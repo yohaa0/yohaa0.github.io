@@ -1,4 +1,4 @@
-Generated at commit `b'changeset:   1366:ce4a3f399607'`
+##SL4A API（介绍）
 
 **ActivityResultFacade**
 
