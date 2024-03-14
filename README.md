@@ -1,4944 +1,1700 @@
-##SL4A API（介绍）
-
-**ActivityResultFacade**
-
-  * [setResultBoolean](#setresultboolean)
-  * [setResultByte](#setresultbyte)
-  * [setResultShort](#setresultshort)
-  * [setResultChar](#setresultchar)
-  * [setResultInteger](#setresultinteger)
-  * [setResultLong](#setresultlong)
-  * [setResultFloat](#setresultfloat)
-  * [setResultDouble](#setresultdouble)
-  * [setResultString](#setresultstring)
-  * [setResultBooleanArray](#setresultbooleanarray)
-  * [setResultByteArray](#setresultbytearray)
-  * [setResultShortArray](#setresultshortarray)
-  * [setResultCharArray](#setresultchararray)
-  * [setResultIntegerArray](#setresultintegerarray)
-  * [setResultLongArray](#setresultlongarray)
-  * [setResultFloatArray](#setresultfloatarray)
-  * [setResultDoubleArray](#setresultdoublearray)
-  * [setResultStringArray](#setresultstringarray)
-  * [setResultSerializable](#setresultserializable)
-
-**AndroidFacade**
-
-  * [setClipboard](#setclipboard)
-  * [getClipboard](#getclipboard)
-  * [startActivityForResult](#startactivityforresult)
-  * [startActivityForResultIntent](#startactivityforresultintent)
-  * [startActivity](#startactivity)
-  * [sendBroadcast](#sendbroadcast)
-  * [makeIntent](#makeintent)
-  * [startActivityIntent](#startactivityintent)
-  * [sendBroadcastIntent](#sendbroadcastintent)
-  * [vibrate](#vibrate)
-  * [makeToast](#maketoast)
-  * [getInput](#getinput)
-  * [getPassword](#getpassword)
-  * [notify](#notify)
-  * [getIntent](#getintent)
-  * [sendEmail](#sendemail)
-  * [getPackageVersionCode](#getpackageversioncode)
-  * [getPackageVersion](#getpackageversion)
-  * [requiredVersion](#requiredversion)
-  * [log](#log)
-  * [environment](#environment)
-  * [getConstants](#getconstants)
-
-**ApplicationManagerFacade**
-
-  * [getLaunchableApplications](#getlaunchableapplications)
-  * [launch](#launch)
-  * [getRunningPackages](#getrunningpackages)
-  * [forceStopPackage](#forcestoppackage)
-
-**BatteryManagerFacade**
-
-  * [readBatteryData](#readbatterydata)
-  * [batteryStartMonitoring](#batterystartmonitoring)
-  * [batteryStopMonitoring](#batterystopmonitoring)
-  * [batteryGetStatus](#batterygetstatus)
-  * [batteryGetHealth](#batterygethealth)
-  * [batteryCheckPresent](#batterycheckpresent)
-  * [batteryGetLevel](#batterygetlevel)
-  * [batteryGetVoltage](#batterygetvoltage)
-  * [batteryGetTemperature](#batterygettemperature)
-  * [batteryGetTechnology](#batterygettechnology)
-
-**Bluetooth4Facade**
-
-  * [bluetoothMakeConnectable](#bluetoothmakeconnectable)
-  * [bluetoothActiveConnections](#bluetoothactiveconnections)
-  * [bluetoothWriteBinary](#bluetoothwritebinary)
-  * [bluetoothReadBinary](#bluetoothreadbinary)
-  * [bluetoothConnect](#bluetoothconnect)
-  * [bluetoothAccept](#bluetoothaccept)
-  * [bluetoothMakeDiscoverable](#bluetoothmakediscoverable)
-  * [bluetoothWrite](#bluetoothwrite)
-  * [bluetoothReadReady](#bluetoothreadready)
-  * [bluetoothRead](#bluetoothread)
-  * [bluetoothReadLine](#bluetoothreadline)
-  * [bluetoothMakeUndiscoverable](#bluetoothmakeundiscoverable)
-  * [bluetoothGetRemoteDeviceName](#bluetoothgetremotedevicename)
-  * [bluetoothGetLocalName](#bluetoothgetlocalname)
-  * [bluetoothSetLocalName](#bluetoothsetlocalname)
-  * [bluetoothGetScanMode](#bluetoothgetscanmode)
-  * [bluetoothGetConnectedDeviceName](#bluetoothgetconnecteddevicename)
-  * [checkBluetoothState](#checkbluetoothstate)
-  * [bluetoothFactoryReset](#bluetoothfactoryreset)
-  * [toggleBluetoothState](#togglebluetoothstate)
-  * [bluetoothStop](#bluetoothstop)
-  * [bluetoothGetLocalAddress](#bluetoothgetlocaladdress)
-  * [bluetoothDiscoveryStart](#bluetoothdiscoverystart)
-  * [bluetoothDiscoveryCancel](#bluetoothdiscoverycancel)
-  * [bluetoothIsDiscovering](#bluetoothisdiscovering)
-  * [bluetoothGetDiscoveredDevices](#bluetoothgetdiscovereddevices)
-  * [bluetoothConfigHciSnoopLog](#bluetoothconfighcisnooplog)
-  * [bluetoothGetControllerActivityEnergyInfo](#bluetoothgetcontrolleractivityenergyinfo)
-  * [bluetoothIsHardwareTrackingFiltersAvailable](#bluetoothishardwaretrackingfiltersavailable)
-  * [bluetoothGetLeState](#bluetoothgetlestate)
-  * [bluetoothEnableBLE](#bluetoothenableble)
-  * [bluetoothDisableBLE](#bluetoothdisableble)
-  * [bluetoothListenForBleStateChange](#bluetoothlistenforblestatechange)
-  * [bluetoothStopListeningForBleStateChange](#bluetoothstoplisteningforblestatechange)
-  * [bluetoothStartListeningForAdapterStateChange](#bluetoothstartlisteningforadapterstatechange)
-  * [bluetoothStopListeningForAdapterStateChange](#bluetoothstoplisteningforadapterstatechange)
-
-**BluetoothA2dpFacade**
-
-  * [bluetoothA2dpIsReady](#bluetootha2dpisready)
-  * [bluetoothA2dpSetPriority](#bluetootha2dpsetpriority)
-  * [bluetoothA2dpConnect](#bluetootha2dpconnect)
-  * [bluetoothA2dpDisconnect](#bluetootha2dpdisconnect)
-  * [bluetoothA2dpGetConnectedDevices](#bluetootha2dpgetconnecteddevices)
-
-**BluetoothA2dpSinkFacade**
-
-  * [bluetoothA2dpSinkSetPriority](#bluetootha2dpsinksetpriority)
-  * [bluetoothA2dpSinkGetPriority](#bluetootha2dpsinkgetpriority)
-  * [bluetoothA2dpSinkIsReady](#bluetootha2dpsinkisready)
-  * [bluetoothA2dpSinkConnect](#bluetootha2dpsinkconnect)
-  * [bluetoothA2dpSinkDisconnect](#bluetootha2dpsinkdisconnect)
-  * [bluetoothA2dpSinkGetConnectedDevices](#bluetootha2dpsinkgetconnecteddevices)
-  * [bluetoothA2dpSinkGetConnectionStatus](#bluetootha2dpsinkgetconnectionstatus)
-
-**BluetoothAvrcpFacade**
-
-  * [bluetoothAvrcpIsReady](#bluetoothavrcpisready)
-  * [bluetoothAvrcpGetConnectedDevices](#bluetoothavrcpgetconnecteddevices)
-  * [bluetoothAvrcpDisconnect](#bluetoothavrcpdisconnect)
-
-**BluetoothConnectionFacade**
-
-  * [bluetoothStartConnectionStateChangeMonitor](#bluetoothstartconnectionstatechangemonitor)
-  * [bluetoothStartPairingHelper](#bluetoothstartpairinghelper)
-  * [bluetoothGetConnectedDevices](#bluetoothgetconnecteddevices)
-  * [bluetoothGetConnectedLeDevices](#bluetoothgetconnectedledevices)
-  * [bluetoothIsDeviceConnected](#bluetoothisdeviceconnected)
-  * [bluetoothGetConnectedDevicesOnProfile](#bluetoothgetconnecteddevicesonprofile)
-  * [bluetoothDiscoverAndConnect](#bluetoothdiscoverandconnect)
-  * [bluetoothDiscoverAndBond](#bluetoothdiscoverandbond)
-  * [bluetoothUnbond](#bluetoothunbond)
-  * [bluetoothConnectBonded](#bluetoothconnectbonded)
-  * [bluetoothDisconnectConnected](#bluetoothdisconnectconnected)
-  * [bluetoothDisconnectConnectedProfile](#bluetoothdisconnectconnectedprofile)
-  * [bluetoothChangeProfileAccessPermission](#bluetoothchangeprofileaccesspermission)
-
-**BluetoothFacade**
-
-  * [bluetoothActiveConnections](#bluetoothactiveconnections)
-  * [bluetoothWriteBinary](#bluetoothwritebinary)
-  * [bluetoothReadBinary](#bluetoothreadbinary)
-  * [bluetoothConnect](#bluetoothconnect)
-  * [bluetoothAccept](#bluetoothaccept)
-  * [bluetoothMakeDiscoverable](#bluetoothmakediscoverable)
-  * [bluetoothWrite](#bluetoothwrite)
-  * [bluetoothReadReady](#bluetoothreadready)
-  * [bluetoothRead](#bluetoothread)
-  * [bluetoothReadLine](#bluetoothreadline)
-  * [bluetoothGetRemoteDeviceName](#bluetoothgetremotedevicename)
-  * [bluetoothGetLocalName](#bluetoothgetlocalname)
-  * [bluetoothSetLocalName](#bluetoothsetlocalname)
-  * [bluetoothGetScanMode](#bluetoothgetscanmode)
-  * [bluetoothGetConnectedDeviceName](#bluetoothgetconnecteddevicename)
-  * [checkBluetoothState](#checkbluetoothstate)
-  * [toggleBluetoothState](#togglebluetoothstate)
-  * [bluetoothStop](#bluetoothstop)
-  * [bluetoothGetLocalAddress](#bluetoothgetlocaladdress)
-  * [bluetoothDiscoveryStart](#bluetoothdiscoverystart)
-  * [bluetoothDiscoveryCancel](#bluetoothdiscoverycancel)
-  * [bluetoothIsDiscovering](#bluetoothisdiscovering)
-
-**BluetoothHfpClientFacade**
-
-  * [bluetoothHfpClientIsReady](#bluetoothhfpclientisready)
-  * [bluetoothHfpClientSetPriority](#bluetoothhfpclientsetpriority)
-  * [bluetoothHfpClientGetPriority](#bluetoothhfpclientgetpriority)
-  * [bluetoothHfpClientConnect](#bluetoothhfpclientconnect)
-  * [bluetoothHfpClientDisconnect](#bluetoothhfpclientdisconnect)
-  * [bluetoothHfpClientGetConnectedDevices](#bluetoothhfpclientgetconnecteddevices)
-  * [bluetoothHfpClientGetConnectionStatus](#bluetoothhfpclientgetconnectionstatus)
-
-**BluetoothHidFacade**
-
-  * [bluetoothHidIsReady](#bluetoothhidisready)
-  * [bluetoothHidConnect](#bluetoothhidconnect)
-  * [bluetoothHidDisconnect](#bluetoothhiddisconnect)
-  * [bluetoothHidGetConnectedDevices](#bluetoothhidgetconnecteddevices)
-  * [bluetoothHidGetConnectionStatus](#bluetoothhidgetconnectionstatus)
-  * [bluetoothHidSetReport](#bluetoothhidsetreport)
-  * [bluetoothHidGetReport](#bluetoothhidgetreport)
-  * [bluetoothHidSendData](#bluetoothhidsenddata)
-  * [bluetoothHidVirtualUnplug](#bluetoothhidvirtualunplug)
-  * [testByte](#testbyte)
-
-**BluetoothHspFacade**
-
-  * [bluetoothHspIsReady](#bluetoothhspisready)
-  * [bluetoothHspSetPriority](#bluetoothhspsetpriority)
-  * [bluetoothHspConnect](#bluetoothhspconnect)
-  * [bluetoothHspDisconnect](#bluetoothhspdisconnect)
-  * [bluetoothHspGetConnectedDevices](#bluetoothhspgetconnecteddevices)
-  * [bluetoothHspGetConnectionStatus](#bluetoothhspgetconnectionstatus)
-
-**BluetoothLeAdvertiseFacade**
-
-  * [bleGenBleAdvertiseCallback](#blegenbleadvertisecallback)
-  * [bleBuildAdvertiseData](#blebuildadvertisedata)
-  * [bleBuildAdvertiseSettings](#blebuildadvertisesettings)
-  * [bleStopBleAdvertising](#blestopbleadvertising)
-  * [bleStartBleAdvertising](#blestartbleadvertising)
-  * [bleStartBleAdvertisingWithScanResponse](#blestartbleadvertisingwithscanresponse)
-  * [bleGetAdvertiseSettingsMode](#blegetadvertisesettingsmode)
-  * [bleGetAdvertiseSettingsTxPowerLevel](#blegetadvertisesettingstxpowerlevel)
-  * [bleGetAdvertiseSettingsIsConnectable](#blegetadvertisesettingsisconnectable)
-  * [bleGetAdvertiseDataIncludeTxPowerLevel](#blegetadvertisedataincludetxpowerlevel)
-  * [bleGetAdvertiseDataManufacturerSpecificData](#blegetadvertisedatamanufacturerspecificdata)
-  * [bleGetAdvertiseDataIncludeDeviceName](#blegetadvertisedataincludedevicename)
-  * [bleGetAdvertiseDataServiceData](#blegetadvertisedataservicedata)
-  * [bleGetAdvertiseDataServiceUuids](#blegetadvertisedataserviceuuids)
-  * [bleSetAdvertiseDataSetServiceUuids](#blesetadvertisedatasetserviceuuids)
-  * [bleAddAdvertiseDataServiceData](#bleaddadvertisedataservicedata)
-  * [bleAddAdvertiseDataManufacturerId](#bleaddadvertisedatamanufacturerid)
-  * [bleSetAdvertiseSettingsAdvertiseMode](#blesetadvertisesettingsadvertisemode)
-  * [bleSetAdvertiseSettingsTxPowerLevel](#blesetadvertisesettingstxpowerlevel)
-  * [bleSetAdvertiseSettingsIsConnectable](#blesetadvertisesettingsisconnectable)
-  * [bleSetAdvertiseDataIncludeTxPowerLevel](#blesetadvertisedataincludetxpowerlevel)
-  * [bleSetAdvertiseSettingsTimeout](#blesetadvertisesettingstimeout)
-  * [bleSetAdvertiseDataIncludeDeviceName](#blesetadvertisedataincludedevicename)
-
-**BluetoothLeScanFacade**
-
-  * [bleGenScanCallback](#blegenscancallback)
-  * [bleGenLeScanCallback](#blegenlescancallback)
-  * [bleGenFilterList](#blegenfilterlist)
-  * [bleBuildScanFilter](#blebuildscanfilter)
-  * [bleBuildScanSetting](#blebuildscansetting)
-  * [bleStopBleScan](#blestopblescan)
-  * [bleStopClassicBleScan](#blestopclassicblescan)
-  * [bleStartBleScan](#blestartblescan)
-  * [bleStartClassicBleScan](#blestartclassicblescan)
-  * [bleStartClassicBleScanWithServiceUuids](#blestartclassicblescanwithserviceuuids)
-  * [bleFlushPendingScanResults](#bleflushpendingscanresults)
-  * [bleSetScanSettingsCallbackType](#blesetscansettingscallbacktype)
-  * [bleSetScanSettingsReportDelayMillis](#blesetscansettingsreportdelaymillis)
-  * [bleSetScanSettingsScanMode](#blesetscansettingsscanmode)
-  * [bleSetScanSettingsResultType](#blesetscansettingsresulttype)
-  * [bleGetScanSettingsCallbackType](#blegetscansettingscallbacktype)
-  * [bleGetScanSettingsReportDelayMillis](#blegetscansettingsreportdelaymillis)
-  * [bleGetScanSettingsScanMode](#blegetscansettingsscanmode)
-  * [bleGetScanSettingsScanResultType](#blegetscansettingsscanresulttype)
-  * [bleGetScanFilterManufacturerId](#blegetscanfiltermanufacturerid)
-  * [bleGetScanFilterDeviceAddress](#blegetscanfilterdeviceaddress)
-  * [bleGetScanFilterDeviceName](#blegetscanfilterdevicename)
-  * [bleGetScanFilterManufacturerData](#blegetscanfiltermanufacturerdata)
-  * [bleGetScanFilterManufacturerDataMask](#blegetscanfiltermanufacturerdatamask)
-  * [bleGetScanFilterServiceData](#blegetscanfilterservicedata)
-  * [bleGetScanFilterServiceDataMask](#blegetscanfilterservicedatamask)
-  * [bleGetScanFilterServiceUuid](#blegetscanfilterserviceuuid)
-  * [bleGetScanFilterServiceUuidMask](#blegetscanfilterserviceuuidmask)
-  * [bleSetScanFilterDeviceAddress](#blesetscanfilterdeviceaddress)
-  * [bleSetScanFilterManufacturerData](#blesetscanfiltermanufacturerdata)
-  * [bleSetScanFilterServiceData](#blesetscanfilterservicedata)
-  * [bleSetScanFilterServiceUuid](#blesetscanfilterserviceuuid)
-  * [bleSetScanFilterDeviceName](#blesetscanfilterdevicename)
-  * [bleSetScanSettingsMatchMode](#blesetscansettingsmatchmode)
-  * [bleGetScanSettingsMatchMode](#blegetscansettingsmatchmode)
-  * [bleSetScanSettingsNumOfMatches](#blesetscansettingsnumofmatches)
-  * [bleGetScanSettingsNumberOfMatches](#blegetscansettingsnumberofmatches)
-
-**BluetoothMapClientFacade**
-
-  * [bluetoothMapClientConnect](#bluetoothmapclientconnect)
-  * [mapSendMessage](#mapsendmessage)
-  * [bluetoothMapClientIsReady](#bluetoothmapclientisready)
-  * [bluetoothMapClientDisconnect](#bluetoothmapclientdisconnect)
-  * [bluetoothMapClientGetConnectedDevices](#bluetoothmapclientgetconnecteddevices)
-
-**BluetoothMapFacade**
-
-  * [bluetoothMapIsReady](#bluetoothmapisready)
-  * [bluetoothMapDisconnect](#bluetoothmapdisconnect)
-  * [bluetoothMapGetConnectedDevices](#bluetoothmapgetconnecteddevices)
-  * [bluetoothMapGetClient](#bluetoothmapgetclient)
-
-**BluetoothMediaFacade**
-
-  * [bluetoothMediaPassthrough](#bluetoothmediapassthrough)
-  * [bluetoothMediaGetCurrentMediaMetaData](#bluetoothmediagetcurrentmediametadata)
-  * [bluetoothMediaGetActiveMediaSessions](#bluetoothmediagetactivemediasessions)
-  * [bluetoothMediaConnectToCarMBS](#bluetoothmediaconnecttocarmbs)
-  * [bluetoothMediaPhoneSL4AMBSStart](#bluetoothmediaphonesl4ambsstart)
-  * [bluetoothMediaPhoneSL4AMBSStop](#bluetoothmediaphonesl4ambsstop)
-  * [bluetoothMediaHandleMediaCommandOnPhone](#bluetoothmediahandlemediacommandonphone)
-
-**BluetoothPanFacade**
-
-  * [bluetoothPanSetBluetoothTethering](#bluetoothpansetbluetoothtethering)
-  * [bluetoothPanIsReady](#bluetoothpanisready)
-  * [bluetoothPanGetConnectedDevices](#bluetoothpangetconnecteddevices)
-  * [bluetoothPanIsTetheringOn](#bluetoothpanistetheringon)
-
-**BluetoothPbapClientFacade**
-
-  * [bluetoothPbapClientIsReady](#bluetoothpbapclientisready)
-  * [bluetoothPbapClientSetPriority](#bluetoothpbapclientsetpriority)
-  * [bluetoothPbapClientGetPriority](#bluetoothpbapclientgetpriority)
-  * [bluetoothPbapClientConnect](#bluetoothpbapclientconnect)
-  * [bluetoothPbapClientDisconnect](#bluetoothpbapclientdisconnect)
-  * [bluetoothPbapClientGetConnectedDevices](#bluetoothpbapclientgetconnecteddevices)
-  * [bluetoothPbapClientGetConnectionStatus](#bluetoothpbapclientgetconnectionstatus)
-
-**BluetoothRfcommFacade**
-
-  * [bluetoothRfcommBeginConnectThread](#bluetoothrfcommbeginconnectthread)
-  * [bluetoothRfcommKillConnThread](#bluetoothrfcommkillconnthread)
-  * [bluetoothRfcommEndConnectThread](#bluetoothrfcommendconnectthread)
-  * [bluetoothRfcommEndAcceptThread](#bluetoothrfcommendacceptthread)
-  * [bluetoothRfcommActiveConnections](#bluetoothrfcommactiveconnections)
-  * [bluetoothRfcommGetConnectedDeviceName](#bluetoothrfcommgetconnecteddevicename)
-  * [bluetoothRfcommBeginAcceptThread](#bluetoothrfcommbeginacceptthread)
-  * [bluetoothRfcommWrite](#bluetoothrfcommwrite)
-  * [bluetoothRfcommRead](#bluetoothrfcommread)
-  * [bluetoothRfcommWriteBinary](#bluetoothrfcommwritebinary)
-  * [bluetoothRfcommReadBinary](#bluetoothrfcommreadbinary)
-  * [bluetoothRfcommReadReady](#bluetoothrfcommreadready)
-  * [bluetoothRfcommReadLine](#bluetoothrfcommreadline)
-  * [bluetoothRfcommStop](#bluetoothrfcommstop)
-
-**CameraFacade**
-
-  * [cameraCapturePicture](#cameracapturepicture)
-  * [cameraInteractiveCapturePicture](#camerainteractivecapturepicture)
-  * [camerasList](#cameraslist)
-
-**CommonIntentsFacade**
-
-  * [pick](#pick)
-  * [scanBarcode](#scanbarcode)
-  * [view](#view)
-  * [viewMap](#viewmap)
-  * [viewContacts](#viewcontacts)
-  * [viewHtml](#viewhtml)
-  * [search](#search)
-
-**ContactsFacade**
-
-  * [contactsDisplayContactPickList](#contactsdisplaycontactpicklist)
-  * [contactsDisplayPhonePickList](#contactsdisplayphonepicklist)
-  * [contactsGetAttributes](#contactsgetattributes)
-  * [contactsGetContactIds](#contactsgetcontactids)
-  * [contactsGetAllContacts](#contactsgetallcontacts)
-  * [contactsGetContactById](#contactsgetcontactbyid)
-  * [contactsGetCount](#contactsgetcount)
-  * [contactsEraseAll](#contactseraseall)
-  * [contactsQueryContent](#contactsquerycontent)
-  * [queryAttributes](#queryattributes)
-  * [importVcf](#importvcf)
-  * [exportVcf](#exportvcf)
-
-**EventFacade**
-
-  * [eventClearBuffer](#eventclearbuffer)
-  * [eventRegisterForBroadcast](#eventregisterforbroadcast)
-  * [eventUnregisterForBroadcast](#eventunregisterforbroadcast)
-  * [eventGetBrodcastCategories](#eventgetbrodcastcategories)
-  * [eventPoll](#eventpoll)
-  * [eventWaitFor](#eventwaitfor)
-  * [eventWait](#eventwait)
-  * [eventPost](#eventpost)
-  * [rpcPostEvent](#rpcpostevent)
-  * [receiveEvent](#receiveevent)
-  * [waitForEvent](#waitforevent)
-  * [startEventDispatcher](#starteventdispatcher)
-  * [stopEventDispatcher](#stopeventdispatcher)
-
-**EyesFreeFacade**
-
-  * [ttsSpeak](#ttsspeak)
-
-**GattClientFacade**
-
-  * [gattClientConnectGatt](#gattclientconnectgatt)
-  * [gattClientDiscoverServices](#gattclientdiscoverservices)
-  * [gattClientGetServices](#gattclientgetservices)
-  * [gattClientAbortReliableWrite](#gattclientabortreliablewrite)
-  * [gattClientBeginReliableWrite](#gattclientbeginreliablewrite)
-  * [gattClientRequestMtu](#gattclientrequestmtu)
-  * [gattClientDisconnect](#gattclientdisconnect)
-  * [gattClientClose](#gattclientclose)
-  * [gattExecuteReliableWrite](#gattexecutereliablewrite)
-  * [gattClientGetConnectedDevices](#gattclientgetconnecteddevices)
-  * [gattGetDevice](#gattgetdevice)
-  * [gattClientGetDevicesMatchingConnectionStates](#gattclientgetdevicesmatchingconnectionstates)
-  * [gattClientGetServiceUuidList](#gattclientgetserviceuuidlist)
-  * [gattClientReadCharacteristic](#gattclientreadcharacteristic)
-  * [gattClientReadDescriptor](#gattclientreaddescriptor)
-  * [gattClientWriteDescriptor](#gattclientwritedescriptor)
-  * [gattClientDescriptorSetValue](#gattclientdescriptorsetvalue)
-  * [gattClientWriteCharacteristic](#gattclientwritecharacteristic)
-  * [gattClientCharacteristicSetValue](#gattclientcharacteristicsetvalue)
-  * [gattClientCharacteristicSetWriteType](#gattclientcharacteristicsetwritetype)
-  * [gattClientReadRSSI](#gattclientreadrssi)
-  * [gattClientRefresh](#gattclientrefresh)
-  * [gattClientRequestConnectionPriority](#gattclientrequestconnectionpriority)
-  * [gattClientSetCharacteristicNotification](#gattclientsetcharacteristicnotification)
-  * [gattCreateGattCallback](#gattcreategattcallback)
-  * [gattClientGetDiscoveredServicesCount](#gattclientgetdiscoveredservicescount)
-  * [gattClientGetDiscoveredServiceUuid](#gattclientgetdiscoveredserviceuuid)
-  * [gattClientGetDiscoveredCharacteristicUuids](#gattclientgetdiscoveredcharacteristicuuids)
-  * [gattClientGetDiscoveredDescriptorUuids](#gattclientgetdiscovereddescriptoruuids)
-
-**GattServerFacade**
-
-  * [gattServerOpenGattServer](#gattserveropengattserver)
-  * [gattServerAddService](#gattserveraddservice)
-  * [gattServerClearServices](#gattserverclearservices)
-  * [gattServerGetConnectedDevices](#gattservergetconnecteddevices)
-  * [gattServerSendResponse](#gattserversendresponse)
-  * [gattServerNotifyCharacteristicChanged](#gattservernotifycharacteristicchanged)
-  * [gattServerCreateService](#gattservercreateservice)
-  * [gattServiceAddCharacteristic](#gattserviceaddcharacteristic)
-  * [gattServerAddCharacteristicToService](#gattserveraddcharacteristictoservice)
-  * [gattServerClose](#gattserverclose)
-  * [gattGetConnectedDevices](#gattgetconnecteddevices)
-  * [gattGetServiceUuidList](#gattgetserviceuuidlist)
-  * [gattGetService](#gattgetservice)
-  * [gattServerCharacteristicAddDescriptor](#gattservercharacteristicadddescriptor)
-  * [gattServerCreateBluetoothGattCharacteristic](#gattservercreatebluetoothgattcharacteristic)
-  * [gattServerCharacteristicSetValue](#gattservercharacteristicsetvalue)
-  * [gattServerCreateGattServerCallback](#gattservercreategattservercallback)
-  * [gattServerCreateBluetoothGattDescriptor](#gattservercreatebluetoothgattdescriptor)
-
-**LocationFacade**
-
-  * [locationProviders](#locationproviders)
-  * [locationProviderEnabled](#locationproviderenabled)
-  * [startLocating](#startlocating)
-  * [readLocation](#readlocation)
-  * [stopLocating](#stoplocating)
-  * [getLastKnownLocation](#getlastknownlocation)
-  * [geocode](#geocode)
-
-**MediaPlayerFacade**
-
-  * [mediaPlay](#mediaplay)
-  * [mediaPlayPause](#mediaplaypause)
-  * [mediaPlayStart](#mediaplaystart)
-  * [mediaPlayClose](#mediaplayclose)
-  * [mediaIsPlaying](#mediaisplaying)
-  * [mediaPlayInfo](#mediaplayinfo)
-  * [mediaPlayList](#mediaplaylist)
-  * [mediaPlaySetLooping](#mediaplaysetlooping)
-  * [mediaPlaySeek](#mediaplayseek)
-
-**MediaRecorderFacade**
-
-  * [recorderStartMicrophone](#recorderstartmicrophone)
-  * [recorderStartVideo](#recorderstartvideo)
-  * [recorderCaptureVideo](#recordercapturevideo)
-  * [recorderStop](#recorderstop)
-  * [startInteractiveVideoRecording](#startinteractivevideorecording)
-
-**NfcManagerFacade**
-
-  * [nfcIsEnabled](#nfcisenabled)
-  * [nfcStartTrackingStateChange](#nfcstarttrackingstatechange)
-  * [nfcStopTrackingStateChange](#nfcstoptrackingstatechange)
-
-**PhoneFacade**
-
-  * [startTrackingPhoneState](#starttrackingphonestate)
-  * [readPhoneState](#readphonestate)
-  * [stopTrackingPhoneState](#stoptrackingphonestate)
-  * [phoneCall](#phonecall)
-  * [phoneCallNumber](#phonecallnumber)
-  * [phoneDial](#phonedial)
-  * [phoneDialNumber](#phonedialnumber)
-  * [getCellLocation](#getcelllocation)
-  * [getNetworkOperator](#getnetworkoperator)
-  * [getNetworkOperatorName](#getnetworkoperatorname)
-  * [getNetworkType](#getnetworktype)
-  * [getPhoneType](#getphonetype)
-  * [getSimCountryIso](#getsimcountryiso)
-  * [getSimOperator](#getsimoperator)
-  * [getSimOperatorName](#getsimoperatorname)
-  * [getSimSerialNumber](#getsimserialnumber)
-  * [getSimState](#getsimstate)
-  * [getSubscriberId](#getsubscriberid)
-  * [getVoiceMailAlphaTag](#getvoicemailalphatag)
-  * [getVoiceMailNumber](#getvoicemailnumber)
-  * [checkNetworkRoaming](#checknetworkroaming)
-  * [getDeviceId](#getdeviceid)
-  * [getDeviceSoftwareVersion](#getdevicesoftwareversion)
-  * [getLine1Number](#getline1number)
-  * [getNeighboringCellInfo](#getneighboringcellinfo)
-
-**PreferencesFacade**
-
-  * [prefGetValue](#prefgetvalue)
-  * [prefPutValue](#prefputvalue)
-  * [prefGetAll](#prefgetall)
-
-**SensorManagerFacade**
-
-  * [startSensingTimed](#startsensingtimed)
-  * [startSensingThreshold](#startsensingthreshold)
-  * [readSensors](#readsensors)
-  * [stopSensing](#stopsensing)
-  * [sensorsGetAccuracy](#sensorsgetaccuracy)
-  * [sensorsGetLight](#sensorsgetlight)
-  * [sensorsReadAccelerometer](#sensorsreadaccelerometer)
-  * [sensorsReadMagnetometer](#sensorsreadmagnetometer)
-  * [sensorsReadOrientation](#sensorsreadorientation)
-  * [startSensing](#startsensing)
-
-**SettingsFacade**
-
-  * [setScreenTimeout](#setscreentimeout)
-  * [getScreenTimeout](#getscreentimeout)
-  * [checkAirplaneMode](#checkairplanemode)
-  * [toggleAirplaneMode](#toggleairplanemode)
-  * [checkRingerSilentMode](#checkringersilentmode)
-  * [toggleRingerSilentMode](#toggleringersilentmode)
-  * [toggleVibrateMode](#togglevibratemode)
-  * [getVibrateMode](#getvibratemode)
-  * [getMaxRingerVolume](#getmaxringervolume)
-  * [getRingerVolume](#getringervolume)
-  * [setRingerVolume](#setringervolume)
-  * [getMaxMediaVolume](#getmaxmediavolume)
-  * [getMediaVolume](#getmediavolume)
-  * [setMediaVolume](#setmediavolume)
-  * [getScreenBrightness](#getscreenbrightness)
-  * [setScreenBrightness](#setscreenbrightness)
-  * [checkScreenOn](#checkscreenon)
-
-**SignalStrengthFacade**
-
-  * [startTrackingSignalStrengths](#starttrackingsignalstrengths)
-  * [readSignalStrengths](#readsignalstrengths)
-  * [stopTrackingSignalStrengths](#stoptrackingsignalstrengths)
-
-**SmsFacade**
-
-  * [smsSend](#smssend)
-  * [smsGetMessageCount](#smsgetmessagecount)
-  * [smsGetMessageIds](#smsgetmessageids)
-  * [smsGetMessages](#smsgetmessages)
-  * [smsGetMessageById](#smsgetmessagebyid)
-  * [smsGetAttributes](#smsgetattributes)
-  * [smsDeleteMessage](#smsdeletemessage)
-  * [smsMarkMessageRead](#smsmarkmessageread)
-
-**SpeechRecognitionFacade**
-
-  * [recognizeSpeech](#recognizespeech)
-
-**TelecomCallFacade**
-
-  * [telecomCallGetCallById](#telecomcallgetcallbyid)
-
-**TextToSpeechFacade**
-
-  * [ttsSpeak](#ttsspeak)
-  * [ttsIsSpeaking](#ttsisspeaking)
-  * [setTtsPitch](#setttspitch)
-
-**ToneGeneratorFacade**
-
-  * [generateDtmfTones](#generatedtmftones)
-
-**USBHostSerialFacade**
-
-  * [usbserialGetDeviceList](#usbserialgetdevicelist)
-  * [usbserialDisconnect](#usbserialdisconnect)
-  * [usbserialActiveConnections](#usbserialactiveconnections)
-  * [usbserialWriteBinary](#usbserialwritebinary)
-  * [usbserialReadBinary](#usbserialreadbinary)
-  * [usbserialConnect](#usbserialconnect)
-  * [usbserialHostEnable](#usbserialhostenable)
-  * [usbserialWrite](#usbserialwrite)
-  * [usbserialReadReady](#usbserialreadready)
-  * [usbserialRead](#usbserialread)
-  * [usbserialGetDeviceName](#usbserialgetdevicename)
-
-**UiFacade**
-
-  * [dialogCreateInput](#dialogcreateinput)
-  * [dialogCreatePassword](#dialogcreatepassword)
-  * [dialogGetInput](#dialoggetinput)
-  * [dialogGetPassword](#dialoggetpassword)
-  * [dialogCreateSpinnerProgress](#dialogcreatespinnerprogress)
-  * [dialogCreateHorizontalProgress](#dialogcreatehorizontalprogress)
-  * [dialogCreateAlert](#dialogcreatealert)
-  * [dialogCreateSeekBar](#dialogcreateseekbar)
-  * [dialogCreateTimePicker](#dialogcreatetimepicker)
-  * [dialogCreateDatePicker](#dialogcreatedatepicker)
-  * [dialogDismiss](#dialogdismiss)
-  * [dialogShow](#dialogshow)
-  * [dialogSetCurrentProgress](#dialogsetcurrentprogress)
-  * [dialogSetMaxProgress](#dialogsetmaxprogress)
-  * [dialogSetPositiveButtonText](#dialogsetpositivebuttontext)
-  * [dialogSetNegativeButtonText](#dialogsetnegativebuttontext)
-  * [dialogSetNeutralButtonText](#dialogsetneutralbuttontext)
-  * [dialogSetItems](#dialogsetitems)
-  * [dialogSetSingleChoiceItems](#dialogsetsinglechoiceitems)
-  * [dialogSetMultiChoiceItems](#dialogsetmultichoiceitems)
-  * [dialogGetResponse](#dialoggetresponse)
-  * [dialogGetSelectedItems](#dialoggetselecteditems)
-  * [webViewShow](#webviewshow)
-  * [addContextMenuItem](#addcontextmenuitem)
-  * [addOptionsMenuItem](#addoptionsmenuitem)
-  * [clearContextMenu](#clearcontextmenu)
-  * [clearOptionsMenu](#clearoptionsmenu)
-  * [fullShow](#fullshow)
-  * [fullDismiss](#fulldismiss)
-  * [fullQuery](#fullquery)
-  * [fullQueryDetail](#fullquerydetail)
-  * [fullSetProperty](#fullsetproperty)
-  * [fullSetList](#fullsetlist)
-  * [fullSetTitle](#fullsettitle)
-  * [fullKeyOverride](#fullkeyoverride)
-
-**WakeLockFacade**
-
-  * [wakeLockAcquireFull](#wakelockacquirefull)
-  * [wakeLockAcquirePartial](#wakelockacquirepartial)
-  * [wakeLockAcquireBright](#wakelockacquirebright)
-  * [wakeLockAcquireDim](#wakelockacquiredim)
-  * [wakeLockRelease](#wakelockrelease)
-
-**WebCamFacade**
-
-  * [webcamStart](#webcamstart)
-  * [webcamAdjustQuality](#webcamadjustquality)
-  * [webcamStop](#webcamstop)
-  * [cameraStartPreview](#camerastartpreview)
-  * [cameraStopPreview](#camerastoppreview)
-
-**WifiFacade**
-
-  * [wifiAddNetwork](#wifiaddnetwork)
-  * [wifiConnect](#wificonnect)
-  * [wifiEnableNetwork](#wifienablenetwork)
-  * [wifiEnterpriseConnect](#wifienterpriseconnect)
-  * [wifiGetScanResults](#wifigetscanresults)
-  * [wifiLockAcquireFull](#wifilockacquirefull)
-  * [wifiLockAcquireScanOnly](#wifilockacquirescanonly)
-  * [wifiLockRelease](#wifilockrelease)
-  * [wifiStartScan](#wifistartscan)
-  * [checkWifiState](#checkwifistate)
-  * [toggleWifiState](#togglewifistate)
-  * [wifiDisconnect](#wifidisconnect)
-  * [wifiGetConnectionInfo](#wifigetconnectioninfo)
-  * [wifiReassociate](#wifireassociate)
-  * [wifiReconnect](#wifireconnect)
-
-# Method descriptions
-
-## dialogCreateInput
+# 书源日记
 
-```
-void dialogCreateInput( final String title, final String message, final String text, final String inputType)
-
-Create a text input dialog.
-```
-
-## dialogCreatePassword
-
-```
-void dialogCreatePassword( final String title, final String message)
-
-Create a password input dialog.
-```
-
-## dialogGetInput
-
-```
-String dialogGetInput( final String title, final String message, final String text)
-
-Queries the user for a text input.
-```
-
-## dialogGetPassword
-
-```
-String dialogGetPassword( final String title, final String message)
-
-Queries the user for a password.
-```
-
-## dialogCreateSpinnerProgress
-
-```
-void dialogCreateSpinnerProgress(String title, String message, Integer max)
-
-Create a spinner progress dialog.
-```
-
-## dialogCreateHorizontalProgress
-
-```
-void dialogCreateHorizontalProgress( String title, String message, Integer max)
-
-Create a horizontal progress dialog.
-```
-
-## dialogCreateAlert
-
-```
-void dialogCreateAlert(String title, String message)
-
-Create alert dialog.
-```
-
-## dialogCreateSeekBar
-
-```
-void dialogCreateSeekBar( Integer progress, Integer max, String title, String message)
-
-Create seek bar dialog.
-```
-
-## dialogCreateTimePicker
-
-```
-void dialogCreateTimePicker( Integer hour, Integer minute, Boolean is24hour)
-
-Create time picker dialog.
-```
-
-## dialogCreateDatePicker
-
-```
-void dialogCreateDatePicker(Integer year, Integer month, Integer day)
-
-Create date picker dialog.
-```
-
-## dialogDismiss
-
-```
-void dialogDismiss()
-
-Dismiss dialog.
-```
-
-## dialogShow
-
-```
-void dialogShow()
-
-Show dialog.
-```
-
-## dialogSetCurrentProgress
-
-```
-void dialogSetCurrentProgress(Integer current)
-
-Set progress dialog current value.
-```
-
-## dialogSetMaxProgress
-
-```
-void dialogSetMaxProgress(Integer max)
-
-Set progress dialog maximum value.
-```
-
-## dialogSetPositiveButtonText
-
-```
-void dialogSetPositiveButtonText(String text)
-
-Set alert dialog positive button text.
-```
-
-## dialogSetNegativeButtonText
-
-```
-void dialogSetNegativeButtonText(String text)
-
-Set alert dialog button text.
-```
-
-## dialogSetNeutralButtonText
-
-```
-void dialogSetNeutralButtonText(String text)
-
-Set alert dialog button text.
-```
-
-## dialogSetItems
-
-```
-void dialogSetItems(JSONArray items)
-
-Set alert dialog list items.
-```
-
-## dialogSetSingleChoiceItems
-
-```
-void dialogSetSingleChoiceItems( JSONArray items, Integer selected)
-
-Set dialog single choice items and selected item.
-```
-
-## dialogSetMultiChoiceItems
-
-```
-void dialogSetMultiChoiceItems( JSONArray items, JSONArray selected)
-
-Set dialog multiple choice items and selection.
-```
-
-## dialogGetResponse
-
-```
-Object dialogGetResponse()
-
-Returns dialog response.
-```
-
-## dialogGetSelectedItems
-
-```
-Set<Integer> dialogGetSelectedItems()
-
-This method provides list of items user selected.
-
-Returns Selected items
-```
-
-## webViewShow
-
-```
-void webViewShow( String url, Boolean wait)
-
-Display a WebView with the given URL.
-```
-
-## addContextMenuItem
-
-```
-void addContextMenuItem( String label, String event, Object data)
-
-Adds a new item to context menu.
-```
-
-## addOptionsMenuItem
-
-```
-void addOptionsMenuItem( String label, String event, Object data, String iconName)
-
-Adds a new item to options menu.
-```
-
-## clearContextMenu
-
-```
-void clearContextMenu()
-
-Removes all items previously added to context menu.
-```
-
-## clearOptionsMenu
-
-```
-void clearOptionsMenu()
-
-Removes all items previously added to options menu.
-```
-
-## fullShow
-
-```
-List<String> fullShow( String layout, String title)
-
-Show Full Screen.
-```
-
-## fullDismiss
-
-```
-void fullDismiss()
-
-Dismiss Full Screen.
-```
-
-## fullQuery
-
-```
-Map<String, Map<String, String>> fullQuery()
-
-Get Fullscreen Properties
-```
-
-## fullQueryDetail
-
-```
-Map<String, String> fullQueryDetail( String id)
-
-Get fullscreen properties for a specific widget
-```
-
-## fullSetProperty
-
-```
-String fullSetProperty( String id, String property, String value)
-
-Set fullscreen widget property
-```
-
-## fullSetList
-
-```
-String fullSetList( String id, JSONArray items)
-
-Attach a list to a fullscreen widget
-```
-
-## fullSetTitle
-
-```
-void fullSetTitle( String title)
-
-Set the Full Screen Activity Title
-```
-
-## fullKeyOverride
-
-```
-JSONArray fullKeyOverride( JSONArray keycodes, Boolean enable)
-
-Override default key actions
-```
-
-## smsSend
-
-```
-void smsSend( String destinationAddress, String text)
-
-Sends an SMS.
-```
-
-## smsGetMessageCount
-
-```
-Integer smsGetMessageCount(Boolean unreadOnly, String folder)
-
-Returns the number of messages.
-```
-
-## smsGetMessageIds
-
-```
-List<Integer> smsGetMessageIds(Boolean unreadOnly, String folder)
-
-Returns a List of all message IDs.
-```
-
-## smsGetMessages
-
-```
-List<JSONObject> smsGetMessages(Boolean unreadOnly, String folder, JSONArray attributes)
-
-Returns a List of all messages.
-
-Returns a List of messages as Maps
-```
-
-## smsGetMessageById
-
-```
-JSONObject smsGetMessageById( Integer id, JSONArray attributes)
-
-Returns message attributes.
-```
-
-## smsGetAttributes
-
-```
-List<String> smsGetAttributes()
-
-Returns a List of all possible message attributes.
-```
-
-## smsDeleteMessage
-
-```
-Boolean smsDeleteMessage(Integer id)
-
-Deletes a message.
-
-Returns True if the message was deleted
-```
-
-## smsMarkMessageRead
-
-```
-Integer smsMarkMessageRead( JSONArray ids, Boolean read)
-
-Marks messages as read.
-
-Returns number of messages marked read
-```
-
-## readBatteryData
-
-```
-Bundle readBatteryData()
-
-Returns the most recently recorded battery data.
-```
-
-## batteryStartMonitoring
-
-```
-void batteryStartMonitoring()
-
-Starts tracking battery state.
-```
-
-## batteryStopMonitoring
-
-```
-void batteryStopMonitoring()
-
-Stops tracking battery state.
-```
-
-## batteryGetStatus
-
-```
-Integer batteryGetStatus()
-
-Returns  the most recently received battery status data:\n1 - unknown;\n2 - charging;\n3 - discharging;\n4 - not charging;\n5 - full;
-```
-
-## batteryGetHealth
-
-```
-Integer batteryGetHealth()
-
-Returns the most recently received battery health data:\n1 - unknown;\n2 - good;\n3 - overheat;\n4 - dead;\n5 - over voltage;\n6 - unspecified failure;
-```
-
-## batteryCheckPresent
-
-```
-Boolean batteryCheckPresent()
-
-Returns the most recently received battery presence data.
-```
-
-## batteryGetLevel
-
-```
-Integer batteryGetLevel()
-
-Returns the most recently received battery level (percentage).
-```
-
-## batteryGetVoltage
-
-```
-Integer batteryGetVoltage()
-
-Returns the most recently received battery voltage.
-```
-
-## batteryGetTemperature
-
-```
-Integer batteryGetTemperature()
-
-Returns the most recently received battery temperature.
-```
-
-## batteryGetTechnology
-
-```
-String batteryGetTechnology()
-
-Returns the most recently received battery technology data.
-```
-
-## bluetoothMediaPassthrough
-
-```
-void bluetoothMediaPassthrough( String passthruCmd)
-
-Simulate a passthrough command
-```
-
-## bluetoothMediaGetCurrentMediaMetaData
-
-```
-Map<String, String> bluetoothMediaGetCurrentMediaMetaData()
-
-Gets the Metadata of currently playing Media
-```
-
-## bluetoothMediaGetActiveMediaSessions
-
-```
-List<String> bluetoothMediaGetActiveMediaSessions()
-
-Get the current active Media Sessions
-```
-
-## bluetoothMediaConnectToCarMBS
-
-```
-void bluetoothMediaConnectToCarMBS()
-
-Connect a MediaBrowser to the A2dpMediaBrowserservice in the Carkitt
-```
-
-## bluetoothMediaPhoneSL4AMBSStart
-
-```
-void bluetoothMediaPhoneSL4AMBSStart()
-
-Start the BluetoothSL4AAudioSrcMBS on Phone.
-```
-
-## bluetoothMediaPhoneSL4AMBSStop
-
-```
-void bluetoothMediaPhoneSL4AMBSStop()
-
-Stop the BluetoothSL4AAudioSrcMBS running on Phone.
-```
-
-## bluetoothMediaHandleMediaCommandOnPhone
-
-```
-void bluetoothMediaHandleMediaCommandOnPhone(String command)
-
-Media Commands on the Phone's BluetoothAvrcpMBS.
-```
-
-## cameraCapturePicture
-
-```
-Bundle cameraCapturePicture( final String targetPath, Boolean useAutoFocus, Integer cameraId)
-
-Take a picture and save it to the specified path.
-
-Returns A map of Booleans autoFocus and takePicture where True indicates success. cameraId also included.
-```
-
-## cameraInteractiveCapturePicture
-
-```
-void cameraInteractiveCapturePicture( final String targetPath)
-
-Starts the image capture application to take a picture and saves it to the specified path.
-```
-
-## camerasList
-
-```
-Map<String, String> camerasList()
-
-Get Camera List, Id and parameters.
-
-Returns Map of (cameraId, information).information is comma separated and order is:canDisableShtterSound,facing,orientation.facing: 0=BACK, 1=FACE.orientation: 0,90,180,270=camera image.
-```
-
-## nfcIsEnabled
-
-```
-Boolean nfcIsEnabled()
-
-Check if NFC hardware is enabled.
-```
-
-## nfcStartTrackingStateChange
-
-```
-void nfcStartTrackingStateChange()
-
-Start tracking NFC hardware state changes.
-```
-
-## nfcStopTrackingStateChange
-
-```
-void nfcStopTrackingStateChange()
-
-Stop tracking NFC hardware state changes.
-```
-
-## bluetoothPbapClientIsReady
-
-```
-Boolean bluetoothPbapClientIsReady()
-
-Is PbapClient profile ready.
-```
-
-## bluetoothPbapClientSetPriority
-
-```
-void bluetoothPbapClientSetPriority( String deviceStr, Integer priority)
-
-Set priority of the profile
-```
-
-## bluetoothPbapClientGetPriority
-
-```
-Integer bluetoothPbapClientGetPriority( String deviceStr)
-
-Get priority of the profile
-```
-
-## bluetoothPbapClientConnect
-
-```
-Boolean bluetoothPbapClientConnect( String deviceStr)
-
-Connect to an PBAP Client device.
-```
-
-## bluetoothPbapClientDisconnect
-
-```
-Boolean bluetoothPbapClientDisconnect( String deviceStr)
-
-Disconnect an PBAP Client device.
-```
-
-## bluetoothPbapClientGetConnectedDevices
-
-```
-List<BluetoothDevice> bluetoothPbapClientGetConnectedDevices()
-
-Get all the devices connected through PBAP Client.
-```
-
-## bluetoothPbapClientGetConnectionStatus
-
-```
-Integer bluetoothPbapClientGetConnectionStatus( String deviceID)
-
-Get the connection status of a device.
-```
-
-## bluetoothStartConnectionStateChangeMonitor
-
-```
-void bluetoothStartConnectionStateChangeMonitor( String deviceID)
-
-Start monitoring state changes for input device.
-```
-
-## bluetoothStartPairingHelper
-
-```
-void bluetoothStartPairingHelper( Boolean autoConfirm)
-
-Start intercepting all bluetooth connection pop-ups.
-```
-
-## bluetoothGetConnectedDevices
-
-```
-List<BluetoothDevice> bluetoothGetConnectedDevices()
-
-Return a list of devices connected through bluetooth
-```
-
-## bluetoothGetConnectedLeDevices
-
-```
-List<BluetoothDevice> bluetoothGetConnectedLeDevices(Integer profile)
-
-Return a list of devices connected through bluetooth LE
-```
-
-## bluetoothIsDeviceConnected
-
-```
-Boolean bluetoothIsDeviceConnected(String deviceID)
-
-Return true if a bluetooth device is connected.
-```
-
-## bluetoothGetConnectedDevicesOnProfile
-
-```
-List<BluetoothDevice> bluetoothGetConnectedDevicesOnProfile( Integer profileId)
-
-Return list of connected bluetooth devices over a profile
-
-Returns List of devices connected over the profile
-```
-
-## bluetoothDiscoverAndConnect
-
-```
-Boolean bluetoothDiscoverAndConnect( String deviceID)
-
-Connect to a specified device once it's discovered.
-
-Returns Whether discovery started successfully.
-```
-
-## bluetoothDiscoverAndBond
-
-```
-Boolean bluetoothDiscoverAndBond( String deviceID)
-
-Bond to a specified device once it's discovered.
-
-Returns Whether discovery started successfully. 
-```
-
-## bluetoothUnbond
-
-```
-Boolean bluetoothUnbond( String deviceID)
-
-Unbond a device.
-
-Returns Whether the device was successfully unbonded.
-```
-
-## bluetoothConnectBonded
-
-```
-void bluetoothConnectBonded( String deviceID)
-
-Connect to a device that is already bonded.
-```
-
-## bluetoothDisconnectConnected
-
-```
-void bluetoothDisconnectConnected( String deviceID)
-
-Disconnect from a device that is already connected.
-```
-
-## bluetoothDisconnectConnectedProfile
-
-```
-void bluetoothDisconnectConnectedProfile( String deviceID, JSONArray profileSet )
-
-Disconnect on a profile from a device that is already connected.
-```
-
-## bluetoothChangeProfileAccessPermission
-
-```
-void bluetoothChangeProfileAccessPermission( String deviceID, Integer profileID, Integer access )
-
-Change permissions for a profile.
-```
-
-## bleGenScanCallback
-
-```
-Integer bleGenScanCallback()
-
-Generate a new myScanCallback Object
-```
-
-## bleGenLeScanCallback
-
-```
-Integer bleGenLeScanCallback()
-
-Generate a new myScanCallback Object
-```
-
-## bleGenFilterList
-
-```
-Integer bleGenFilterList()
-
-Generate a new Filter list
-```
-
-## bleBuildScanFilter
-
-```
-Integer bleBuildScanFilter( Integer filterIndex )
-
-Generate a new Filter list
-```
-
-## bleBuildScanSetting
-
-```
-Integer bleBuildScanSetting()
-
-Generate a new scan settings Object
-```
-
-## bleStopBleScan
-
-```
-void bleStopBleScan( Integer index)
-
-Stops an ongoing ble advertisement scan
-```
-
-## bleStopClassicBleScan
-
-```
-void bleStopClassicBleScan( Integer index)
-
-Stops an ongoing classic ble scan
-```
-
-## bleStartBleScan
-
-```
-void bleStartBleScan( Integer filterListIndex, Integer scanSettingsIndex, Integer callbackIndex )
-
-Starts a ble advertisement scan
-```
-
-## bleStartClassicBleScan
-
-```
-boolean bleStartClassicBleScan( Integer leCallbackIndex )
-
-Starts a classic ble advertisement scan
-```
-
-## bleStartClassicBleScanWithServiceUuids
-
-```
-boolean bleStartClassicBleScanWithServiceUuids( Integer leCallbackIndex, String[] serviceUuidList )
-
-Starts a classic ble advertisement scan with service Uuids
-```
-
-## bleFlushPendingScanResults
-
-```
-void bleFlushPendingScanResults( Integer callbackIndex )
-
-Gets the results of the ble ScanCallback
-```
-
-## bleSetScanSettingsCallbackType
-
-```
-void bleSetScanSettingsCallbackType( Integer callbackType)
-
-Set the scan setting's callback type
-```
-
-## bleSetScanSettingsReportDelayMillis
-
-```
-void bleSetScanSettingsReportDelayMillis( Long reportDelayMillis)
-
-Set the scan setting's report delay millis
-```
-
-## bleSetScanSettingsScanMode
-
-```
-void bleSetScanSettingsScanMode( Integer scanMode)
-
-Set the scan setting's scan mode
-```
-
-## bleSetScanSettingsResultType
-
-```
-void bleSetScanSettingsResultType( Integer scanResultType)
-
-Set the scan setting's scan result type
-```
-
-## bleGetScanSettingsCallbackType
-
-```
-Integer bleGetScanSettingsCallbackType( Integer index )
-
-Get ScanSetting's callback type
-```
-
-## bleGetScanSettingsReportDelayMillis
-
-```
-Long bleGetScanSettingsReportDelayMillis( Integer index)
-
-Get ScanSetting's report delay milliseconds
-```
-
-## bleGetScanSettingsScanMode
-
-```
-Integer bleGetScanSettingsScanMode( Integer index)
-
-Get ScanSetting's scan mode
-```
-
-## bleGetScanSettingsScanResultType
-
-```
-Integer bleGetScanSettingsScanResultType( Integer index)
-
-Get ScanSetting's scan result type
-```
-
-## bleGetScanFilterManufacturerId
-
-```
-Integer bleGetScanFilterManufacturerId( Integer index, Integer filterIndex)
-
-Get ScanFilter's Manufacturer Id
-```
-
-## bleGetScanFilterDeviceAddress
-
-```
-String bleGetScanFilterDeviceAddress( Integer index, Integer filterIndex)
-
-Get ScanFilter's device address
-```
-
-## bleGetScanFilterDeviceName
-
-```
-String bleGetScanFilterDeviceName( Integer index, Integer filterIndex)
-
-Get ScanFilter's device name
-```
-
-## bleGetScanFilterManufacturerData
-
-```
-byte[] bleGetScanFilterManufacturerData( Integer index, Integer filterIndex)
-
-Get ScanFilter's manufacturer data
-```
-
-## bleGetScanFilterManufacturerDataMask
-
-```
-byte[] bleGetScanFilterManufacturerDataMask( Integer index, Integer filterIndex)
-
-Get ScanFilter's manufacturer data mask
-```
-
-## bleGetScanFilterServiceData
-
-```
-byte[] bleGetScanFilterServiceData( Integer index, Integer filterIndex)
-
-Get ScanFilter's service data
-```
-
-## bleGetScanFilterServiceDataMask
-
-```
-byte[] bleGetScanFilterServiceDataMask( Integer index, Integer filterIndex)
-
-Get ScanFilter's service data mask
-```
-
-## bleGetScanFilterServiceUuid
-
-```
-String bleGetScanFilterServiceUuid( Integer index, Integer filterIndex)
-
-Get ScanFilter's service uuid
-```
-
-## bleGetScanFilterServiceUuidMask
-
-```
-String bleGetScanFilterServiceUuidMask( Integer index, Integer filterIndex)
-
-Get ScanFilter's service uuid mask
-```
-
-## bleSetScanFilterDeviceAddress
-
-```
-void bleSetScanFilterDeviceAddress( String macAddress )
-
-Add filter \"macAddress\" to existing ScanFilter
-```
-
-## bleSetScanFilterManufacturerData
-
-```
-void bleSetScanFilterManufacturerData( Integer manufacturerDataId, byte[] manufacturerData, byte[] manufacturerDataMask )
-
-Add filter \"manufacturereDataId and/or manufacturerData\" to existing ScanFilter
-```
-
-## bleSetScanFilterServiceData
-
-```
-void bleSetScanFilterServiceData( String serviceUuid, byte[] serviceData, byte[] serviceDataMask )
-
-Add filter \"serviceData and serviceDataMask\" to existing ScanFilter 
-```
-
-## bleSetScanFilterServiceUuid
-
-```
-void bleSetScanFilterServiceUuid( String serviceUuid, String serviceMask )
-
-Add filter \"serviceUuid and/or serviceMask\" to existing ScanFilter
-```
-
-## bleSetScanFilterDeviceName
-
-```
-void bleSetScanFilterDeviceName( String name )
-
-Sets the scan filter's device name
-```
-
-## bleSetScanSettingsMatchMode
-
-```
-void bleSetScanSettingsMatchMode( Integer mode)
-
-Set the scan setting's match mode
-```
-
-## bleGetScanSettingsMatchMode
-
-```
-int bleGetScanSettingsMatchMode( Integer scanSettingsIndex )
-
-Get the scan setting's match mode
-```
-
-## bleSetScanSettingsNumOfMatches
-
-```
-void bleSetScanSettingsNumOfMatches( Integer matches)
-
-Set the scan setting's number of matches
-```
-
-## bleGetScanSettingsNumberOfMatches
-
-```
-int bleGetScanSettingsNumberOfMatches( Integer scanSettingsIndex)
-
-Get the scan setting's number of matches
-```
-
-## telecomCallGetCallById
-
-```
-Call telecomCallGetCallById(String callId)
-
-Get call by particular Id
-```
-
-## bluetoothMapIsReady
-
-```
-Boolean bluetoothMapIsReady()
-
-Is Map profile ready.
-```
-
-## bluetoothMapDisconnect
-
-```
-Boolean bluetoothMapDisconnect( String deviceID)
-
-Disconnect an MAP device.
-```
-
-## bluetoothMapGetConnectedDevices
-
-```
-List<BluetoothDevice> bluetoothMapGetConnectedDevices()
-
-Get all the devices connected through MAP.
-```
-
-## bluetoothMapGetClient
-
-```
-BluetoothDevice bluetoothMapGetClient()
-
-Get the currently connected remote Bluetooth device (PCE).
-```
-
-## pick
-
-```
-Intent pick(String uri)
-
-Display content to be picked by URI (e.g. contacts)
-
-Returns A map of result values.
-```
-
-## scanBarcode
-
-```
-Intent scanBarcode()
-
-Starts the barcode scanner.
-
-Returns A Map representation of the result Intent.
-```
-
-## view
-
-```
-void view( String uri, String type, JSONObject extras)
-
-Start activity with view action by URI (i.e. browser, contacts, etc.).
-```
-
-## viewMap
-
-```
-void viewMap(String query)
-
-Opens a map search for query (e.g. pizza, 123 My Street).
-```
-
-## viewContacts
-
-```
-void viewContacts()
-
-Opens the list of contacts.
-```
-
-## viewHtml
-
-```
-void viewHtml( String path)
-
-Opens the browser to display a local HTML file.
-```
-
-## search
-
-```
-void search(String query)
-
-Starts a search for the given query.
-```
-
-## gattServerOpenGattServer
-
-```
-int gattServerOpenGattServer(Integer index)
-
-Open new gatt server
-```
-
-## gattServerAddService
-
-```
-void gattServerAddService(Integer index, Integer serviceIndex)
-
-Add service to bluetooth gatt server
-```
-
-## gattServerClearServices
-
-```
-void gattServerClearServices( Integer index)
-
-Clear services from bluetooth gatt server
-```
-
-## gattServerGetConnectedDevices
-
-```
-List<BluetoothDevice> gattServerGetConnectedDevices( Integer gattServerIndex)
-
-Return a list of connected gatt devices.
-```
-
-## gattServerSendResponse
-
-```
-void gattServerSendResponse( Integer gattServerIndex, Integer bluetoothDeviceIndex, Integer requestId, Integer status, Integer offset, byte[] value)
-
-Send a response after a write.
-```
-
-## gattServerNotifyCharacteristicChanged
-
-```
-void gattServerNotifyCharacteristicChanged( Integer gattServerIndex, Integer bluetoothDeviceIndex, Integer characteristicIndex, Boolean confirm)
-
-Notify that characteristic was changed.
-```
-
-## gattServerCreateService
-
-```
-int gattServerCreateService(String uuid, Integer serviceType)
-
-Create new bluetooth gatt service
-```
-
-## gattServiceAddCharacteristic
-
-```
-void gattServiceAddCharacteristic( Integer index, String serviceUuid, Integer characteristicIndex)
-
-Add a characteristic to a bluetooth gatt service
-```
-
-## gattServerAddCharacteristicToService
-
-```
-void gattServerAddCharacteristicToService(Integer index, Integer characteristicIndex  )
-
-Add a characteristic to a bluetooth gatt service
-```
-
-## gattServerClose
-
-```
-void gattServerClose(Integer index)
-
-Close a bluetooth gatt
-```
-
-## gattGetConnectedDevices
-
-```
-List<BluetoothDevice> gattGetConnectedDevices( Integer index)
-
-Get a list of Bluetooth Devices connnected to the bluetooth gatt
-```
-
-## gattGetServiceUuidList
-
-```
-ArrayList<String> gattGetServiceUuidList(Integer index)
-
-Get the service from an input UUID
-```
-
-## gattGetService
-
-```
-BluetoothGattService gattGetService(Integer index, String uuid)
-
-Get the service from an input UUID
-```
-
-## gattServerCharacteristicAddDescriptor
-
-```
-void gattServerCharacteristicAddDescriptor(Integer index, Integer descriptorIndex)
-
-add descriptor to blutooth gatt characteristic
-```
-
-## gattServerCreateBluetoothGattCharacteristic
-
-```
-int gattServerCreateBluetoothGattCharacteristic( String characteristicUuid, Integer property, Integer permission)
-
-Create a new Characteristic object
-```
-
-## gattServerCharacteristicSetValue
-
-```
-void gattServerCharacteristicSetValue(Integer index, byte[] value)
-
-add descriptor to blutooth gatt characteristic
-```
-
-## gattServerCreateGattServerCallback
-
-```
-Integer gattServerCreateGattServerCallback()
-
-Create a new GattCallback object
-```
-
-## gattServerCreateBluetoothGattDescriptor
-
-```
-int gattServerCreateBluetoothGattDescriptor( String descriptorUuid, Integer permissions)
-
-Create a new Descriptor object
-```
-
-## startTrackingPhoneState
-
-```
-void startTrackingPhoneState()
-
-Starts tracking phone state.
-```
-
-## readPhoneState
-
-```
-Bundle readPhoneState()
-
-Returns the current phone state and incoming number.
-
-Returns A Map of \"state\" and \"incomingNumber\"
-```
-
-## stopTrackingPhoneState
-
-```
-void stopTrackingPhoneState()
-
-Stops tracking phone state.
-```
-
-## phoneCall
-
-```
-void phoneCall(final String uriString)
-
-Calls a contact/phone number by URI.
-```
-
-## phoneCallNumber
-
-```
-void phoneCallNumber(final String number)
-
-Calls a phone number.
-```
-
-## phoneDial
-
-```
-void phoneDial(final String uri)
-
-Dials a contact/phone number by URI.
-```
-
-## phoneDialNumber
-
-```
-void phoneDialNumber(final String number)
-
-Dials a phone number.
-```
-
-## getCellLocation
-
-```
-CellLocation getCellLocation()
-
-Returns the current cell location.
-```
-
-## getNetworkOperator
-
-```
-String getNetworkOperator()
-
-Returns the numeric name (MCC+MNC) of current registered operator.
-```
-
-## getNetworkOperatorName
-
-```
-String getNetworkOperatorName()
-
-Returns the alphabetic name of current registered operator.
-```
-
-## getNetworkType
-
-```
-String getNetworkType()
-
-Returns a the radio technology (network type) currently in use on the device.
-```
-
-## getPhoneType
-
-```
-String getPhoneType()
-
-Returns the device phone type.
-```
-
-## getSimCountryIso
-
-```
-String getSimCountryIso()
-
-Returns the ISO country code equivalent for the SIM provider's country code.
-```
-
-## getSimOperator
-
-```
-String getSimOperator()
-
-Returns the MCC+MNC (mobile country code + mobile network code) of the provider of the SIM. 5 or 6 decimal digits.
-```
-
-## getSimOperatorName
-
-```
-String getSimOperatorName()
-
-Returns the Service Provider Name (SPN).
-```
-
-## getSimSerialNumber
-
-```
-String getSimSerialNumber()
-
-Returns the serial number of the SIM, if applicable. Return null if it is unavailable.
-```
-
-## getSimState
-
-```
-String getSimState()
-
-Returns the state of the device SIM card.
-```
-
-## getSubscriberId
-
-```
-String getSubscriberId()
-
-Returns the unique subscriber ID, for example, the IMSI for a GSM phone. Return null if it is unavailable.
-```
-
-## getVoiceMailAlphaTag
-
-```
-String getVoiceMailAlphaTag()
-
-Retrieves the alphabetic identifier associated with the voice mail number.
-```
-
-## getVoiceMailNumber
-
-```
-String getVoiceMailNumber()
-
-Returns the voice mail number. Return null if it is unavailable.
-```
-
-## checkNetworkRoaming
-
-```
-Boolean checkNetworkRoaming()
-
-Returns true if the device is considered roaming on the current network, for GSM purposes.
-```
-
-## getDeviceId
-
-```
-String getDeviceId()
-
-Returns the unique device ID, for example, the IMEI for GSM and the MEID for CDMA phones. Return null if device ID is not available.
-```
-
-## getDeviceSoftwareVersion
-
-```
-String getDeviceSoftwareVersion()
-
-Returns the software version number for the device, for example, the IMEI/SV for GSM phones. Return null if the software version is not available.
-```
-
-## getLine1Number
-
-```
-String getLine1Number()
-
-Returns the phone number string for line 1, for example, the MSISDN for a GSM phone. Return null if it is unavailable.
-```
-
-## getNeighboringCellInfo
-
-```
-List<NeighboringCellInfo> getNeighboringCellInfo()
-
-Returns the neighboring cell information of the device.
-```
-
-## getLaunchableApplications
-
-```
-Map<String, String> getLaunchableApplications()
-
-Returns a list of all launchable application class names.
-```
-
-## launch
-
-```
-void launch(String className)
-
-Start activity with the given class name.
-```
-
-## getRunningPackages
-
-```
-List<String> getRunningPackages()
-
-Returns a list of packages running activities or services.
-
-Returns List of packages running activities.
-```
-
-## forceStopPackage
-
-```
-void forceStopPackage( String packageName)
-
-Force stops a package.
-```
-
-## bluetoothMapClientConnect
-
-```
-Boolean bluetoothMapClientConnect( String device)
-
-Connect to an MAP MSE device.
-```
-
-## mapSendMessage
-
-```
-Boolean mapSendMessage( String deviceID, String[] phoneNumbers, String message)
-
-Send a (text) message via bluetooth.
-```
-
-## bluetoothMapClientIsReady
-
-```
-Boolean bluetoothMapClientIsReady()
-
-Is Map profile ready.
-```
-
-## bluetoothMapClientDisconnect
-
-```
-Boolean bluetoothMapClientDisconnect( String deviceID)
-
-Disconnect an MAP device.
-```
-
-## bluetoothMapClientGetConnectedDevices
-
-```
-List<BluetoothDevice> bluetoothMapClientGetConnectedDevices()
-
-Get all the devices connected through MAP.
-```
-
-## bleGenBleAdvertiseCallback
-
-```
-Integer bleGenBleAdvertiseCallback()
-
-Generate a new myAdvertisement Object
-```
-
-## bleBuildAdvertiseData
-
-```
-Integer bleBuildAdvertiseData()
-
-Constructs a new Builder obj for AdvertiseData and returns its index
-```
-
-## bleBuildAdvertiseSettings
-
-```
-Integer bleBuildAdvertiseSettings()
-
-Constructs a new Builder obj for AdvertiseData and returns its index
-```
-
-## bleStopBleAdvertising
-
-```
-void bleStopBleAdvertising( Integer index)
-
-Stops an ongoing ble advertisement
-```
-
-## bleStartBleAdvertising
-
-```
-void bleStartBleAdvertising( Integer callbackIndex, Integer dataIndex, Integer settingsIndex )
-
-Starts ble advertisement
-```
-
-## bleStartBleAdvertisingWithScanResponse
-
-```
-void bleStartBleAdvertisingWithScanResponse( Integer callbackIndex, Integer dataIndex, Integer settingsIndex, Integer scanResponseIndex )
-
-Starts ble advertisement
-```
-
-## bleGetAdvertiseSettingsMode
-
-```
-int bleGetAdvertiseSettingsMode( Integer index)
-
-Get ble advertisement settings mode
-```
-
-## bleGetAdvertiseSettingsTxPowerLevel
-
-```
-int bleGetAdvertiseSettingsTxPowerLevel( Integer index)
-
-Get ble advertisement settings tx power level
-```
-
-## bleGetAdvertiseSettingsIsConnectable
-
-```
-boolean bleGetAdvertiseSettingsIsConnectable( Integer index)
-
-Get ble advertisement settings isConnectable value
-```
-
-## bleGetAdvertiseDataIncludeTxPowerLevel
-
-```
-Boolean bleGetAdvertiseDataIncludeTxPowerLevel( Integer index)
-
-Get ble advertisement data include tx power level
-```
-
-## bleGetAdvertiseDataManufacturerSpecificData
-
-```
-byte[] bleGetAdvertiseDataManufacturerSpecificData( Integer index, Integer manufacturerId)
-
-Get ble advertisement data manufacturer specific data
-```
-
-## bleGetAdvertiseDataIncludeDeviceName
-
-```
-Boolean bleGetAdvertiseDataIncludeDeviceName( Integer index)
-
-Get ble advertisement include device name
-```
-
-## bleGetAdvertiseDataServiceData
-
-```
-byte[] bleGetAdvertiseDataServiceData( Integer index, String serviceUuid)
-
-Get ble advertisement Service Data
-```
-
-## bleGetAdvertiseDataServiceUuids
-
-```
-List<ParcelUuid> bleGetAdvertiseDataServiceUuids( Integer index)
-
-Get ble advertisement Service Uuids
-```
-
-## bleSetAdvertiseDataSetServiceUuids
-
-```
-void bleSetAdvertiseDataSetServiceUuids( String[] uuidList )
-
-Set ble advertisement data service uuids
-```
-
-## bleAddAdvertiseDataServiceData
-
-```
-void bleAddAdvertiseDataServiceData( String serviceDataUuid, byte[] serviceData )
-
-Set ble advertise data service uuids
-```
-
-## bleAddAdvertiseDataManufacturerId
-
-```
-void bleAddAdvertiseDataManufacturerId( Integer manufacturerId, byte[] manufacturerSpecificData )
-
-Set ble advertise data manufacturerId
-```
-
-## bleSetAdvertiseSettingsAdvertiseMode
-
-```
-void bleSetAdvertiseSettingsAdvertiseMode( Integer advertiseMode )
-
-Set ble advertise settings advertise mode
-```
-
-## bleSetAdvertiseSettingsTxPowerLevel
-
-```
-void bleSetAdvertiseSettingsTxPowerLevel( Integer txPowerLevel )
-
-Set ble advertise settings tx power level
-```
-
-## bleSetAdvertiseSettingsIsConnectable
-
-```
-void bleSetAdvertiseSettingsIsConnectable( Boolean value )
-
-Set ble advertise settings isConnectable value
-```
-
-## bleSetAdvertiseDataIncludeTxPowerLevel
-
-```
-void bleSetAdvertiseDataIncludeTxPowerLevel( Boolean includeTxPowerLevel )
-
-Set ble advertisement data include tx power level
-```
-
-## bleSetAdvertiseSettingsTimeout
-
-```
-void bleSetAdvertiseSettingsTimeout( Integer timeoutSeconds )
-
-Set ble advertisement data include tx power level
-```
-
-## bleSetAdvertiseDataIncludeDeviceName
-
-```
-void bleSetAdvertiseDataIncludeDeviceName( Boolean includeDeviceName )
-
-Set ble advertisement data include device name
-```
-
-## bluetoothRfcommBeginConnectThread
-
-```
-void bluetoothRfcommBeginConnectThread( String address, String uuid)
-
-Begins a thread initiate an Rfcomm connection over Bluetooth. 
-```
-
-## bluetoothRfcommKillConnThread
-
-```
-void bluetoothRfcommKillConnThread()
-
-Kill thread
-```
-
-## bluetoothRfcommEndConnectThread
-
-```
-void bluetoothRfcommEndConnectThread()
-
-Close an active Rfcomm Client socket
-```
-
-## bluetoothRfcommEndAcceptThread
-
-```
-void bluetoothRfcommEndAcceptThread()
-
-Close an active Rfcomm Server socket
-```
-
-## bluetoothRfcommActiveConnections
-
-```
-Map<String, String> bluetoothRfcommActiveConnections()
-
-Returns active Bluetooth connections.
-```
-
-## bluetoothRfcommGetConnectedDeviceName
-
-```
-String bluetoothRfcommGetConnectedDeviceName( String connID)
-
-Returns the name of the connected device.
-```
-
-## bluetoothRfcommBeginAcceptThread
-
-```
-void bluetoothRfcommBeginAcceptThread( String uuid, Integer timeout)
-
-Begins a thread to accept an Rfcomm connection over Bluetooth. 
-```
-
-## bluetoothRfcommWrite
-
-```
-void bluetoothRfcommWrite(String ascii, String connID)
-
-Sends ASCII characters over the currently open Bluetooth connection.
-```
-
-## bluetoothRfcommRead
-
-```
-String bluetoothRfcommRead( Integer bufferSize, String connID)
-
-Read up to bufferSize ASCII characters.
-```
-
-## bluetoothRfcommWriteBinary
-
-```
-void bluetoothRfcommWriteBinary( String base64, String connID)
-
-Send bytes over the currently open Bluetooth connection.
-```
-
-## bluetoothRfcommReadBinary
-
-```
-String bluetoothRfcommReadBinary( Integer bufferSize, String connID)
-
-Read up to bufferSize bytes and return a chunked, base64 encoded string.
-```
-
-## bluetoothRfcommReadReady
-
-```
-Boolean bluetoothRfcommReadReady( String connID)
-
-Returns True if the next read is guaranteed not to block.
-```
-
-## bluetoothRfcommReadLine
-
-```
-String bluetoothRfcommReadLine( String connID)
-
-Read the next line.
-```
-
-## bluetoothRfcommStop
-
-```
-void bluetoothRfcommStop( String connID)
-
-Stops Bluetooth connection.
-```
-
-## recorderStartMicrophone
-
-```
-void recorderStartMicrophone(String targetPath)
-
-Records audio from the microphone and saves it to the given location.
-```
-
-## recorderStartVideo
-
-```
-void recorderStartVideo(String targetPath, Integer duration, Integer videoSize)
-
-Records video from the camera and saves it to the given location. \nDuration specifies the maximum duration of the recording session. \nIf duration is 0 this method will return and the recording will only be stopped \nwhen recorderStop is called or when a scripts exits. \nOtherwise it will block for the time period equal to the duration argument.\nvideoSize: 0=160x120, 1=320x240, 2=352x288, 3=640x480, 4=800x480.
-```
-
-## recorderCaptureVideo
-
-```
-void recorderCaptureVideo(String targetPath, Integer duration, Boolean recordAudio)
-
-Records video (and optionally audio) from the camera and saves it to the given location. \nDuration specifies the maximum duration of the recording session. \nIf duration is not provided this method will return immediately and the recording will only be stopped \nwhen recorderStop is called or when a scripts exits. \nOtherwise it will block for the time period equal to the duration argument.
-```
-
-## recorderStop
-
-```
-void recorderStop()
-
-Stops a previously started recording.
-```
-
-## startInteractiveVideoRecording
-
-```
-void startInteractiveVideoRecording(final String path)
-
-Starts the video capture application to record a video and saves it to the specified path.
-```
-
-## bluetoothAvrcpIsReady
-
-```
-Boolean bluetoothAvrcpIsReady()
-
-Is Avrcp profile ready.
-```
-
-## bluetoothAvrcpGetConnectedDevices
-
-```
-List<BluetoothDevice> bluetoothAvrcpGetConnectedDevices()
-
-Get all the devices connected through AVRCP.
-```
-
-## bluetoothAvrcpDisconnect
-
-```
-void bluetoothAvrcpDisconnect()
-
-Close AVRCP connection.
-```
-
-## bluetoothHfpClientIsReady
-
-```
-Boolean bluetoothHfpClientIsReady()
-
-Is HfpClient profile ready.
-```
-
-## bluetoothHfpClientSetPriority
-
-```
-void bluetoothHfpClientSetPriority( String deviceStr, Integer priority)
-
-Set priority of the profile
-```
-
-## bluetoothHfpClientGetPriority
-
-```
-Integer bluetoothHfpClientGetPriority( String deviceStr)
-
-Get priority of the profile
-```
-
-## bluetoothHfpClientConnect
-
-```
-Boolean bluetoothHfpClientConnect( String deviceStr)
-
-Connect to an HFP Client device.
-```
-
-## bluetoothHfpClientDisconnect
-
-```
-Boolean bluetoothHfpClientDisconnect( String deviceStr)
-
-Disconnect an HFP Client device.
-```
-
-## bluetoothHfpClientGetConnectedDevices
-
-```
-List<BluetoothDevice> bluetoothHfpClientGetConnectedDevices()
-
-Get all the devices connected through HFP Client.
-```
-
-## bluetoothHfpClientGetConnectionStatus
-
-```
-Integer bluetoothHfpClientGetConnectionStatus( String deviceID)
-
-Get the connection status of a device.
-```
-
-## eventClearBuffer
-
-```
-void eventClearBuffer()
-
-Clears all events from the event buffer.
-```
-
-## eventRegisterForBroadcast
-
-```
-boolean eventRegisterForBroadcast( String category, Boolean enqueue)
-
-Registers a listener for a new broadcast signal
-```
-
-## eventUnregisterForBroadcast
-
-```
-void eventUnregisterForBroadcast(String category)
-
-Stop listening for a broadcast signal
-```
-
-## eventGetBrodcastCategories
-
-```
-Set<String> eventGetBrodcastCategories()
-
-Lists all the broadcast signals we are listening for
-```
-
-## eventPoll
-
-```
-List<Event> eventPoll( Integer number_of_events)
-
-Returns and removes the oldest n events (i.e. location or sensor update, etc.) from the event buffer.
-
-Returns A List of Maps of event properties.
-```
-
-## eventWaitFor
-
-```
-Event eventWaitFor( final String eventName, Integer timeout)
-
-Blocks until an event with the supplied name occurs. The returned event is not removed from the buffer.
-
-Returns Map of event properties.
-```
-
-## eventWait
-
-```
-Event eventWait( Integer timeout)
-
-Blocks until an event occurs. The returned event is removed from the buffer.
-
-Returns Map of event properties.
-```
-
-## eventPost
-
-```
-void eventPost( String name, String data, Boolean enqueue)
-
-Post an event to the event queue.
-```
-
-## rpcPostEvent
-
-```
-void rpcPostEvent(String name, String data)
-
-Post an event to the event queue.
-```
-
-## receiveEvent
-
-```
-Event receiveEvent()
-
-Returns and removes the oldest event (i.e. location or sensor update, etc.) from the event buffer.
-
-Returns Map of event properties.
-```
-
-## waitForEvent
-
-```
-Event waitForEvent( final String eventName, Integer timeout)
-
-Blocks until an event with the supplied name occurs. The returned event is not removed from the buffer.
-
-Returns Map of event properties.
-```
-
-## startEventDispatcher
-
-```
-int startEventDispatcher( Integer port)
-
-Opens up a socket where you can read for events posted
-```
-
-## stopEventDispatcher
-
-```
-void stopEventDispatcher()
-
-Stops the event server, you can't read in the port anymore
-```
-
-## ttsSpeak
-
-```
-void ttsSpeak(String message)
-
-Speaks the provided message via TTS.
-```
-
-## gattClientConnectGatt
-
-```
-int gattClientConnectGatt( Integer index, String macAddress, Boolean autoConnect, Integer transport )
-
-Create a gatt connection
-```
-
-## gattClientDiscoverServices
-
-```
-boolean gattClientDiscoverServices( Integer index )
-
-Trigger discovering of services on the BluetoothGatt object
-```
-
-## gattClientGetServices
-
-```
-List<BluetoothGattService> gattClientGetServices( Integer index )
-
-Get the services from the BluetoothGatt object
-```
-
-## gattClientAbortReliableWrite
-
-```
-void gattClientAbortReliableWrite( Integer index )
-
-Abort reliable write of a bluetooth gatt
-```
-
-## gattClientBeginReliableWrite
-
-```
-boolean gattClientBeginReliableWrite( Integer index )
-
-Begin reliable write of a bluetooth gatt
-```
-
-## gattClientRequestMtu
-
-```
-boolean gattClientRequestMtu( Integer index, Integer mtu )
-
-true, if the new MTU value has been requested successfully
-```
-
-## gattClientDisconnect
-
-```
-void gattClientDisconnect( Integer index )
-
-Disconnect a bluetooth gatt
-```
-
-## gattClientClose
-
-```
-void gattClientClose( Integer index)
-
-Close a Bluetooth GATT object
-```
-
-## gattExecuteReliableWrite
-
-```
-boolean gattExecuteReliableWrite( Integer index )
-
-Execute reliable write on a bluetooth gatt
-```
-
-## gattClientGetConnectedDevices
-
-```
-List<BluetoothDevice> gattClientGetConnectedDevices( Integer index )
-
-Get a list of Bluetooth Devices connnected to the bluetooth gatt
-```
-
-## gattGetDevice
-
-```
-BluetoothDevice gattGetDevice( Integer index )
-
-Get the remote bluetooth device this GATT client targets to
-```
-
-## gattClientGetDevicesMatchingConnectionStates
-
-```
-List<BluetoothDevice> gattClientGetDevicesMatchingConnectionStates( Integer index, int[] states )
-
-Get the bluetooth devices matching input connection states
-```
-
-## gattClientGetServiceUuidList
-
-```
-ArrayList<String> gattClientGetServiceUuidList( Integer index )
-
-Get the service from an input UUID
-```
-
-## gattClientReadCharacteristic
-
-```
-boolean gattClientReadCharacteristic( Integer gattIndex, Integer discoveredServiceListIndex, Integer serviceIndex, String characteristicUuid)
-
-Reads the requested characteristic from the associated remote device.
-```
-
-## gattClientReadDescriptor
-
-```
-boolean gattClientReadDescriptor( Integer gattIndex, Integer discoveredServiceListIndex, Integer serviceIndex, String characteristicUuid, String descriptorUuid)
-
-Reads the value for a given descriptor from the associated remote device
-```
-
-## gattClientWriteDescriptor
-
-```
-boolean gattClientWriteDescriptor( Integer gattIndex, Integer discoveredServiceListIndex, Integer serviceIndex, String characteristicUuid, String descriptorUuid)
-
-Write the value of a given descriptor to the associated remote device
-```
-
-## gattClientDescriptorSetValue
-
-```
-boolean gattClientDescriptorSetValue( Integer gattIndex, Integer discoveredServiceListIndex, Integer serviceIndex, String characteristicUuid, String descriptorUuid, String value)
-
-Write the value of a given descriptor to the associated remote device
-```
-
-## gattClientWriteCharacteristic
-
-```
-boolean gattClientWriteCharacteristic( Integer gattIndex, Integer discoveredServiceListIndex, Integer serviceIndex, String characteristicUuid)
-
-Write the value of a given characteristic to the associated remote device
-```
-
-## gattClientCharacteristicSetValue
-
-```
-boolean gattClientCharacteristicSetValue( Integer gattIndex, Integer discoveredServiceListIndex, Integer serviceIndex, String characteristicUuid, String value)
-
-Write the value of a given characteristic to the associated remote device
-```
-
-## gattClientCharacteristicSetWriteType
-
-```
-boolean gattClientCharacteristicSetWriteType( Integer gattIndex, Integer discoveredServiceListIndex, Integer serviceIndex, String characteristicUuid, Integer writeType)
-
-Set write type of a given characteristic to the associated remote device
-```
-
-## gattClientReadRSSI
-
-```
-boolean gattClientReadRSSI( Integer index )
-
-Read the RSSI for a connected remote device
-```
-
-## gattClientRefresh
-
-```
-boolean gattClientRefresh( Integer index )
-
-Clears the internal cache and forces a refresh of the services from the remote device
-```
-
-## gattClientRequestConnectionPriority
-
-```
-boolean gattClientRequestConnectionPriority( Integer index, Integer connectionPriority )
-
-Request a connection parameter update. from the Bluetooth Gatt
-```
-
-## gattClientSetCharacteristicNotification
-
-```
-boolean gattClientSetCharacteristicNotification( Integer gattIndex, Integer discoveredServiceListIndex, Integer serviceIndex, String characteristicUuid, Boolean enable )
-
-Sets the characteristic notification of a bluetooth gatt
-```
-
-## gattCreateGattCallback
-
-```
-Integer gattCreateGattCallback()
-
-Create a new GattCallback object
-```
-
-## gattClientGetDiscoveredServicesCount
-
-```
-int gattClientGetDiscoveredServicesCount( Integer index )
-
-Get Bluetooth Gatt Services
-```
-
-## gattClientGetDiscoveredServiceUuid
-
-```
-String gattClientGetDiscoveredServiceUuid( Integer index, Integer serviceIndex )
-
-Get Bluetooth Gatt Service Uuid
-```
-
-## gattClientGetDiscoveredCharacteristicUuids
-
-```
-ArrayList<String> gattClientGetDiscoveredCharacteristicUuids( Integer index, Integer serviceIndex )
-
-Get Bluetooth Gatt Services
-```
-
-## gattClientGetDiscoveredDescriptorUuids
-
-```
-ArrayList<String> gattClientGetDiscoveredDescriptorUuids ( Integer index, Integer serviceIndex, String characteristicUuid )
-
-Get Bluetooth Gatt Services
-```
-
-## setScreenTimeout
-
-```
-Integer setScreenTimeout(Integer value)
-
-Sets the screen timeout to this number of seconds.
-
-Returns The original screen timeout.
-```
-
-## getScreenTimeout
-
-```
-Integer getScreenTimeout()
-
-Returns the current screen timeout in seconds.
-
-Returns the current screen timeout in seconds.
-```
-
-## checkAirplaneMode
-
-```
-Boolean checkAirplaneMode()
-
-Checks the airplane mode setting.
-
-Returns True if airplane mode is enabled.
-```
-
-## toggleAirplaneMode
-
-```
-Boolean toggleAirplaneMode(Boolean enabled)
-
-Toggles airplane mode on and off.
-
-Returns True if airplane mode is enabled.
-```
-
-## checkRingerSilentMode
-
-```
-Boolean checkRingerSilentMode()
-
-Checks the ringer silent mode setting.
-
-Returns True if ringer silent mode is enabled.
-```
-
-## toggleRingerSilentMode
-
-```
-Boolean toggleRingerSilentMode(Boolean enabled)
-
-Toggles ringer silent mode on and off.
-
-Returns True if ringer silent mode is enabled.
-```
-
-## toggleVibrateMode
-
-```
-Boolean toggleVibrateMode(Boolean enabled, Boolean ringer)
-
-Toggles vibrate mode on and off. If ringer=true then set Ringer setting, else set Notification setting
-
-Returns True if vibrate mode is enabled.
-```
-
-## getVibrateMode
-
-```
-Boolean getVibrateMode(Boolean ringer)
-
-Checks Vibration setting. If ringer=true then query Ringer setting, else query Notification setting
-
-Returns True if vibrate mode is enabled.
-```
-
-## getMaxRingerVolume
-
-```
-int getMaxRingerVolume()
-
-Returns the maximum ringer volume.
-```
-
-## getRingerVolume
-
-```
-int getRingerVolume()
-
-Returns the current ringer volume.
-```
-
-## setRingerVolume
-
-```
-void setRingerVolume(Integer volume)
-
-Sets the ringer volume.
-```
-
-## getMaxMediaVolume
-
-```
-int getMaxMediaVolume()
-
-Returns the maximum media volume.
-```
-
-## getMediaVolume
-
-```
-int getMediaVolume()
-
-Returns the current media volume.
-```
-
-## setMediaVolume
-
-```
-void setMediaVolume(Integer volume)
-
-Sets the media volume.
-```
-
-## getScreenBrightness
-
-```
-Integer getScreenBrightness()
-
-Returns the screen backlight brightness.
-
-Returns the current screen brightness between 0 and 255
-```
-
-## setScreenBrightness
-
-```
-Integer setScreenBrightness( Integer value)
-
-Sets the the screen backlight brightness.
-
-Returns the original screen brightness.
-```
-
-## checkScreenOn
-
-```
-Boolean checkScreenOn()
-
-Checks if the screen is on or off (requires API level 7).
-
-Returns True if the screen is currently on.
-```
-
-## wakeLockAcquireFull
-
-```
-void wakeLockAcquireFull()
-
-Acquires a full wake lock (CPU on, screen bright, keyboard bright).
-```
-
-## wakeLockAcquirePartial
-
-```
-void wakeLockAcquirePartial()
-
-Acquires a partial wake lock (CPU on).
-```
-
-## wakeLockAcquireBright
-
-```
-void wakeLockAcquireBright()
-
-Acquires a bright wake lock (CPU on, screen bright).
-```
-
-## wakeLockAcquireDim
-
-```
-void wakeLockAcquireDim()
-
-Acquires a dim wake lock (CPU on, screen dim).
-```
-
-## wakeLockRelease
-
-```
-void wakeLockRelease()
-
-Releases the wake lock.
-```
-
-## setResultBoolean
-
-```
-void setResultBoolean( Integer resultCode, Boolean resultValue)
-
-sRpcDescription
-```
-
-## setResultByte
-
-```
-void setResultByte( Integer resultCode, Byte resultValue)
-
-sRpcDescription
-```
-
-## setResultShort
-
-```
-void setResultShort( Integer resultCode, Short resultValue)
-
-sRpcDescription
-```
-
-## setResultChar
-
-```
-void setResultChar( Integer resultCode, Character resultValue)
-
-sRpcDescription
-```
-
-## setResultInteger
-
-```
-void setResultInteger( Integer resultCode, Integer resultValue)
-
-sRpcDescription
-```
-
-## setResultLong
-
-```
-void setResultLong( Integer resultCode, Long resultValue)
-
-sRpcDescription
-```
-
-## setResultFloat
-
-```
-void setResultFloat( Integer resultCode, Float resultValue)
-
-sRpcDescription
-```
-
-## setResultDouble
-
-```
-void setResultDouble( Integer resultCode, Double resultValue)
-
-sRpcDescription
-```
-
-## setResultString
-
-```
-void setResultString( Integer resultCode, String resultValue)
-
-sRpcDescription
-```
-
-## setResultBooleanArray
-
-```
-void setResultBooleanArray( Integer resultCode, Boolean[] resultValue)
-
-sRpcDescription
-```
-
-## setResultByteArray
-
-```
-void setResultByteArray( Integer resultCode, Byte[] resultValue)
-
-sRpcDescription
-```
-
-## setResultShortArray
-
-```
-void setResultShortArray( Integer resultCode, Short[] resultValue)
-
-sRpcDescription
-```
-
-## setResultCharArray
-
-```
-void setResultCharArray( Integer resultCode, Character[] resultValue)
-
-sRpcDescription
-```
-
-## setResultIntegerArray
-
-```
-void setResultIntegerArray( Integer resultCode, Integer[] resultValue)
-
-sRpcDescription
-```
-
-## setResultLongArray
-
-```
-void setResultLongArray( Integer resultCode, Long[] resultValue)
-
-sRpcDescription
-```
-
-## setResultFloatArray
-
-```
-void setResultFloatArray( Integer resultCode, Float[] resultValue)
-
-sRpcDescription
-```
-
-## setResultDoubleArray
-
-```
-void setResultDoubleArray( Integer resultCode, Double[] resultValue)
-
-sRpcDescription
-```
-
-## setResultStringArray
-
-```
-void setResultStringArray( Integer resultCode, String[] resultValue)
-
-sRpcDescription
-```
-
-## setResultSerializable
-
-```
-void setResultSerializable( Integer resultCode, Serializable resultValue)
-
-sRpcDescription
-```
-
-## usbserialGetDeviceList
-
-```
-Map<String, String> usbserialGetDeviceList()
-
-Returns USB devices reported by USB Host API.
-
-Returns "Map of id and string information '
-```
-
-## usbserialDisconnect
-
-```
-void usbserialDisconnect( String connID )
-
-Disconnect all USB-device.
-```
-
-## usbserialActiveConnections
-
-```
-Map<String, String> usbserialActiveConnections()
-
-Returns active USB-device connections.
-
-Returns "Active USB-device connections by Map UUID vs device-name." 
-```
-
-## usbserialWriteBinary
-
-```
-void usbserialWriteBinary( String base64, String connID)
-
-Send bytes over the currently open USB Serial connection.
-```
-
-## usbserialReadBinary
-
-```
-String usbserialReadBinary( Integer bufferSize, String connID)
-
-Read up to bufferSize bytes and return a chunked, base64 encoded string.
-```
-
-## usbserialConnect
-
-```
-String usbserialConnect( String hash, String options)
-
-Connect to a device with USB-Host. request the connection and exit.
-
-Returns messages the request status.
-```
-
-## usbserialHostEnable
-
-```
-Boolean usbserialHostEnable()
-
-Requests that the host be enable for USB Serial connections.
-
-Returns "True if the USB Device is accesible
-```
-
-## usbserialWrite
-
-```
-void usbserialWrite(String ascii, String connID)
-
-Sends ASCII characters over the currently open USB Serial connection.
-```
-
-## usbserialReadReady
-
-```
-Boolean usbserialReadReady( String connID)
-
-Returns True if the next read is guaranteed not to block.
-```
-
-## usbserialRead
-
-```
-String usbserialRead( String connID, Integer bufferSize)
-
-Read up to bufferSize ASCII characters.
-```
-
-## usbserialGetDeviceName
-
-```
-String usbserialGetDeviceName( String connID)
-
-Queries a remote device for it's name or null if it can't be resolved
-```
-
-## prefGetValue
-
-```
-Object prefGetValue( String key, String filename)
-
-Read a value from shared preferences
-```
-
-## prefPutValue
-
-```
-void prefPutValue( String key, Object value, String filename)
-
-Write a value to shared preferences
-```
-
-## prefGetAll
-
-```
-Map<String, ?> prefGetAll( String filename)
-
-Get list of Shared Preference Values
-
-Returns Map of key,value
-```
-
-## recognizeSpeech
-
-```
-String recognizeSpeech( final String prompt, final String language, final String languageModel)
-
-Recognizes user's speech and returns the most likely result.
-
-Returns An empty string in case the speech cannot be recongnized.
-```
-
-## generateDtmfTones
-
-```
-void generateDtmfTones( String phoneNumber, Integer toneDuration)
-
-Generate DTMF tones for the given phone number.
-```
-
-## bluetoothHspIsReady
-
-```
-Boolean bluetoothHspIsReady()
-
-Is Hsp profile ready.
-```
-
-## bluetoothHspSetPriority
-
-```
-void bluetoothHspSetPriority( String deviceStr, Integer priority)
-
-Set priority of the profile
-```
-
-## bluetoothHspConnect
-
-```
-Boolean bluetoothHspConnect( String device)
-
-Connect to an HSP device.
-```
-
-## bluetoothHspDisconnect
-
-```
-Boolean bluetoothHspDisconnect( String device)
-
-Disconnect an HSP device.
-```
-
-## bluetoothHspGetConnectedDevices
-
-```
-List<BluetoothDevice> bluetoothHspGetConnectedDevices()
-
-Get all the devices connected through HSP.
-```
-
-## bluetoothHspGetConnectionStatus
-
-```
-Integer bluetoothHspGetConnectionStatus( String deviceID)
-
-Get the connection status of a device.
-```
-
-## bluetoothHidIsReady
-
-```
-Boolean bluetoothHidIsReady()
-
-Is Hid profile ready.
-```
-
-## bluetoothHidConnect
-
-```
-Boolean bluetoothHidConnect( String device)
-
-Connect to an HID device.
-```
-
-## bluetoothHidDisconnect
-
-```
-Boolean bluetoothHidDisconnect( String device)
-
-Disconnect an HID device.
-```
-
-## bluetoothHidGetConnectedDevices
-
-```
-List<BluetoothDevice> bluetoothHidGetConnectedDevices()
-
-Get all the devices connected through HID.
-```
-
-## bluetoothHidGetConnectionStatus
-
-```
-Integer bluetoothHidGetConnectionStatus( String deviceID)
-
-Get the connection status of a device.
-```
-
-## bluetoothHidSetReport
-
-```
-Boolean bluetoothHidSetReport( String deviceID, String type, String report)
-
-Send Set_Report command to the connected HID input device.
-```
-
-## bluetoothHidGetReport
-
-```
-Boolean bluetoothHidGetReport( String deviceID, String type, String reportId, Integer buffSize)
-
-Send Get_Report command to the connected HID input device.
-```
-
-## bluetoothHidSendData
-
-```
-Boolean bluetoothHidSendData( String deviceID, String report)
-
-Send data to a connected HID device.
-```
-
-## bluetoothHidVirtualUnplug
-
-```
-Boolean bluetoothHidVirtualUnplug( String deviceID)
-
-Send virtual unplug to a connected HID device.
-```
-
-## testByte
-
-```
-byte[] testByte()
-
-Test byte transfer.
-```
-
-## bluetoothA2dpIsReady
-
-```
-Boolean bluetoothA2dpIsReady()
-
-Is A2dp profile ready.
-```
-
-## bluetoothA2dpSetPriority
-
-```
-void bluetoothA2dpSetPriority( String deviceStr, Integer priority)
-
-Set priority of the profile
-```
-
-## bluetoothA2dpConnect
-
-```
-Boolean bluetoothA2dpConnect( String deviceID)
-
-Connect to an A2DP device.
-```
-
-## bluetoothA2dpDisconnect
-
-```
-Boolean bluetoothA2dpDisconnect( String deviceID)
-
-Disconnect an A2DP device.
-```
-
-## bluetoothA2dpGetConnectedDevices
-
-```
-List<BluetoothDevice> bluetoothA2dpGetConnectedDevices()
-
-Get all the devices connected through A2DP.
-```
-
-## startTrackingSignalStrengths
-
-```
-void startTrackingSignalStrengths()
-
-Starts tracking signal strengths.
-```
-
-## readSignalStrengths
-
-```
-Bundle readSignalStrengths()
-
-Returns the current signal strengths.
-
-Returns A map of \"gsm_signal_strength\"
-```
-
-## stopTrackingSignalStrengths
-
-```
-void stopTrackingSignalStrengths()
-
-Stops tracking signal strength.
-```
-
-## bluetoothActiveConnections
-
-```
-Map<String, String> bluetoothActiveConnections()
-
-Returns active Bluetooth connections.
-```
-
-## bluetoothWriteBinary
-
-```
-void bluetoothWriteBinary( String base64, String connID)
-
-Send bytes over the currently open Bluetooth connection.
-```
-
-## bluetoothReadBinary
-
-```
-String bluetoothReadBinary( Integer bufferSize, String connID)
-
-Read up to bufferSize bytes and return a chunked, base64 encoded string.
-```
-
-## bluetoothConnect
-
-```
-String bluetoothConnect( String uuid, String address)
-
-Connect to a device over Bluetooth. Blocks until the connection is established or fails.
-
-Returns True if the connection was established successfully.
-```
-
-## bluetoothAccept
-
-```
-String bluetoothAccept( String uuid, Integer timeout)
-
-Listens for and accepts a Bluetooth connection. Blocks until the connection is established or fails.
-```
-
-## bluetoothMakeDiscoverable
-
-```
-void bluetoothMakeDiscoverable( Integer duration)
-
-Requests that the device be discoverable for Bluetooth connections.
-```
-
-## bluetoothWrite
-
-```
-void bluetoothWrite(String ascii, String connID)
-
-Sends ASCII characters over the currently open Bluetooth connection.
-```
-
-## bluetoothReadReady
-
-```
-Boolean bluetoothReadReady( String connID)
-
-Returns True if the next read is guaranteed not to block.
-```
-
-## bluetoothRead
-
-```
-String bluetoothRead( Integer bufferSize, String connID)
-
-Read up to bufferSize ASCII characters.
-```
-
-## bluetoothReadLine
-
-```
-String bluetoothReadLine( String connID)
-
-Read the next line.
-```
-
-## bluetoothGetRemoteDeviceName
-
-```
-String bluetoothGetRemoteDeviceName( String address)
-
-Queries a remote device for it's name or null if it can't be resolved
-```
-
-## bluetoothGetLocalName
-
-```
-String bluetoothGetLocalName()
-
-Gets the Bluetooth Visible device name
-```
-
-## bluetoothSetLocalName
-
-```
-boolean bluetoothSetLocalName( String name)
-
-Sets the Bluetooth Visible device name, returns True on success
-```
-
-## bluetoothGetScanMode
-
-```
-int bluetoothGetScanMode()
-
-Gets the scan mode for the local dongle.\r\nReturn values:\r\n\t-1 when Bluetooth is disabled.\r\n\t0 if non discoverable and non connectable.\r\n\r1 connectable non discoverable.\r3 connectable and discoverable.
-```
-
-## bluetoothGetConnectedDeviceName
-
-```
-String bluetoothGetConnectedDeviceName( String connID)
-
-Returns the name of the connected device.
-```
-
-## checkBluetoothState
-
-```
-Boolean checkBluetoothState()
-
-Checks Bluetooth state.
-
-Returns True if Bluetooth is enabled.
-```
-
-## toggleBluetoothState
-
-```
-Boolean toggleBluetoothState( Boolean enabled, Boolean prompt)
-
-Toggle Bluetooth on and off.
-
-Returns True if Bluetooth is enabled.
-```
-
-## bluetoothStop
-
-```
-void bluetoothStop( String connID)
-
-Stops Bluetooth connection.
-```
-
-## bluetoothGetLocalAddress
-
-```
-String bluetoothGetLocalAddress()
-
-Returns the hardware address of the local Bluetooth adapter. 
-```
-
-## bluetoothDiscoveryStart
-
-```
-Boolean bluetoothDiscoveryStart()
-
-Start the remote device discovery process. 
-
-Returns true on success, false on error
-```
-
-## bluetoothDiscoveryCancel
-
-```
-Boolean bluetoothDiscoveryCancel()
-
-Cancel the current device discovery process.
-
-Returns true on success, false on error
-```
-
-## bluetoothIsDiscovering
-
-```
-Boolean bluetoothIsDiscovering()
-
-Return true if the local Bluetooth adapter is currently in the device discovery process. 
-```
-
-## bluetoothA2dpSinkSetPriority
-
-```
-void bluetoothA2dpSinkSetPriority( String deviceStr, Integer priority)
-
-Set priority of the profile
-```
-
-## bluetoothA2dpSinkGetPriority
-
-```
-Integer bluetoothA2dpSinkGetPriority( String deviceStr)
-
-get priority of the profile
-```
-
-## bluetoothA2dpSinkIsReady
-
-```
-Boolean bluetoothA2dpSinkIsReady()
-
-Is A2dpSink profile ready.
-```
-
-## bluetoothA2dpSinkConnect
-
-```
-Boolean bluetoothA2dpSinkConnect( String deviceStr)
-
-Connect to an A2DP Sink device.
-```
-
-## bluetoothA2dpSinkDisconnect
-
-```
-Boolean bluetoothA2dpSinkDisconnect( String deviceStr)
-
-Disconnect an A2DP Sink device.
-```
-
-## bluetoothA2dpSinkGetConnectedDevices
-
-```
-List<BluetoothDevice> bluetoothA2dpSinkGetConnectedDevices()
-
-Get all the devices connected through A2DP Sink.
-```
-
-## bluetoothA2dpSinkGetConnectionStatus
-
-```
-Integer bluetoothA2dpSinkGetConnectionStatus( String deviceID)
-
-Get the connection status of a device.
-```
-
-## locationProviders
-
-```
-List<String> locationProviders()
-
-Returns availables providers on the phone
-```
-
-## locationProviderEnabled
-
-```
-boolean locationProviderEnabled( String provider)
-
-Ask if provider is enabled
-```
-
-## startLocating
-
-```
-void startLocating( Integer minUpdateTime, Integer minUpdateDistance)
-
-Starts collecting location data.
-```
-
-## readLocation
-
-```
-Map<String, Location> readLocation()
-
-Returns the current location as indicated by all available providers.
-
-Returns A map of location information by provider.
-```
-
-## stopLocating
-
-```
-void stopLocating()
-
-Stops collecting location data.
-```
-
-## getLastKnownLocation
-
-```
-Map<String, Location> getLastKnownLocation()
-
-Returns the last known location of the device.
-
-Returns A map of location information by provider.
-```
-
-## geocode
-
-```
-List<Address> geocode( Double latitude, Double longitude, Integer maxResults)
-
-Returns a list of addresses for the given latitude and longitude.
-
-Returns A list of addresses.
-```
-
-## bluetoothMakeConnectable
-
-```
-void bluetoothMakeConnectable()
-
-Requests that the device be made connectable.
-```
-
-## bluetoothActiveConnections
-
-```
-Map<String, String> bluetoothActiveConnections()
-
-Returns active Bluetooth connections.
-```
-
-## bluetoothWriteBinary
-
-```
-void bluetoothWriteBinary( String base64, String connID)
-
-Send bytes over the currently open Bluetooth connection.
-```
-
-## bluetoothReadBinary
-
-```
-String bluetoothReadBinary( Integer bufferSize, String connID)
-
-Read up to bufferSize bytes and return a chunked, base64 encoded string.
-```
-
-## bluetoothConnect
-
-```
-String bluetoothConnect( String uuid, String address)
-
-Connect to a device over Bluetooth. Blocks until the connection is established or fails.
-
-Returns True if the connection was established successfully.
-```
-
-## bluetoothAccept
-
-```
-String bluetoothAccept( String uuid, Integer timeout)
-
-Listens for and accepts a Bluetooth connection. Blocks until the connection is established or fails.
-```
-
-## bluetoothMakeDiscoverable
-
-```
-void bluetoothMakeDiscoverable( Integer duration)
-
-Requests that the device be discoverable for Bluetooth connections.
-```
-
-## bluetoothWrite
-
-```
-void bluetoothWrite(String ascii, String connID)
-
-Sends ASCII characters over the currently open Bluetooth connection.
-```
-
-## bluetoothReadReady
-
-```
-Boolean bluetoothReadReady( String connID)
-
-Returns True if the next read is guaranteed not to block.
-```
-
-## bluetoothRead
-
-```
-String bluetoothRead( Integer bufferSize, String connID)
-
-Read up to bufferSize ASCII characters.
-```
-
-## bluetoothReadLine
-
-```
-String bluetoothReadLine( String connID)
-
-Read the next line.
-```
-
-## bluetoothMakeUndiscoverable
-
-```
-void bluetoothMakeUndiscoverable()
-
-Requests that the device be not discoverable.
-```
-
-## bluetoothGetRemoteDeviceName
-
-```
-String bluetoothGetRemoteDeviceName( String address)
-
-Queries a remote device for it's name or null if it can't be resolved
-```
-
-## bluetoothGetLocalName
-
-```
-String bluetoothGetLocalName()
-
-Get local Bluetooth device name
-```
-
-## bluetoothSetLocalName
-
-```
-boolean bluetoothSetLocalName( String name)
-
-Sets the Bluetooth visible device name
-
-Returns true on success
-```
-
-## bluetoothGetScanMode
-
-```
-int bluetoothGetScanMode()
-
-Gets the scan mode for the local dongle.\r\nReturn values:\r\n\t-1 when Bluetooth is disabled.\r\n\t0 if non discoverable and non connectable.\r\n\r1 connectable non discoverable.\r3 connectable and discoverable.
-```
-
-## bluetoothGetConnectedDeviceName
-
-```
-String bluetoothGetConnectedDeviceName( String connID)
-
-Returns the name of the connected device.
-```
-
-## checkBluetoothState
-
-```
-Boolean checkBluetoothState()
-
-Checks Bluetooth state.
-
-Returns True if Bluetooth is enabled.
-```
-
-## bluetoothFactoryReset
-
-```
-boolean bluetoothFactoryReset()
-
-Factory reset bluetooth settings.
-
-Returns True if successful.
-```
-
-## toggleBluetoothState
-
-```
-Boolean toggleBluetoothState( Boolean enabled, Boolean prompt)
-
-Toggle Bluetooth on and off.
-
-Returns True if Bluetooth is enabled.
-```
-
-## bluetoothStop
-
-```
-void bluetoothStop( String connID)
-
-Stops Bluetooth connection.
-```
-
-## bluetoothGetLocalAddress
-
-```
-String bluetoothGetLocalAddress()
-
-Returns the hardware address of the local Bluetooth adapter. 
-```
-
-## bluetoothDiscoveryStart
-
-```
-Boolean bluetoothDiscoveryStart()
-
-Start the remote device discovery process. 
-
-Returns true on success, false on error
-```
-
-## bluetoothDiscoveryCancel
-
-```
-Boolean bluetoothDiscoveryCancel()
-
-Cancel the current device discovery process.
-
-Returns true on success, false on error
-```
-
-## bluetoothIsDiscovering
-
-```
-Boolean bluetoothIsDiscovering()
-
-If the local Bluetooth adapter is currentlyin the device discovery process.
-```
-
-## bluetoothGetDiscoveredDevices
-
-```
-Collection<BluetoothDevice> bluetoothGetDiscoveredDevices()
-
-Get all the discovered bluetooth devices.
-```
-
-## bluetoothConfigHciSnoopLog
-
-```
-boolean bluetoothConfigHciSnoopLog( Boolean value )
-
-Enable or disable the Bluetooth HCI snoop log
-```
-
-## bluetoothGetControllerActivityEnergyInfo
-
-```
-String bluetoothGetControllerActivityEnergyInfo( Integer value )
-
-Get Bluetooth controller activity energy info.
-```
-
-## bluetoothIsHardwareTrackingFiltersAvailable
-
-```
-boolean bluetoothIsHardwareTrackingFiltersAvailable()
-
-Return true if hardware has entriesavailable for matching beacons.
-```
-
-## bluetoothGetLeState
-
-```
-int bluetoothGetLeState()
-
-Gets the current state of LE.
-```
-
-## bluetoothEnableBLE
-
-```
-boolean bluetoothEnableBLE()
-
-Enables BLE functionalities.
-```
-
-## bluetoothDisableBLE
-
-```
-boolean bluetoothDisableBLE()
-
-Disables BLE functionalities.
-```
-
-## bluetoothListenForBleStateChange
-
-```
-boolean bluetoothListenForBleStateChange()
-
-Listen for a Bluetooth LE State Change.
-```
-
-## bluetoothStopListeningForBleStateChange
-
-```
-boolean bluetoothStopListeningForBleStateChange()
-
-Stop Listening for a Bluetooth LE State Change.
-```
-
-## bluetoothStartListeningForAdapterStateChange
-
-```
-boolean bluetoothStartListeningForAdapterStateChange()
-
-Listen for Bluetooth State Changes.
-```
-
-## bluetoothStopListeningForAdapterStateChange
-
-```
-boolean bluetoothStopListeningForAdapterStateChange()
-
-Stop Listening for Bluetooth State Changes.
-```
-
-## setClipboard
-
-```
-void setClipboard(String text)
-
-Put text in the clipboard.
-```
-
-## getClipboard
-
-```
-String getClipboard()
-
-Read text from the clipboard.
-
-Returns The text in the clipboard.
-```
-
-## startActivityForResult
-
-```
-Intent startActivityForResult( String action, String uri, String type, JSONObject extras, String packagename, String classname)
-
-Starts an activity and returns the result.
-
-Returns A Map representation of the result Intent.
-```
-
-## startActivityForResultIntent
-
-```
-Intent startActivityForResultIntent( Intent intent)
-
-Starts an activity and returns the result.
-
-Returns A Map representation of the result Intent.
-```
-
-## startActivity
-
-```
-void startActivity( String action, String uri, String type, JSONObject extras, Boolean wait, String packagename, String classname)
-
-Starts an activity.
-```
-
-## sendBroadcast
-
-```
-void sendBroadcast( String action, String uri, String type, JSONObject extras, String packagename, String classname)
-
-Send a broadcast.
-```
-
-## makeIntent
-
-```
-Intent makeIntent( String action, String uri, String type, JSONObject extras, JSONArray categories, String packagename, String classname, Integer flags)
-
-Create an Intent.
-
-Returns An object representing an Intent
-```
-
-## startActivityIntent
-
-```
-void startActivityIntent( Intent intent, Boolean wait)
-
-Start Activity using Intent
-```
-
-## sendBroadcastIntent
-
-```
-void sendBroadcastIntent( Intent intent)
-
-Send Broadcast Intent
-```
-
-## vibrate
-
-```
-void vibrate( Integer duration)
-
-Vibrates the phone or a specified duration in milliseconds.
-```
-
-## makeToast
-
-```
-void makeToast(final String message)
-
-Displays a short-duration Toast notification.
-```
-
-## getInput
-
-```
-String getInput( final String title, final String message)
-
-Queries the user for a text input.
-```
-
-## getPassword
-
-```
-String getPassword( final String title, final String message)
-
-Queries the user for a password.
-```
-
-## notify
-
-```
-void notify(String title, String message)
-
-Displays a notification that will be canceled when the user clicks on it.
-```
-
-## getIntent
-
-```
-Object getIntent()
-
-Returns the intent that launched the script.
-```
-
-## sendEmail
-
-```
-void sendEmail( final String to, final String subject, final String body, final String attachmentUri)
-
-Launches an activity that sends an e-mail message to a given recipient.
-```
-
-## getPackageVersionCode
-
-```
-int getPackageVersionCode(final String packageName)
-
-Returns package version code.
-```
-
-## getPackageVersion
-
-```
-String getPackageVersion(final String packageName)
-
-Returns package version name.
-```
-
-## requiredVersion
-
-```
-boolean requiredVersion(final Integer version)
-
-Checks if version of SL4A is greater than or equal to the specified version.
-```
-
-## log
-
-```
-void log(String message)
-
-Writes message to logcat.
-```
-
-## environment
-
-```
-Map<String, Object> environment()
-
-A map of various useful environment details
-```
-
-## getConstants
-
-```
-Bundle getConstants( String classname)
-
-Get list of constants (static final fields) for a class
-```
-
-## startSensingTimed
-
-```
-void startSensingTimed( Integer sensorNumber, Integer delayTime)
-
-Starts recording sensor data to be available for polling.
-```
-
-## startSensingThreshold
-
-```
-void startSensingThreshold(  Integer sensorNumber, Integer threshold, Integer axis)
-
-Records to the Event Queue sensor data exceeding a chosen threshold.
-```
-
-## readSensors
-
-```
-Bundle readSensors()
-
-Returns the most recently recorded sensor data.
-```
-
-## stopSensing
-
-```
-void stopSensing()
-
-Stops collecting sensor data.
-```
-
-## sensorsGetAccuracy
-
-```
-Integer sensorsGetAccuracy()
-
-Returns the most recently received accuracy value.
-```
-
-## sensorsGetLight
-
-```
-Float sensorsGetLight()
-
-Returns the most recently received light value.
-```
-
-## sensorsReadAccelerometer
-
-```
-List<Float> sensorsReadAccelerometer()
-
-Returns the most recently received accelerometer values.
-
-Returns a List of Floats [(acceleration on the) X axis, Y axis, Z axis].
-```
-
-## sensorsReadMagnetometer
-
-```
-List<Float> sensorsReadMagnetometer()
-
-Returns the most recently received magnetic field values.
-
-Returns a List of Floats [(magnetic field value for) X axis, Y axis, Z axis].
-```
-
-## sensorsReadOrientation
-
-```
-List<Double> sensorsReadOrientation()
-
-Returns the most recently received orientation values.
-
-Returns a List of Doubles [azimuth, pitch, roll].
-```
-
-## startSensing
-
-```
-void startSensing( Integer sampleSize)
-
-Starts recording sensor data to be available for polling.
-```
-
-## wifiAddNetwork
-
-```
-Integer wifiAddNetwork(JSONObject wifiConfig)
-
-Add a network.
-```
-
-## wifiConnect
-
-```
-Boolean wifiConnect(JSONObject config)
-
-Connects a wifi network by ssid
-
-Returns True if the operation succeeded.
-```
-
-## wifiEnableNetwork
-
-```
-Boolean wifiEnableNetwork(Integer netId, Boolean disableOthers)
-
-Enable a configured network. Initiate a connection if disableOthers is true
-
-Returns True if the operation succeeded.
-```
-
-## wifiEnterpriseConnect
-
-```
-void wifiEnterpriseConnect(JSONObject config)
-
-Connect to a wifi network that uses Enterprise authentication methods.
-```
-
-## wifiGetScanResults
-
-```
-List<ScanResult> wifiGetScanResults()
-
-Returns the list of access points found during the most recent Wifi scan.
-```
-
-## wifiLockAcquireFull
-
-```
-void wifiLockAcquireFull()
-
-Acquires a full Wifi lock.
-```
-
-## wifiLockAcquireScanOnly
-
-```
-void wifiLockAcquireScanOnly()
-
-Acquires a scan only Wifi lock.
-```
-
-## wifiLockRelease
-
-```
-void wifiLockRelease()
-
-Releases a previously acquired Wifi lock.
-```
-
-## wifiStartScan
-
-```
-Boolean wifiStartScan()
-
-Starts a scan for Wifi access points.
-
-Returns True if the scan was initiated successfully.
-```
-
-## checkWifiState
-
-```
-Boolean checkWifiState()
-
-Checks Wifi state.
-
-Returns True if Wifi is enabled.
-```
-
-## toggleWifiState
-
-```
-Boolean toggleWifiState(Boolean enabled)
-
-Toggle Wifi on and off.
-
-Returns True if Wifi is enabled.
-```
-
-## wifiDisconnect
-
-```
-Boolean wifiDisconnect()
-
-Disconnects from the currently active access point.
-
-Returns True if the operation succeeded.
-```
-
-## wifiGetConnectionInfo
-
-```
-WifiInfo wifiGetConnectionInfo()
-
-Returns information about the currently active access point.
-```
-
-## wifiReassociate
-
-```
-Boolean wifiReassociate()
-
-Reassociates with the currently active access point.
-
-Returns True if the operation succeeded.
-```
-
-## wifiReconnect
-
-```
-Boolean wifiReconnect()
-
-Reconnects to the currently active access point.
-
-Returns True if the operation succeeded.
-```
-
-## mediaPlay
-
-```
-boolean mediaPlay( String url, String tag, Boolean play)
-
-Open a media file
-
-Returns true if play successful
-```
-
-## mediaPlayPause
-
-```
-boolean mediaPlayPause( String tag)
-
-pause playing media file
-
-Returns true if successful
-```
-
-## mediaPlayStart
-
-```
-boolean mediaPlayStart( String tag)
+#### 介绍
 
-start playing media file
+★活力宝的书源日记-仅作学习交流之用.
 
-Returns true if successful
-```
-
-## mediaPlayClose
-
-```
-boolean mediaPlayClose( String tag)
-
-Close media file
-
-Returns true if successful
-```
-
-## mediaIsPlaying
+<h2>此文仅用于学习交流，严禁用做它用，造成什么后果请自负.</h2>
 
-```
-boolean mediaIsPlaying( String tag)
+### ☆非得到本人同意，禁止转载，违者必究.毕竟是零零散散的东西.
 
-Checks if media file is playing.
+### ☆书源写法之个人见解
 
-Returns true if playing
-```
+参考文档:[Html结构解析](https://www.cnblogs.com/iamspecialone/p/11139491.html)
 
-## mediaPlayInfo
+参考文档:[HTML 标签参考手册](https://www.w3school.com.cn/tags/index.asp)
 
-```
-Map<String, Object> mediaPlayInfo( String tag)
+参考文档: [CSS 选择器参考手册](https://www.w3school.com.cn/cssref/css_selectors.asp)
 
-Information on current media
+(这个CSS 选择器参考手册有助于了解选择器的意思,实际做源的时候阅读APP使用的有它自己的一套更简单的写法)
 
-Returns Media Information
-```
+参考文档:[阅读APP书源制作帮助文档](https://alanskycn.gitee.io/teachme/Rule/source.html)
 
-## mediaPlayList
+参考文档:[正则表达式教程](https://www.runoob.com/regexp/regexp-tutorial.html)
 
-```
-Set<String> mediaPlayList()
+参考视频:[HMLT5+CSS3制作前端网页](https://www.bilibili.com/video/BV1wS4y1G72k)
 
-Lists currently loaded media
+参考视频:[关耳大佬的【阅读3.0】书源制作过程(基础语法)](https://www.bilibili.com/video/BV1py4y1J73u)
 
-Returns List of Media Tags
-```
 
-## mediaPlaySetLooping
+简单说句废话,想学怎么写源想少走弯路建议在写之前打下HTML与CSS的基础,不求你都看懂,只要知道它网站的源码是怎么一个套一个的,他的属性我们怎么能取的到.
 
-```
-boolean mediaPlaySetLooping( Boolean enabled, String tag)
+简单介绍Html与CSS样式的关系
+html呢,相当于一个国家,一个大容器.里面有很多省市县乡村户等等.
+就是它的框架结构是有层级关系的.大概理解成祖宗,爷爷,父亲,兄弟,儿子,子孙等等层级也可以.
 
-Set Looping
+CSS样式呢,相当于人身上的服饰之类的.就是原本大家都一样的.加上CSS样式之后可以让网站变的更丰富多彩,比如文字大小呀,文字颜色呀,鼠标放到字上面它变颜色呀等等..
 
-Returns True if successful
 ```
-
-## mediaPlaySeek
-
+<!DOCTYPE html>//声明这是个HTML5的文档,写源的时候不用在意它
+<html>//html主框架相当于地球,    一般大部分标签都是有结束标签的,一个<html>开始对应着</html>为结尾,这样叫成套出现,只有少部分的标签是单独出现的.
+    <head>//head隐藏加载框架相当于国家.    这个是网站预加载的内容,对于用户隐藏进行的,就是它不是展现给普通大众看的,它是给网站制作者们看的.它同样是有</head>为结尾.
+        <meta charset="UTF-8" />//这个相当于省份.    这个是给出网站的语言解码信息.UTF-8是国际通用的码,码库相对于gbk***的要大一些.
+        <link rel="stylesheet" href="/static/css/style.css"/>//这个也是省份.    这个是外部加载网站的CSS样式.
+    </head>
+    <body>//国,这里开始往后面到</body>里出现的东西都是面向普通网友的,就是大家能正常看到的东西都在下面这里面.
+       <div class="g-plate">//省
+            <p class="hd"> 重磅推荐 </p>//市   
+            <ul class="list-3">//市
+                <li>//县
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>//html主框架结束
 ```
-int mediaPlaySeek( Integer msec, String tag)
+大概意思呢,就是他们有层级关系的.
 
-Seek To Position
 
-Returns New Position (in ms)
-```
+简单解释下标签的意思,拿这个```<div class="g-plate">```来说吧
 
-## contactsDisplayContactPickList
 
-```
-Intent contactsDisplayContactPickList()
+这里的div是标签名,在阅读里面选它的时候用tag.标签名来选择,或者直接标签名前面啥也不加也可以.
 
-Displays a list of contacts to pick from.
 
-Returns "A map of result values." 
-```
+class="g-plate" 这个是说刚这个div标签的class属性它的值等于g-plate. 这个g-plate不用管他啥意思,简单点就把它想成是它的名字就可以了,一般我们都是想要他们的值定位的东西.
 
-## contactsDisplayPhonePickList
 
-```
-String contactsDisplayPhonePickList()
+它的名字还可以有多个.多个名字中间以空格隔开.
 
-Displays a list of phone numbers to pick from.
 
-Returns "The selected phone number." 
-```
+比如```<ul class="list-3 list-2">``` 这样它的名字可以叫list-3 list-2也可以单独叫list-3或者单独叫list-2
 
-## contactsGetAttributes
 
-```
-List<String> contactsGetAttributes()
+那么问题来了,名字会不会重名.重复的名字的话,可以通过定位它是谁家的,或者定位它名字中与别人不一样的.或者第几排第几个的小明同学.这样也可以.
 
-Returns a List of all possible attributes for contacts.
-```
 
-## contactsGetContactIds
+class.祖级名字@class.父级名字@class.自己名字(或者自己的那个标签名tag.自己标签名)@最后找自己身上的衣服呀还是帽子呀还是鞋子.
 
-```
-List<Integer> contactsGetContactIds()
 
-Returns a List of all contact IDs.
-```
+class.zujimz@clas.fujimz@tag.a@text
 
-## contactsGetAllContacts
 
-```
-List<JSONObject> contactsGetAllContacts( JSONArray attributes)
+阅读里的class可以用英文句号点来代替比如: .zujimz  这个跟class.zujimz用途一样,[.]就是个简写class方法
 
-Returns a List of all contacts.
 
-Returns a List of contacts as Maps
-```
+阅读里的id可以用#来代替比如:#xxx   这个跟id.xxx用途一样,[#]就是个简写id的方法
 
-## contactsGetContactById
 
-```
-JSONObject contactsGetContactById( Integer id, JSONArray attributes)
+阅读里的tag有时候图省事也可以省略不写
 
-Returns contacts by ID.
-```
 
-## contactsGetCount
+阅读里的@ 可以用空格代替
 
-```
-Integer contactsGetCount()
 
-Returns the number of contacts.
-```
+.zujimz .fujimz a@text
 
-## contactsEraseAll
 
-```
-void contactsEraseAll()
 
-Erase all contacts in phone book.
-```
+特别说明一下,class属性的名字可能会出现多处.id属性它的名字大部分情况下都是独立唯一的.因为它不但有普通的显示作用还具备定位的作用,所以一般都是唯一的.
 
-## contactsQueryContent
 
-```
-List<JSONObject> contactsQueryContent( String uri, JSONArray attributes, String selection, JSONArray selectionArgs, String order)
+所以在取属性的时候自己考虑怎么选择,我建议有id取id,没有的话取class或者别的. 它又不限制你取哪个属性,能得到自己想要的信息就可以.
 
-Content Resolver Query
 
-Returns result of query as Maps
-```
 
-## queryAttributes
+在阅读里写源也就是通过这些已知条件来挑选自己想要的东西.
 
-```
-JSONArray queryAttributes( String uri)
 
-Content Resolver Query Attributes
 
-Returns "a list of available columns for a given content uri" 
-```
+### 关于[property$=book_name]@content这个写法的找法公布.
 
-## importVcf
 
-```
-void importVcf( String uri)
+首先感谢酷安大佬:糖果超甜哒
 
-Launches VCF import.
-```
 
-## exportVcf
+这个怎么找的方法我是从她那里学的,可能现在没有原文了,以前在她的动态里面翻到的一个教程.
 
-```
-void exportVcf( String path)
 
-Launches VCF export.
-```
+1.这个一般用于做书源的详情页.随便找本小说进入详情页后,在网站源码里面翻翻看head这个区域里面有没有相关的标签.
 
-## ttsSpeak
 
-```
-void ttsSpeak(String message)
+比如这一条:
 
-Speaks the provided message via TTS.
-```
+```<meta property="og:novel:book_name" content="活力宝祝大家开心每一天!">```
 
-## ttsIsSpeaking
 
-```
-Boolean ttsIsSpeaking()
 
-Returns True if speech is currently in progress.
-```
+meta是它的标签名,property是它的属性名,og:novel:book_name是它的属性名. 它的content的值就是我们要找的东西.
 
-## setTtsPitch
 
-```
-void setTtsPitch(String pitch)
+就是找有property属性名字末尾($的意思代表末尾是啥啥啥,^代表开始是啥啥啥)为book_name的,它的content的值或者名字文字之类的..大概就那个意思吧.
 
-Changes the pitch of TTS speech.
-```
 
-## bluetoothPanSetBluetoothTethering
+它其实还有个傻瓜写法:[property="og:novel:book_name"]@content
 
-```
-void bluetoothPanSetBluetoothTethering( Boolean enable)
 
-Set Bluetooth Tethering
-```
+这样写也可以.  他们后面一样可以用##来挑选自己想要的内容或者剔除自己不想要的内容.具体的看阅读帮助文档.
 
-## bluetoothPanIsReady
 
-```
-Boolean bluetoothPanIsReady()
 
-Is Pan profile ready.
-```
+学会灵活利用做书源的时候那个问号,里面可以自己添加快捷词条啥的.比如把这详情页几大简便写法给加进去,下次遇到类似的,就直接去点就可以了,比复制粘贴都快.
 
-## bluetoothPanGetConnectedDevices
 
-```
-List<BluetoothDevice> bluetoothPanGetConnectedDevices()
+简单点的学习方法就是拿别人做好的源,去复刻一下,看看自己能不能理解别人怎么写的源,自己能不能按他已经给的方法去找到相对应的东西.
 
-Get all the devices connected through PAN
-```
 
-## bluetoothPanIsTetheringOn
+其它的去瞅关耳大佬的视频教学吧. 遇到不懂可以回来翻翻笔记哦.
 
+### 日记第三版,自己折腾自己用
 ```
-Boolean bluetoothPanIsTetheringOn()
+------书源里的选择器方法简写-----
+案例一
+class.名字1@text
+简写为
+.名字1@text
 
-Is tethering on.
-```
+案例二
+class.名字1 名字2 名字3@text
+简写为
+.名字1.名字2.名字3@text
 
-## webcamStart
+如果这三个名字中哪个是唯一出现的话也可以单独拿出来用比如:  .名字3@text
+也可以: .名字1.名字2@text 
+自己灵活搭配使用
 
-```
-InetSocketAddress webcamStart( Integer resolutionLevel, Integer jpegQuality, Integer port)
+案例三
+(当遇到id与class在同一标签里的时候优选id属性,因为id的优先权比class高,主要它具有唯一性,不容易像class那样出现多个一样的class.)
+id.最优选哦@text
+简写为
+#最优选哦@text 
 
-Starts an MJPEG stream and returns a Tuple of address and port for the stream.
-```
+案例四
+(有时候@连接上下层符号可以用一个空格来代替,除非标签的class属性有很多个属性名(比如案例二那个)要特别处理一下开始的class怎么写)
+class.xxx@li@a@text
+简写为
+.xxx li a@text
+---------------------------------------------
+基本页请求头
+在里面加referer信息破网站防盗链，比如在A网站里面的B链接地址，要是正常访问B链接它会自动跳回到A网站，那么在请求头里面带上'referer':A网站,有可能可以破除它的防盗链
+{
+'referer':'https://official.bkvvvvv.com/'
+}
+或者
+{"referer":"https://mjjxs.net"}
+或者
+{"headers":{"Referer":baseUrl}};
+或者
+书源基本页面，请求头，@js:JSON.stringify({"referer":baseUrl})
 
-## webcamAdjustQuality
+"headers":{"Referer": "{{baseUrl}}"}
 
-```
-void webcamAdjustQuality( Integer resolutionLevel, Integer jpegQuality)
+{
+	"User-Agent":"Mozilla/5.0 (Linux; Android 9) Mobile Safari/537.36","referer":"{{baseUrl}}"
+	}
 
-Adjusts the quality of the webcam stream while it is running.
-```
+{ "User-Agent": "Mozilla/5.0 (Linux; Android 11) Mobile Safari/537.36"}
 
-## webcamStop
+{'User-Agent':'Mozilla/5.0 (Linux; Android 11; PCAM10 Build/RP1A.200720.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/83.0.4103.106 Mobile Safari/537.36'}
 
-```
-void webcamStop()
+{"User-Agent":"Mozilla/5.0 (Linux; Android 11; PCAM10 Build/RP1A.200720.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/100.0.4103.106 Mobile Safari/537.36"}
 
-Stops the webcam stream.
-```
+小米浏览器UA，使用百度流畅，此UA不要全局使用，盗版网站会给大厂浏览器UA加上专属网页广告
+{'User-Agent':'Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5414.86 Mobile Safari/537.36 XiaoMi/MiuiBrowser/17.2.79 swan-mibrowser'}
+苹果手机请求头
+{"User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"}
 
-## cameraStartPreview
+请求头
+{'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/71.0.3578.141 Safari/534.24 XiaoMi/MiuiBrowser/12.4.14'}
 
-```
-boolean cameraStartPreview( Integer resolutionLevel, Integer jpegQuality, String filepath)
+或者
+{
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+}
 
-Start Preview Mode. Throws 'preview' events.
+或者
+{
+ 'User-Agent': 'Mozilla/5.0 (Linux; Android 11; Pixel 3 XL Build/RQ3A.211001.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/102.0.4988.0 Mobile Safari/537.36 SearchCraft/3.9.2 (Baidu; P1 11) '
+}
 
-Returns True if successful
-```
+或者
+{"User-Agent": "Mozilla/5.0 (Linux; Android 12; M2011K2C Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/102.0.5005.99 Mobile Safari/537.36 T7/12.16 SearchCraft/3.9.1 (Baidu; P1 11)"}
 
-## cameraStopPreview
+或者
+{'User-Agent':'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Mobile Safari/537.36',
+"Referer":"http://m.b777777.com/"}
 
-```
-void cameraStopPreview()
+或者
+{
+	"User-Agent":"Mozilla/5.0 (Linux; Android 12; Nexus 5X Build/NRD90M); wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/96.0.4664.104 Mobile Safari/537.36"
+}
 
-Stop the preview mode.
-```
+或者请求头2
+{
+  "User-Agent": "Mozilla/5.0 (Windows; U; Windows NT 5.2;. en-US) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36 Quark/4.6.2.161"
+}
 
+或者手机百度ua
+{"User-Agent": "Mozilla/5.0 (Linux; Android 11; PCAM10 Build/RP1A.200720.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/97.0.4692.98 Mobile Safari/537.36 T7/13.32 SP-engine/2.70.0 baiduboxapp/13.32.5.10 (Baidu; P1 11) NABar/1.0"}
+
+或者
+{'webView': true,"header":{"referer":"https://mjjxs.net"}}
+
+URL规则后面加上Java.log查看获取页面调试结果用的
+tag.a@href<js>java.log(result)</js>
+或者这样写
+tag.a@href@js:java.log(result)
+或者这样写
+@js:java.log(src)
+
+跨栏目存取数据
+比如在搜索栏的书名里面存了个id这里的@put:{id:$.Id}就是存储数据，括号里的id是名字，:后面的是它要存的内容公式字符等等
+Name@put:{id:$.Id}
+然后到目录页里面的章节url里面调用它，这里的@get:{id}就是调用前面存储的数据
+https://conhhs.pggfggi.com/BookFiles/Html/@get:{cid}/@get:{id}/{{$.id}}.html
+
+搜索规则重定向处理案列
+@js:
+url="https://m.fushutxt.cc/e/search/index.php";
+body="show=title&keyboard="+key;
+$=java.post(url,body,{}).header("Location");
+java.log("https://m.fushutxt.cc/e/search/"+$);
+或者
+{{java.post('https://m.siyixs.com/search/','keyword='+key+'&submit=',{}).header("Location")}}
+或者
+<js>
+url="https://m.siyixs.com";
+head={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko, By Black Prism) Chrome/99.0 Safari/537.36","content-type":"application/x-www-form-urlencoded","Cookie":"5ydev_t=15; 5ydev_cdn=https%3A%2F%2Ffastly.jsdelivr.net%2Fgh%2Fiquns%2Fxs%40289%2Fstatic%2F","Referer":"https://m.siyixs.com/"};
+body="submit=&keyword="+key;
+op={
+"method": "get",
+"body": body,
+        "charset": "UTF-8",
+        "headers": JSON.stringify(head)
+};
+myurl=url+"/search/";
+path=java.post(myurl,body,head).header("Location");
+java.log(path);
+url+path+","+JSON.stringify(op);
+</js>
+
+台湾小说网繁体字搜索时编码问题
+搜索地址：
+<js>
+url="https://m.xsw.tw/modules/article/wap_search.php,";
+key=java.s2t(key);
+option={
+  "body":`searchkey=${key}`,
+  "charset":"big5",
+  "method":"POST"
+}
+url+JSON.stringify(option)
+</js>
+新版阅读适用
+---------------------------------
+解决搜索30秒的办法，在基本页里登录检查Js里填上
+cookie.removeCookie(source.getKey())
+result
+或者在搜索地址栏清空cookie写法如下
+{{cookie.removeCookie(source.getKey())}}
+/search0f.html?searchkey={{key}}
+---------------------------------
+搜索地址经常变动的解决办法
+感谢 虚空大梦 大佬提供的方法
+//通过ajax加载基本页的网址,然后提取form标签里的action的值,然后后面再跟着?searchkey={{key}}参数
+{{java.ajax(source.getKey()).match(/action="(.*?)"/)[1]}}?searchkey={{key}}
+或者用这个来获取搜索地址会变动的
+案例网址:http://www.iqb8.cc
+@js:
+var url=source.getKey();
+var html = java.ajax(url);
+so = org.jsoup.Jsoup.parse(html).select('form[name=t_frmsearch]').attr('action');
+url+so+","+JSON.stringify({
+  "body": "searchkey={{key}}",
+  "method": "post"
+})
+…………………………
+搜索规则下的搜索链接第一页和第二页的网址不同可以这样写:
+以下是非js正则的发现规则列表第二页和第一页格式不同的写法
+①第一页https://qdjjj9.net/gudai/
+②第二页https://qdjjj9.net/gudai/index_2.html
+可写成
+/{{page==1?"":page+".html"}}
+
+https://qdjjj9.net/gudai/{{page==1?'':'index_'+page+'.html'}}
+具体看阅读帮助文档page相关的:
+<,{{page}}>
+还有种第一页是这样的
+https://11111.com/搜索/关键字
+第二页是这样的
+https://11111.com/搜索/关键字/2.html
+这个情况可以这样写
+https://11111.com/搜索/关键字<,/{{page}}.html>
+
+发现页第一页和第二页网址不同案例
+http://dmxs.org/book/index_{{page}}.html
+或
+http://dmxs.org/book/<,index_{{page}}.html>
+--------------------------------
+搜索栏下目录列表多个的处理方法
+案例一:https://m.bookb.net/
+它的搜索列表有两个
+<div class="recommend mybook">
+//目录1
+<div class="hot_sale ">...</div>
+//目录2
+<div class="hot_sale hot_saleEm">...</div>
+</div>
+处理办法用div.hot_sale取它的class名字的共通处
+
+案例二:http://www.bookshuku.info/
+这是个电脑端的网站,它的搜索页也是两个列表,一个是书籍名字,一个是书籍分类想都取到可以这样傻瓜式写法
+//解释一下,就是取id是searchmain的下面的所有的div标签,然后not(@class="searchResult")就是排除不要这个class是searchResult的标签然后用and连接多个排除条件剩下的就是我们想要的
+//div[@id="searchmain"]//div[not(@class="searchResult") and not(@class="mainNextPage") and not(@class="searchIntro")]
+--------------------------------
+
+作者规则写法
+###在这里的作用是只保留###前面的内容,全部写法为##要替换提取的内容或者正则##从前面内容中提取并仅保留的内容或者正则其他内容都抛弃###
+tag.a@text##作者：([^"]+)"##$1###
+或者
+.info@text##作者：(.*?) ##$1###
+或者
+##作者[:：]([^<]+)<##$1###
+或者
+##作者：([^<]+)<##$1###
+
+书籍详情页规则URL
+tag.a.1@href@js:'https://www.x7773xs.com'+result
+或者
+tag.a@href@js:"https://www.wan888ntxt.com/"+result+"/"
+或者
+tag.a@href##$##,{"headers":{
+	"Referer":"https://bo454lf.html5.qq.com/kdread/adread/chapter"
+	}}
+或者
+//意思就是在这个a的href属性获得的地址前面加上这##后面的内容
+tag.a@href##^##https://whts.com
+或者
+tag.a@href@js:"https://xxx.com"+result
+或者
+//意思就是在这个a的href属性获得的地址后面加上这##后面的内容
+tag.a@href##$##/sadly_1.html
+或者
+//前面这段一直到href是获取详情页地址，后面一段的js的具体作用是把获取到的详情页地址里面的www……替换成后面的k……
+tag.a.0@href@js:result.replace('www.yexia77ge','k.yexia77ge')
+或者
+//当前页的url
+{{baseUrl}}
+
+详情页或者搜索页分类规则写法
+在正文里面找到相关内容然后用双大括号加上双@来写内容,这里的双@有时候也可能是$..比如说json的文件的写法
+{{@@.info@text##类型：(.*?) ##$1###}},{{@@.status@text}}
+
+……………………………………
+详情页的书名规则写法
+[property$=book_name]@content
+
+详情页的作者规则写法
+[property$=author]@content
+
+详情页的分类规则写法
+~符号在这里的作用是一次性获取property的category|status|update_time三个属性.功能有点类似&&
+[property~=category|status|update_time]@content##\s.*
+或者
+[property~=category|status|update_time]@content##\s\d.*
+
+详情页字数拼接的写法
+{{@@#csount span.1@text}}字
+或者
+class.xxx@tag.a@text##$##万字
+或者
+.book_box@html##字数[：:](.+?)\<##$1###
+或者
+{{@@text.字数@text##字数：}}##W##万字
+
+详情页最新章节写法
+[property$=latest_chapter_name]@content##正文卷.|正文.|VIP章节.|免费章节.|VIP卷.|默认卷.|章节目录.|最新章节.|[\(（【].*?[求更票谢乐发订合补加].*?[】）\)]
+
+或者
+.book_update:contains(最新章节：) > a@text
+##[\(（【].*?[求更谢乐发订合补加].*?[】）\)]|^章节目录\s*
+
+或者
+//前后文字段拼接中间以▪️符号隔开，这个符号也可以用其他任意内容代替
+{{@@li.1@text}}▪️{{@@li.3@text}}
+
+或者
+.block_txt2@p.6:5@text##最新：(.*)\s更新：20(.*)##$1▪️$2
+
+或者
+a.0@href<js>java.ajax('http://www.fenghuaju.com'+result)</js>
+class.diswap@p.-1@text&&class.diswap@p.-2@text##最后更新：|最新章节：|直达底部
+<js>result.replace(/(.*)\s/,'$1 • ')</js>
+<js>result.replace(/\s\d+:\d+:\d+/,'')</js>
+<js>result.replace(/^(正文|VIP章节|最新章节)?(\s+|_)|[\(\{（｛【].*[求更谢乐发推票盟补加字Kk\/].*[\)\}）｝】]/g,'')</js>
+
+或者
+{{@@[property$=chapter_name]@content}} • {{@@[property$=update_time]@content##\s.*}}
+
+详情页的简介规则写法
+[property$=description]@content##(^|[。！？]+[”」）】]?)##$1<br>
+
+或者
+.book_intro:contains(简介：)@textNodes
+##(^|[。！？]+[”」）】]?)##$1<br>
+<js>result</js>##\s*（[^）]*本书网址[^）]*）\s*
+
+详情页的封面规则写法
+[property$=image]@content
+
+详情页的目录URL规则写法
+//这个比较特殊，有的网站的目录跟详情页是在一起的，但是排序可能是反的,这与某些网站用 text.阅读@href 来得到正确的目录页作用一样，能更简单的把目录列表显示出来为最佳选择
+text.[正序]@href
+或者
+text.阅读@href
+
+搜索栏目下的封面规则:
+tag.a.1@href##.*/(\d+)(\d{3})/##https://www.rouziwu.info/files/article/image/$1/$1$2/$1$2s.jpg
+
+或者
+a@href##.*/book/(\d+)/##https://imghhhxiaoshuocom.cdn.bcebos.com/img/$1.jpg
+
+搜索栏下的封面规则通过jax跨页面加载写法
+a.0@href<js>java.ajax("补全缺失的网址"+result)</js>class.pic@img@src
+
+搜索栏下的图片破防盗链
+img@data-src@js:
+headers={"headers":{"Referer":baseUrl}}
+result+','+JSON.stringify(headers)
+
+搜索栏下的章节规则拼接并净化垃圾话
+.tabcontent@class.tabvalue.1@tag.td.2@text&&
+.tabcontent@class.tabvalue.1@tag.td.1@text&&
+.tabcontent@class.tabvalue.1@tag.td.0@text##最后更新：|连载状态：|作品分类：
+
+
+封面图的另一种写法
+class.zp@tag.a@href<js>
+var id = result.match(/(\d+)\/?$/)[1];
+var iid = parseInt(id/1000);
+'https://www.qljgh5.tw/files/article/image/'+iid+'/'+id+'/'+id+'s.jpg';
+</js>
+
+或者
+tag.a@href<js>
+var id = result.match(/(\d+)\/?$/)[1];
+var iid = parseInt(id/1000);
+'https://www.bequgexs.com/files/article/image/'+iid+'/'+id+'/'+id+'s.jpg';
+</js>
+
+或者
+a.0@href##.*/(\d+)/##$1
+@js:
+n=result
+m=parseInt(result/1000)
+"https://fm.pomoxs.com/"+m+"/"+n+"/"+n+"s.jpg"
+
+文字内容不需要左右的[]括号可以这样写:
+tag.a.0@text##\[|\]
+
+目录页的章节名去垃圾话
+text##正文\s|[\(（【].*?[求更票谢乐发订合补加].*?[】）\)]
+
+章节名称通用替换规则:
+dd@text##[\(（【].*?[求更谢乐发订合补加].*?[】）\)]
+
+或者
+tag.a@text@js:result.replace(/[（［【\{\(].*?[更合求票赏鲜盟修推歉谢祝节年].*?[）］】\}\)]/,"")
+或者
+//去除双第N章的章字样，2留1
+tag.a@text##第.*?章\s?(第.*?章)(.*$)##$1 $2
+…………………………
+章节URL特殊情况onclick="window.open处理
+onclick##'([^']+)##$1###<js>
+unescape(result.replace(/\\u/g,'%u'));
+</js>
+应对的情况
+<ul>
+<li>
+<el-tag onclick="window.open('/chapter/235/235310/86363147.\u0068\u0074\u006d\u006c','_self')">503、王传贞（2/2）
+</el-tag>
+</li>
+
+或者用这个
+#next_url@onclick##.*?'([^']+\.).*##$1html
+
+或者用这个
+table[onclick~=bookinfo]@onclick
+##'([^']+)'##$1###
+应对的情况如下：
+<table onclick="window.location.href='http://wap.bookshuku.info/bookinfo/95807.html">
+
+章节目录另一个写法
+书名所在的a标签，也可以这样写范围，a[href^=/move/]，这说的是以href中/move/开头的a标签，^是开头的意思，$是结尾的意思，~是当中有的意思
+
+…………………………
+
+章节URL规则适用于动态加载的网页:
+tag.a@href@js:result+',{webView:“true”}'
+或者
+tag.a@href##$##,{'webView':true}
+
+章节URL取到地址进行拼接的
+tag.a@href##/(.*?)/(.*?).html##https://www.wanben8888txt.net/api/api.php,{
+  "charset": "gbk",
+  "method": "POST",  "body":"action=read&id=$1&cid=$2&token="
+}
+或者
+tag.a@href@js:'https://www.8k55ana.com/book/'+result+'.html'
+或者
+用这个方法取当前详情页的URL来做拆分拼接
+//取当前链接里的数字，然后带入新的链接里面去
+@js:var bid = baseUrl.match(/\d+/);
+java.put('bid', bid);
+'https://uk.reade5455r.qq.com/book-read/'+bid+'/{{$.seq}}'
+
+详情页目录地址加请求头案例
+/b/{{baseUrl.match(/(\d+)/)[1]}}/more,{"headers":{"x-requested-with":"XMLHttpRequest"}}
+——————
+详情页的目录URL规则(目录和详情页不在一页可以这么写)
+这里的{{$.}}代表的是详情页当前的地址,后面的list.html是目录的地址比详情页多出来的一段地址
+{{$.}}list.html
+﹉﹉﹉﹉
+★详情页+目录页+正文第一章显示在一页的时候的处理方法:
+章节名写法
+//具体到它的分页显示比如:首页 2/22 下一页 尾页
+a.0@text##(\d+)\/\d+##第$1页
+其他地方获取内容正常获取，就是在目录页里面的章节URL规则里面这样写:
+//意思是跟目录页共用一页作为第一章的网址
+{{baseUrl}}
+
+或者
+就不填目录链接，目录列表可以填tag.html或tag.body等，章节名称tag.title@text，章节链接填href（获取不到链接，正文就会直接用详情页链接）或者章节链接留空
+反正就是要有一个列表能获取到章节名称就行
+﹉﹉﹉﹉﹉
+
+简介通用替换规则:
+class.intro_info@textNodes##(^|[。！？]+[”」）】]?)##$1<br>
+或者
+[property$=description]@content##(^|[。！？]+[”」）】]?)##$1<br>
+
+
+目录下一页规则
+//适用于目录列表在详情页属于隐藏标签的
+option@value
+或者并发加载，多个隐藏按钮一起打开 [name=pageselect] > option!0@value
+
+
+………………
+目录下一页拼接写法(第1/30页)当前20条/页,第一页网址https://www.yipinxia.co/43/43579/
+第二页网址https://www.yipinxia.co/43/43579_2/
+
+##\(第1\/(\d+)页\)当前##$1###
+<js>
+n=result;
+base=String(baseUrl).replace(/\/$/,'');
+for(i=2,list=[];i<=n;i++){list.push(base+"_"+i+"/")}
+list
+</js>
+………………
+目录列表规则写法
+从id.list开始一直找到tag.dd标签然后把tag.dd的最上面9个排除，因为！号后面的0代表数字1后面的每个数字都是同理加上1算实际对的第几个章节目录
+id.list@tag.dl@tag.dd[!0:8]
+//排除第1个到第9个,因为默认从0开始计算
+或者
+id.list@tag.dl@tag.dd[0:8]
+//只要第1个到第9个,因为默认从0开始计算
+或者
+id.list@tag.dl@tag.dd!0:1:2:3:4:5:6:7:8
+
+
+
+目录标签下的目录列表规则
+//找div标签里面id是lbks的底下的dl标签下的最后一个dt标签后面的与dt标签同级标签里面找dd标签下的a标签
+//#lbks > dl > dt:nth-of-type(2) ~ dd > a
+//div[@id="lbks"]/dl/dt[last()]/following-sibling::dd/a
+案列:
+<div id="lbks"><dl><dt>最新8章节(倒叙)，如果喜欢可以把穿越万界：神功自动满级放到书架里面随时观看</dt><dd><a href="/shoujixs_167907_44533846.html">第996章 古之名将</a></dd><dd><a href="/shoujixs_167907_44533845.html">第995章 包拯</a></dd><dd><a href="/shoujixs_167907_44533844.html">第994章 丢了一魄的宁采臣</a></dd><dd><a href="/shoujixs_167907_44533843.html">第993章 移山术满级</a></dd><dd><a href="/shoujixs_167907_44533624.html">第992章 踏足枉死城</a></dd><dd><a href="/shoujixs_167907_44532919.html">第991章 玩家的求助帖</a></dd><dd><a href="/shoujixs_167907_44531951.html">第990章 一计不成又生一计</a></dd><dd><a href="/shoujixs_167907_44524032.html">第989章 损耗</a></dd><dt>正文</dt><dd><a href="/shoujixs_167907_41554242.html">第1章 全能王者！瞬间满级</a></dd><dd><a href="/shoujixs_167907_41554243.html">第2章 玩家广场热议综合排名第一人</a></dd><dd><a href="/shoujixs_167907_41554244.html">第3章 东汉末年冀州阵营</a></dd><dd><a href="/shoujixs_167907_41554245.html">第4章 成就勋章</a></dd><dd><a href="/shoujixs_167907_41555507.html">第5章 高览</a></dd><dd><a href="/shoujixs_167907_41569074.html">第6章 高阶刀法</a></dd><dd><a href="/shoujixs_167907_41569076.html">第7章 沙场刀诀</a></dd>
+
+
+听书源的正文写法
+正文规则
+<js>result</js>
+资源正则
+.*\.(mp3|m4a).*
+
+正文去两段中文中间的空格
+##([\u4e00-\u9fa5])[ ]+([\u4e00-\u9fa5])##$1$2
+
+正文去重复章节名
+id.contents@html
+<js>
+a=title.replace(/第.*章\s*/,'第.*章')
+b=new RegExp(a,'g')
+result.replace(b,'')
+</js>
+
+或者
+书源正文规则后面添加 ##{{chapter.title}}
+可去除章节名称
+或者
+##\s*{{chapter.title}}(\s)?\(第\d\/\d页\)\s*
+用于去除:章节名 (第1/3页)
+或者
+<js>
+rep='\\s*'+String(book.durChapterTitle.replace(/[^\\u4e00-\\u9fa5\d]/g,'')).split('').toArray().join('[^\\u4e00-\\u9fa5]{0,2}?')+'\\s*';
+reg=new RegExp(rep,'gi');
+result.replace(reg,'');
+</js>
+
+或者
+<js>
+rep='\\s*'+book.durChapterTitle.replace(/[^\\u4e00-\\u9fa5\d]/g,'').replace(/\u3002|\uff1f|\uff01|\uff0c|\u3001|\uff1b|\uff1a|\u201c|\u201d|\u2018|\u2019|\uff08|\uff09|\u300a|\u300b|\u3010|\u3011|\u007e
+/g,'').split('').join('[\s\S]{0,2}?')+'\\s*';
+reg=new RegExp(rep,'gi');
+result.replace(reg,'');
+</js>
+
+或者
+<js>
+rep='\\s*'+book.durChapterTitle.replace(/((?=[\x21-\x7e]+)[^A-Za-z0-9])|[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b’]/g,'').split('').join('[\\s\\S]{0,2}?')+'\\s*';
+reg=new RegExp(rep,'gi');
+result.replace(reg,'');
+</js>
+
+正文去章节名2
+##{{chapter.title}}
+或者
+##{{book.durChapterTitle}}
+
+
+目录下一页以文字拆链接拼接网址
+#pagestats@textNodes
+@js:var go = result[0];
+var page = go.match(/(\d+)/) [1];
+var list = [];
+for (var i = 2; i <= page; i++) {
+  list.push(baseUrl.replace(/1\/asc/, i + '/asc'));
+}
+list;
+
+正文下一页写法1
+if (result.indexOf("next.png") > -1) {
+mat = baseUrl.match(/\/\d+(_(\d+))?\.html/);
+page = Number(mat[2]||1)+1;
+baseUrl.replace(/\/(\d+)(_(\d+))?.html/,'/$1_'+page+'.html');
+}
+
+正文下一页写法2
+:contains(下一章)@href##(^.*_\d+.*$|^)##$1###
+
+正文下一页写法3
+text.【.*】@href
+//它用于正文下一页是这样的:【1】【2】【3】【4】……等等之类以中文括号括起来的下一页
+
+正文下一页写法(拼接网址)
+<js>
+var list=[];
+if(n=result.match(/\/(\d+)页/)){
+for(var i=2;i<=n[1];i++){list.push(baseUrl.replace(/\/$/,"_"+i+"/"))
+}}list</js>
+
+或者
+text.尾页@href
+@js:
+{n=parseInt(result[0].match(/\/(\d+)\.html/)[1]);
+list=[];
+for(i=2;i<=n;i++)
+{list.push(i+".html");}
+list}
+或者
+text.尾页@href
+@js:
+n=parseInt(result[0].match(/\/(\d+)\.html/)[1]);
+list=[];
+for(i=2;i<=n;i++)
+list.push(i+".html");
+list
+或者
+text.尾页@href
+@js:
+{var n=parseInt(result[0].match(/\/(\d+)\.html/)[1]);
+var list=[];
+for(var i=2;i<=n;i++)
+{list.push(i+".html");}
+list}
+或者
+text.尾页@href
+@js:
+n=parseInt(result[0].match(/\/(\d+)\.html/)[1]);
+list=[];
+for(i=2;i<=n;i++)
+list.push(baseUrl+i+".html");
+list
+或者
+text.尾页@href
+@js:
+var n=parseInt(result[0].match(/\/(\d+)\.html/)[1]);
+var list=[];
+for(var i=2;i<=n;i++)
+{list.push(baseUrl+i+".html");}
+list
+或者
+@js:
+{var n=parseInt(java.ajax(baseUrl).match(/\>(\d+)\<\/span\>页\)当前/)[1]);
+var list=[];
+for(var i=2;i<=n;i++)
+{list.push(i+".html");}
+list}
+或者
+@js:
+var n=parseInt(java.ajax(baseUrl).match(/\>(\d+)\<\/span\>页\)当前/)[1]);
+var list=[];
+for(var i=2;i<=n;i++)
+list.push(i+".html");
+list
+或者
+@js:
+n=parseInt(java.ajax(baseUrl).match(/\>(\d+)\<\/span\>页\)当前/)[1]);
+list=[];
+for(i=2;i<=n;i++)
+{list.push(baseUrl+i+".html");}
+list
+或者
+@js:
+{var n=parseInt(java.ajax(baseUrl).match(/\>(\d+)\<\/span\>页\)当前/)[1]);
+var list=[];
+for(var i=2;i<=n;i++)
+{list.push(baseUrl+i+".html");}
+list}
+或者
+@js:if(result.match(/\>\d+\<\/span\>页\)当前/))
+{var n=parseInt(result.match(/\>(\d+)\<\/span\>页\)当前/)[1]);
+var list=[];
+for(var i=2;i<=n;i++)
+{list.push(i+".html");}
+list}
+或者
+@js:if(result.match(/\>\d+\<\/span\>页\)当前/))
+{var n=parseInt(result.match(/\>(\d+)\<\/span\>页\)当前/)[1]);
+var list=[];
+var url=baseUrl;
+for(var i=2;i<=n;i++)
+{list.push(url+i+".html");}
+list}
+或者
+@js:if(result.match(/\>\d+\<\/span\>页\)当前/))
+{var n=parseInt(result.match(/\>(\d+)\<\/span\>页\)当前/)[1]);
+var list=[];
+for(var i=2;i<=n;i++)
+{list.push(baseUrl+i+".html");}
+list}
+或者
+text.下一页@href||text.下一頁@href
+或者
+@js:
+if (result.indexOf("nextpage.png") > -1) {
+  var code = result.match(/eval\(function(.*)\);/)[0];
+  code = code.replace(/u[0-9a-f]+/, 'uData')
+  eval(code);
+  if(!uData.match('_')) {
+	next = java.getElement("@@#pt_next@a")
+	uData = next.attr("href")
+	}
+  uData;
+}
+
+或者
+##和@js不能同时用，正文规则
+要么加上##$##下一页
+要么加上@js:result+'下一页'
+……………………
+正文规则去垃圾话
+(?s)\n+[^\n]+下载爱阅小说.+
+或者
+段落开头几个字加(.|\n)*$或者[\s\S]*
+……………………
+JSON写法
+$.book_author@put{自定义变量：当前页面获取的值}
+$.book_author@put:{bid:book_id}
+
+调用的格式是固定的 一定@get:{自定义变量}
+这里调用本页的json信息可以用双大括号括起来{{$.book_id}} 里面的book_id就是要取的内容
+http://123456.com/{{$.book_id}}_@get:{bid}/1.html
+要是通过java打印台打印get数据的时候可以这样写,括号里加引号是针对属于字符串类型,其它类型可不加引号,比如数字类型的
+{{java.get("id")}}
+或者
+@js:
+java.get("bid")
+
+正文图片修改headers
+let options = {
+"headers": {"User-Agent": "xxxx","Referrer":baseUrl,"Cookie":"aaa=vbbb;"}
+};
+'<img src="'+src+","+JSON.stringify(options)+'">'
+
+漫画源正文
+#cp_img@html##src.*\"
+@js:result.replace(/data-original/g,"src")
+漫画源正文的图片样式
+FULL
+
+正文内容多页拼接断句处理办法
+可以在替换规则里面这样写
+##\s{0,100}\n{0,2}.*(第.*页).*\n{0,2}\s{0,100}
+
+………………
+正文匹配重复段落处理办法
+//([^\n]+)的意思是匹配任意自然段落的内容.
+//  \s*\n\s*的意思是匹配段前段尾出现的空格和换行
+// \1的意思是对前面的第一个括号里面匹配的内容进行引用,即与前面括号内匹配到的内容相同.这样就能匹配到所有的连续的重复段落.
+正则表达式如下:
+([^\n]+)\s*\n\s*\1
+替换为
+$1
+连起来写就是:
+xxxx@html##([^\n]+)\s*\n\s*\1##$1
+……………………
+
+正文js写法替换广告或者字体
+//有多个内容要有替换可以在后面用【.replace(/正则表达式/g,'替换成的内容,想替换为空就留空不填')】
+id.ak@html
+@js:result
+.replace(/<span.class=\"Y_1\"><\/span>/g,'男')
+.replace(/<span.class=\"Y_2\"><\/span>/g,'人')
+
+正文末尾去广告
+正则：广告XX后面加(.|\n)*$可以屏蔽XX后面的内容
+或者开头去广告
+正则：^(.|\n)*?广告
+
+正文段落末尾不是符号并下一段落首字是汉字则自动拼接(简单应对翻页段落被拆分)
+(?<=[\u4e00-\u9fa5])\n(?=[\u4e00-\u9fa5])
+
+----------------------------
+订阅源内容页去除某些不想要的标签
+//选择需要删除的标签，以,来分隔.最后一个标签末尾不用填逗号,class用点开头,id用#开头
+
+items = document.querySelectorAll(` 	.post-info-box, 	.navbar-header `) 
+//把选择的html值改成空
+Array.from(items,(item)=>{ 	item.innerHTML = `` 	item.style.display = `none` })
+----------------------------
+
+
+发现页发现的写法:
+[{"title":"❀榜单❀","url":"","style":{"layout_flexBasisPercent":1,"layout_flexGrow":1}}, {"title":"总点击榜","url":"/top_allvisit/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"月点击榜","url":"/top_monthvisit/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"总推荐榜","url":"/top_allvote/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"月推荐榜","url":"/top_monthvote/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"总月票榜","url":"/top_allvipvote/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"总鲜花榜","url":"/top_allflower/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"月勤更榜","url":"/top_monthwords/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"最近更新","url":"/top_lastupdate/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"最新入库","url":"/top_postdate/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"收藏榜","url":"/top_goodnum/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"字数榜","url":"/top_words/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"新书榜","url":"/top_newhot/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"❀分类❀","url":"","style":{"layout_flexBasisPercent":1,"layout_flexGrow":1}}, {"title":"玄幻奇幻","url":"/xuanhuan/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"武侠仙侠","url":"/xianxia/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"都市言情","url":"/dushi/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"穿越架空","url":"/chuanyue/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"女生视觉","url":"/nvsheng/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"精品辣文","url":"/lawen/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}]
+
+```
+
+
+
+
+### 日记第二版,自己折腾自己用
+```
+阅读书源写法
+解决搜索30秒的办法，在基本页里登录检查Js里填上
+cookie.removeCookie(source.getKey())
+result
+或者在搜索地址栏清空cookie写法如下
+{{cookie.removeCookie(source.getKey())}}
+/search0f.html?searchkey={{key}}
+
+基本页请求头
+在里面加referer信息破网站防盗链，比如在A网站里面的B链接地址，要是正常访问B链接它会自动跳回到A网站，那么在请求头里面带上'referer':A网站,有可能可以破除它的防盗链
+{
+'referer':'https://official.bkvvvvv.com/'
+}
+或者
+{"referer":"https://mjjxs.net"}
+或者
+书源基本页面，请求头，@js:JSON.stringify({"referer":baseUrl})
+
+
+
+{'User-Agent':'Mozilla/5.0 (Linux; Android 11; PCAM10 Build/RP1A.200720.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/83.0.4103.106 Mobile Safari/537.36'}
+
+请求头
+{'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/71.0.3578.141 Safari/534.24 XiaoMi/MiuiBrowser/12.4.14'}
+
+或者
+{
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+}
+
+或者
+{
+ 'User-Agent': 'Mozilla/5.0 (Linux; Android 11; Pixel 3 XL Build/RQ3A.211001.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/102.0.4988.0 Mobile Safari/537.36 SearchCraft/3.9.2 (Baidu; P1 11) '
+}
+
+或者
+{"User-Agent": "Mozilla/5.0 (Linux; Android 12; M2011K2C Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/102.0.5005.99 Mobile Safari/537.36 T7/12.16 SearchCraft/3.9.1 (Baidu; P1 11)"}
+
+或者
+{'User-Agent':'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Mobile Safari/537.36',
+"Referer":"http://m.b777777.com/"}
+
+或者
+{
+	"User-Agent":"Mozilla/5.0 (Linux; Android 12; Nexus 5X Build/NRD90M); wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/96.0.4664.104 Mobile Safari/537.36"
+}
+
+或者请求头
+{
+  "User-Agent": "Mozilla/5.0 (Windows; U; Windows NT 5.2;. en-US) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36 Quark/4.6.2.161"
+}
+
+
+或者
+{"User-Agent": "Mozilla/5.0 (Linux; Android 11) Mobile Safari/537.36"}
+
+或者
+{'webView': true,"header":{"referer":"https://mjjxs.net"}}
+
+URL规则后面加上Java.log查看获取页面调试结果用的
+tag.a@href<js>java.log(result)</js>
+或者这样写
+tag.a@href@js:java.log(result)
+
+跨栏目存取数据
+比如在搜索栏的书名里面存了个id这里的@put:{id:$.Id}就是存储数据，括号里的id是名字，:后面的是它要存的内容公式字符等等
+Name@put:{id:$.Id}
+然后到目录页里面的章节url里面调用它，这里的@get:{id}就是调用前面存储的数据
+https://conhhs.pggfggi.com/BookFiles/Html/@get:{cid}/@get:{id}/{{$.id}}.html
+
+
+搜索规则下的搜索链接第一页和第二页的网址不同可以这样写:
+以下是非js正则的发现规则列表第二页和第一页格式不同的写法
+①第一页https://qdjjj9.net/gudai/
+②第二页https://qdjjj9.net/gudai/index_2.html
+可写成
+https://qdjjj9.net/gudai/{{page==1?'':'index_'+page+'.html'}}
+具体看阅读帮助文档page相关的:
+<,{{page}}>
+还有种第一页是这样的
+https://11111.com/搜索/关键字
+第二页是这样的
+https://11111.com/搜索/关键字/2.html
+这个情况可以这样写
+https://11111.com/搜索/关键字<,/{{page}}.html>
+
+作者规则写法
+###在这里的作用是只保留###前面的内容,全部写法为##要替换提取的内容或者正则##从前面内容中提取并仅保留的内容或者正则其他内容都抛弃###
+tag.a@text##作者：([^"]+)"##$1###
+或者
+.info@text##作者：(.*?) ##$1###
+或者
+##作者[:：]([^<]+)<##$1###
+
+书籍详情页规则URL
+tag.a.1@href@js:'https://www.x7773xs.com'+result
+或者
+tag.a@href@js:"https://www.wan888ntxt.com/"+result+"/"
+或者
+tag.a@href##$##,{"headers":{
+	"Referer":"https://bo454lf.html5.qq.com/kdread/adread/chapter"
+	}}
+或者
+//意思就是在这个a的href属性获得的地址前面加上这##后面的内容
+tag.a@href##^##https://whts.com
+或者
+//意思就是在这个a的href属性获得的地址后面加上这##后面的内容
+tag.a@href##$##/sadly_1.html
+或者
+//前面这段一直到href是获取详情页地址，后面一段的js的具体作用是把获取到的详情页地址里面的www……替换成后面的k……
+tag.a.0@href@js:result.replace('www.yexia77ge','k.yexia77ge')
+或者
+//当前页的url
+{{baseUrl}}
+
+详情页或者搜索页分类规则写法
+在正文里面找到相关内容然后用双大括号加上双@来写内容,这里的双@有时候也可能是$..比如说json的文件的写法
+{{@@.info@text##类型：(.*?) ##$1###}},{{@@.status@text}}
+
+……………………………………
+详情页的书名规则写法
+[property$=book_name]@content
+
+详情页的作者规则写法
+[property$=author]@content
+
+详情页的分类规则写法
+~符号在这里的作用是一次性获取property的category|status|update_time三个属性.功能有点类似&&
+[property~=category|status|update_time]@content##\s.*
+或者
+[property~=category|status|update_time]@content##\s\d.*
+
+详情页字数拼接的写法
+{{@@#csount span.1@text}}字
+或者
+class.xxx@tag.a@text##$##万字
+
+详情页最新章节写法
+[property$=latest_chapter_name]@content##正文卷.|正文.|VIP章节.|免费章节.|VIP卷.|默认卷.|章节目录.|最新章节.|[\(（【].*?[求更票谢乐发订合补加].*?[】）\)]
+
+或者
+.book_update:contains(最新章节：) > a@text
+##[\(（【].*?[求更谢乐发订合补加].*?[】）\)]|^章节目录\s*
+
+或者
+//前后文字段拼接中间以▪️符号隔开，这个符号也可以用其他任意内容代替
+{{@@li.1@text}}▪️{{@@li.3@text}}
+
+或者
+.block_txt2@p.6:5@text##最新：(.*)\s更新：20(.*)##$1▪️$2
+
+或者
+a.0@href<js>java.ajax('http://www.fenghuaju.com'+result)</js>
+class.diswap@p.-1@text&&class.diswap@p.-2@text##最后更新：|最新章节：|直达底部
+<js>result.replace(/(.*)\s/,'$1 • ')</js>
+<js>result.replace(/\s\d+:\d+:\d+/,'')</js>
+<js>result.replace(/^(正文|VIP章节|最新章节)?(\s+|_)|[\(\{（｛【].*[求更谢乐发推票盟补加字Kk\/].*[\)\}）｝】]/g,'')</js>
+
+或者
+{{@@[property$=chapter_name]@content}} • {{@@[property$=update_time]@content##\s.*}}
+
+详情页的简介规则写法
+[property$=description]@content##(^|[。！？]+[”」）】]?)##$1<br>
+
+或者
+.book_intro:contains(简介：)@textNodes
+##(^|[。！？]+[”」）】]?)##$1<br>
+<js>result</js>##\s*（[^）]*本书网址[^）]*）\s*
+
+详情页的封面规则写法
+[property$=image]@content
+
+详情页的目录URL规则写法
+//这个比较特殊，有的网站的目录跟详情页是在一起的，但是排序可能是反的,这与某些网站用 text.阅读@href 来得到正确的目录页作用一样，能更简单的把目录列表显示出来为最佳选择
+text.[正序]@href
+或者
+text.阅读@href
+
+搜索栏目下的封面规则:
+tag.a.1@href##.*/(\d+)(\d{3})/##https://www.rouziwu.info/files/article/image/$1/$1$2/$1$2s.jpg
+
+或者
+a@href##.*/book/(\d+)/##https://imghhhxiaoshuocom.cdn.bcebos.com/img/$1.jpg
+
+搜索栏下的封面规则通过jax跨页面加载写法
+a.0@href<js>java.ajax("补全缺失的网址"+result)</js>class.pic@img@src
+
+搜索栏下的章节规则拼接并净化垃圾话
+.tabcontent@class.tabvalue.1@tag.td.2@text&&
+.tabcontent@class.tabvalue.1@tag.td.1@text&&
+.tabcontent@class.tabvalue.1@tag.td.0@text##最后更新：|连载状态：|作品分类：
+
+
+封面图的另一种写法
+class.zp@tag.a@href<js>
+var id = result.match(/(\d+)\/?$/)[1];
+var iid = parseInt(id/1000);
+'https://www.qljgh5.tw/files/article/image/'+iid+'/'+id+'/'+id+'s.jpg';
+</js>
+
+或者
+tag.a@href<js>
+var id = result.match(/(\d+)\/?$/)[1];
+var iid = parseInt(id/1000);
+'https://www.bequgexs.com/files/article/image/'+iid+'/'+id+'/'+id+'s.jpg';
+</js>
+
+文字内容不需要左右的[]括号可以这样写:
+tag.a.0@text##\[|\]
+
+目录页的章节名去垃圾话
+text##正文\s|[\(（【].*?[求更票谢乐发订合补加].*?[】）\)]
+
+章节名称通用替换规则:
+dd@text##[\(（【].*?[求更谢乐发订合补加].*?[】）\)]
+
+或者
+tag.a@text@js:result.replace(/[（［【\{\(].*?[更合求票赏鲜盟修推歉谢祝节年].*?[）］】\}\)]/,"")
+或者
+//去除双第N章的章字样，2留1
+tag.a@text##第.*?章\s?(第.*?章)(.*$)##$1 $2
+…………………………
+章节URL特殊情况onclick="window.open处理
+onclick##'([^']+)##$1###<js>
+unescape(result.replace(/\\u/g,'%u'));
+</js>
+应对的情况
+<ul>
+<li>
+<el-tag onclick="window.open('/chapter/235/235310/86363147.\u0068\u0074\u006d\u006c','_self')">503、王传贞（2/2）
+</el-tag>
+</li>
+
+或者用这个
+#next_url@onclick##.*?'([^']+\.).*##$1html
+…………………………
+
+章节URL规则适用于动态加载的网页:
+tag.a@href@js:result+',{webView:“true”}'
+或者
+tag.a@href##$##,{'webView':true}
+
+章节URL取到地址进行拼接的
+tag.a@href##/(.*?)/(.*?).html##https://www.wanben8888txt.net/api/api.php,{
+  "charset": "gbk",
+  "method": "POST",  "body":"action=read&id=$1&cid=$2&token="
+}
+或者
+tag.a@href@js:'https://www.8k55ana.com/book/'+result+'.html'
+或者
+用这个方法取当前详情页的URL来做拆分拼接
+//取当前链接里的数字，然后带入新的链接里面去
+@js:var bid = baseUrl.match(/\d+/);
+java.put('bid', bid);
+'https://uk.reade5455r.qq.com/book-read/'+bid+'/{{$.seq}}'
+
+详情页目录地址加请求头案例
+/b/{{baseUrl.match(/(\d+)/)[1]}}/more,{"headers":{"x-requested-with":"XMLHttpRequest"}}
+
+﹉﹉﹉﹉
+★详情页+目录页+正文第一章显示在一页的时候的处理方法:
+章节名写法
+//具体到它的分页显示比如:首页 2/22 下一页 尾页
+a.0@text##(\d+)\/\d+##第$1页
+其他地方获取内容正常获取，就是在目录页里面的章节URL规则里面这样写:
+//意思是跟目录页共用一页作为第一章的网址
+{{baseUrl}}
+
+或者
+就不填目录链接，目录列表可以填tag.html或tag.body等，章节名称tag.title@text，章节链接填href（获取不到链接，正文就会直接用详情页链接）或者章节链接留空
+反正就是要有一个列表能获取到章节名称就行
+﹉﹉﹉﹉﹉
+
+简介通用替换规则:
+class.intro_info@textNodes##(^|[。！？]+[”」）】]?)##$1<br>
+或者
+[property$=description]@content##(^|[。！？]+[”」）】]?)##$1<br>
+
+
+目录下一页规则
+//适用于目录列表在详情页属于隐藏标签的
+option@value
+或者并发加载，多个隐藏按钮一起打开 [name=pageselect] > option!0@value
+
+目录列表规则写法
+从id.list开始一直找到tag.dd标签然后把tag.dd的最上面9个排除，因为！号后面的0代表数字1后面的每个数字都是同理加上1算实际对的第几个章节目录
+id.list@tag.dl@tag.dd[!0:8]
+或者
+id.list@tag.dl@tag.dd!0:1:2:3:4:5:6:7:8
+
+目录标签下的目录列表规则
+//找div标签里面id是lbks的底下的dl标签下的最后一个dt标签后面的与dt标签同级标签里面找dd标签下的a标签
+//div[@id="lbks"]/dl/dt[last()]/following-sibling::dd/a
+案列:
+<div id="lbks"><dl><dt>最新8章节(倒叙)，如果喜欢可以把穿越万界：神功自动满级放到书架里面随时观看</dt><dd><a href="/shoujixs_167907_44533846.html">第996章 古之名将</a></dd><dd><a href="/shoujixs_167907_44533845.html">第995章 包拯</a></dd><dd><a href="/shoujixs_167907_44533844.html">第994章 丢了一魄的宁采臣</a></dd><dd><a href="/shoujixs_167907_44533843.html">第993章 移山术满级</a></dd><dd><a href="/shoujixs_167907_44533624.html">第992章 踏足枉死城</a></dd><dd><a href="/shoujixs_167907_44532919.html">第991章 玩家的求助帖</a></dd><dd><a href="/shoujixs_167907_44531951.html">第990章 一计不成又生一计</a></dd><dd><a href="/shoujixs_167907_44524032.html">第989章 损耗</a></dd><dt>正文</dt><dd><a href="/shoujixs_167907_41554242.html">第1章 全能王者！瞬间满级</a></dd><dd><a href="/shoujixs_167907_41554243.html">第2章 玩家广场热议综合排名第一人</a></dd><dd><a href="/shoujixs_167907_41554244.html">第3章 东汉末年冀州阵营</a></dd><dd><a href="/shoujixs_167907_41554245.html">第4章 成就勋章</a></dd><dd><a href="/shoujixs_167907_41555507.html">第5章 高览</a></dd><dd><a href="/shoujixs_167907_41569074.html">第6章 高阶刀法</a></dd><dd><a href="/shoujixs_167907_41569076.html">第7章 沙场刀诀</a></dd>
+
+
+听书源的正文写法
+正文规则
+<js>result</js>
+资源正则
+.*\.(mp3|m4a).*
+
+
+正文去重复章节名
+id.contents@html
+<js>
+a=title.replace(/第.*章\s*/,'第.*章')
+b=new RegExp(a,'g')
+result.replace(b,'')
+</js>
+
+或者
+书源正文规则后面添加 ##{{chapter.title}}
+可去除章节名称
+
+或者
+<js>
+rep='\\s*'+String(book.durChapterTitle.replace(/[^\\u4e00-\\u9fa5\d]/g,'')).split('').toArray().join('[^\\u4e00-\\u9fa5]{0,2}?')+'\\s*';
+reg=new RegExp(rep,'gi');
+result.replace(reg,'');
+</js>
+
+或者
+<js>
+rep='\\s*'+book.durChapterTitle.replace(/[^\\u4e00-\\u9fa5\d]/g,'').replace(/\u3002|\uff1f|\uff01|\uff0c|\u3001|\uff1b|\uff1a|\u201c|\u201d|\u2018|\u2019|\uff08|\uff09|\u300a|\u300b|\u3010|\u3011|\u007e
+/g,'').split('').join('[\s\S]{0,2}?')+'\\s*';
+reg=new RegExp(rep,'gi');
+result.replace(reg,'');
+</js>
+
+或者
+<js>
+rep='\\s*'+book.durChapterTitle.replace(/((?=[\x21-\x7e]+)[^A-Za-z0-9])|[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b’]/g,'').split('').join('[\\s\\S]{0,2}?')+'\\s*';
+reg=new RegExp(rep,'gi');
+result.replace(reg,'');
+</js>
+
+正文下一页写法1
+if (result.indexOf("next.png") > -1) {
+mat = baseUrl.match(/\/\d+(_(\d+))?\.html/);
+page = Number(mat[2]||1)+1;
+baseUrl.replace(/\/(\d+)(_(\d+))?.html/,'/$1_'+page+'.html');
+}
+
+正文下一页写法2
+:contains(下一章)@href##(^.*_\d+.*$|^)##$1###
+
+正文下一页写法(拼接网址)
+<js>
+var list=[];
+if(n=result.match(/\/(\d+)页/)){
+for(var i=2;i<=n[1];i++){list.push(baseUrl.replace(/\/$/,"_"+i+"/"))
+}}list</js>
+
+或者
+text.尾页@href
+@js:
+{n=parseInt(result[0].match(/\/(\d+)\.html/)[1]);
+list=[];
+for(i=2;i<=n;i++)
+{list.push(i+".html");}
+list}
+或者
+text.尾页@href
+@js:
+n=parseInt(result[0].match(/\/(\d+)\.html/)[1]);
+list=[];
+for(i=2;i<=n;i++)
+list.push(i+".html");
+list
+或者
+text.尾页@href
+@js:
+{var n=parseInt(result[0].match(/\/(\d+)\.html/)[1]);
+var list=[];
+for(var i=2;i<=n;i++)
+{list.push(i+".html");}
+list}
+或者
+text.尾页@href
+@js:
+n=parseInt(result[0].match(/\/(\d+)\.html/)[1]);
+list=[];
+for(i=2;i<=n;i++)
+list.push(baseUrl+i+".html");
+list
+或者
+text.尾页@href
+@js:
+var n=parseInt(result[0].match(/\/(\d+)\.html/)[1]);
+var list=[];
+for(var i=2;i<=n;i++)
+{list.push(baseUrl+i+".html");}
+list
+或者
+@js:
+{var n=parseInt(java.ajax(baseUrl).match(/\>(\d+)\<\/span\>页\)当前/)[1]);
+var list=[];
+for(var i=2;i<=n;i++)
+{list.push(i+".html");}
+list}
+或者
+@js:
+var n=parseInt(java.ajax(baseUrl).match(/\>(\d+)\<\/span\>页\)当前/)[1]);
+var list=[];
+for(var i=2;i<=n;i++)
+list.push(i+".html");
+list
+或者
+@js:
+n=parseInt(java.ajax(baseUrl).match(/\>(\d+)\<\/span\>页\)当前/)[1]);
+list=[];
+for(i=2;i<=n;i++)
+{list.push(baseUrl+i+".html");}
+list
+或者
+@js:
+{var n=parseInt(java.ajax(baseUrl).match(/\>(\d+)\<\/span\>页\)当前/)[1]);
+var list=[];
+for(var i=2;i<=n;i++)
+{list.push(baseUrl+i+".html");}
+list}
+或者
+@js:if(result.match(/\>\d+\<\/span\>页\)当前/))
+{var n=parseInt(result.match(/\>(\d+)\<\/span\>页\)当前/)[1]);
+var list=[];
+for(var i=2;i<=n;i++)
+{list.push(i+".html");}
+list}
+或者
+@js:if(result.match(/\>\d+\<\/span\>页\)当前/))
+{var n=parseInt(result.match(/\>(\d+)\<\/span\>页\)当前/)[1]);
+var list=[];
+var url=baseUrl;
+for(var i=2;i<=n;i++)
+{list.push(url+i+".html");}
+list}
+或者
+@js:if(result.match(/\>\d+\<\/span\>页\)当前/))
+{var n=parseInt(result.match(/\>(\d+)\<\/span\>页\)当前/)[1]);
+var list=[];
+for(var i=2;i<=n;i++)
+{list.push(baseUrl+i+".html");}
+list}
+或者
+text.下一页@href||text.下一頁@href
+
+或者
+##和@js不能同时用，正文规则
+要么加上##$##下一页
+要么加上@js:result+'下一页'
+……………………
+正文规则去垃圾话
+(?s)\n+[^\n]+下载爱阅小说.+
+
+……………………
+JSON写法
+$.book_author@put{自定义变量：当前页面获取的值}
+$.book_author@put:{bid:book_id}
+
+调用的格式是固定的 一定@get:{自定义变量}
+这里调用本页的json信息可以用双大括号括起来{{$.book_id}} 里面的book_id就是要取的内容
+http://123456.com/{{$.book_id}}_@get:{bid}/1.html
+要是通过java打印台打印get数据的时候可以这样写,括号里加引号是针对属于字符串类型,其它类型可不加引号,比如数字类型的
+{{java.get("id")}}
+或者
+@js:
+java.get("bid")
+
+漫画源正文
+#cp_img@html##src.*\"
+@js:result.replace(/data-original/g,"src")
+漫画源正文的图片样式
+FULL
+
+正文内容多页拼接断句处理办法
+可以在替换规则里面这样写
+##\s{0,100}\n{0,2}.*(第.*页).*\n{0,2}\s{0,100}
+
+正文末尾去广告
+正则：广告XX后面加(.|\n)*$可以屏蔽XX后面的内容
+或者开头去广告
+正则：^(.|\n)*?广告
+
+发现页发现的写法:
+[{"title":"❀榜单❀","url":"","style":{"layout_flexBasisPercent":1,"layout_flexGrow":1}}, {"title":"总点击榜","url":"/top_allvisit/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"月点击榜","url":"/top_monthvisit/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"总推荐榜","url":"/top_allvote/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"月推荐榜","url":"/top_monthvote/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"总月票榜","url":"/top_allvipvote/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"总鲜花榜","url":"/top_allflower/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"月勤更榜","url":"/top_monthwords/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"最近更新","url":"/top_lastupdate/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"最新入库","url":"/top_postdate/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"收藏榜","url":"/top_goodnum/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"字数榜","url":"/top_words/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"新书榜","url":"/top_newhot/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"❀分类❀","url":"","style":{"layout_flexBasisPercent":1,"layout_flexGrow":1}}, {"title":"玄幻奇幻","url":"/xuanhuan/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"武侠仙侠","url":"/xianxia/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"都市言情","url":"/dushi/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"穿越架空","url":"/chuanyue/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"女生视觉","url":"/nvsheng/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}, {"title":"精品辣文","url":"/lawen/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}]
+```
+
+
+
+### 书源日记第一版
+```
+阅读书源写法
+解决搜索30秒的办法，在基本页里登录检查Js里填上
+cookie.removeCookie(source.getKey())
+result
+或者在搜索地址栏清空cookie写法如下
+{{cookie.removeCookie(source.getKey())}}
+/search0f.html?searchkey={{key}}
+
+基本页请求头
+在里面加referer信息破网站防盗链，比如在A网站里面的B链接地址，要是正常访问B链接它会自动跳回到A网站，那么在请求头里面带上'referer':A网站,有可能可以破除它的防盗链
+{
+'referer':'https://official.bkvvvvv.com/'
+}
+
+请求头
+{'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/71.0.3578.141 Safari/534.24 XiaoMi/MiuiBrowser/12.4.14'}
+
+或者
+{
+ 'User-Agent': 'Mozilla/5.0 (Linux; Android 11; Pixel 3 XL Build/RQ3A.211001.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/102.0.4988.0 Mobile Safari/537.36 SearchCraft/3.9.2 (Baidu; P1 11) '
+}
+
+或者
+{"User-Agent": "Mozilla/5.0 (Linux; Android 12; M2011K2C Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/102.0.5005.99 Mobile Safari/537.36 T7/12.16 SearchCraft/3.9.1 (Baidu; P1 11)"}
+
+或者
+{'User-Agent':'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Mobile Safari/537.36',
+"Referer":"http://m.b777777.com/"}
+
+或者
+{
+	"User-Agent":"Mozilla/5.0 (Linux; Android 12; Nexus 5X Build/NRD90M); wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/96.0.4664.104 Mobile Safari/537.36"
+}
+
+或者请求头2
+{
+  "User-Agent": "Mozilla/5.0 (Windows; U; Windows NT 5.2;. en-US) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36 Quark/4.6.2.161"
+}
+
+URL规则后面加上Java.log查看获取页面调试结果用的
+tag.a@href<js>java.log(result)</js>
+或者这样写
+tag.a@href@js:java.log(result)
+
+跨栏目存取数据
+比如在搜索栏的书名里面存了个id这里的@put:{id:$.Id}就是存储数据，括号里的id是名字，:后面的是它要存的内容公式字符等等
+Name@put:{id:$.Id}
+然后到目录页里面的章节url里面调用它，这里的@get:{id}就是调用前面存储的数据
+https://xonhhs.pggfggi.com/BookFiles/Html/@get:{cid}/@get:{id}/{{$.id}}.html
+
+
+搜索规则下的搜索链接第一页和第二页的网址不同可以这样写:
+以下是非js正则的发现规则列表第二页和第一页格式不同的写法
+①第一页https://qdjjj9999.net/gudai/
+②第二页https://qdjjj9999.net/gudai/index_2.html
+可写成
+https://qdjjj9.net/gudai/{{page==1?'':'index_'+page+'.html'}}
+具体看阅读帮助文档page相关的:
+<,{{page}}>
+还有种第一页是这样的
+https://11111.com/搜索/关键字
+第二页是这样的
+https://11111.com/搜索/关键字/2.html
+这个情况可以这样写
+https://11111.com/搜索/关键字<,/{{page}}.html>
+
+作者规则写法
+###在这里的作用是只保留###前面的内容,全部写法为##要替换提取的内容或者正则##从前面内容中提取并仅保留的内容或者正则其他内容都抛弃###
+tag.a@text##作者：([^"]+)"##$1###
+或者
+.info@text##作者：(.*?) ##$1###
+
+书籍详情页规则URL
+tag.a.1@href@js:'https://www.x777888883xs.com'+result
+或者
+tag.a@href@js:"https://www.wan8886688ntxt.com/"+result+"/"
+或者
+tag.a@href##$##,{"headers":{
+	"Referer":"https://bo885454lf.html5.com/kdread/adread/chapter"
+	}}
+或者
+//意思就是在这个a的href属性获得的地址前面加上这##后面的内容
+tag.a@href##^##https://whts.com
+或者
+//意思就是在这个a的href属性获得的地址后面加上这##后面的内容
+tag.a@href##$##/sadly_1.html
+或者
+//前面这段一直到href是获取详情页地址，后面一段的js的具体作用是把获取到的详情页地址里面的www……替换成后面的k……
+tag.a.0@href@js:result.replace('www.yea77ge','k.yea77ge')
+
+详情页的分类规则写法
+~符号在这里的作用是一次性获取property的category|status|update_time三个属性.功能有点类似&&
+[property~=category|status|update_time]@content##\s.*
+
+分类规则写法
+在正文里面找到相关内容然后用双大括号加上双@来写内容,这里的双@有时候也可能是$..比如说json的文件的写法
+{{@@.info@text##类型：(.*?) ##$1###}},{{@@.status@text}}
+
+详情页的书名规则写法
+[property$=book_name]@content
+
+详情页的作者规则写法
+[property$=author]@content
+
+详情页最新章节写法
+[property$=latest_chapter_name]@content##正文卷.|正文.|VIP章节.|免费章节.|VIP卷.|默认卷.|章节目录.|最新章节.|[\(（【].*?[求更票谢乐发订合补加].*?[】）\)]
+
+或者
+//前后文字段拼接中间以▪️符号隔开，这个符号也可以用其他任意内容代替
+{{@@li.1@text}}▪️{{@@li.3@text}}
+
+或者
+.block_txt2@p.6:5@text##最新：(.*)\s更新：20(.*)##$1▪️$2
+
+
+详情页的简介规则写法
+[property$=description]@content##(^|[。！？]+[”」）】]?)##$1<br>
+
+详情页分类的写法
+[property~=category|status|update_time]@content##\s\d.*
+
+详情页字数的写法
+{{@@#count span.1@text}}字
+
+详情页最新章节的写法
+{{@@[property$=chapter_name]@content}} • {{@@[property$=update_time]@content##\s.*}}
+
+详情页的封面规则写法
+[property$=image]@content
+
+详情页的目录URL规则写法
+//这个比较特殊，有的网站的目录跟详情页是在一起的，但是排序可能是反的,这与某些网站用 text.阅读@href 来得到正确的目录页作用一样，能更简单的把目录列表显示出来为最佳选择
+text.[正序]@href
+或者
+text.阅读@href
+
+搜索栏目下的封面规则:
+tag.a.1@href##.*/(\d+)(\d{3})/##https://www.rouziwu.info/files/article/image/$1/$1$2/$1$2s.jpg
+
+或者
+a@href##.*/book/(\d+)/##https://imghhhxiaoshuocom.cdn.bcebos.com/img/$1.jpg
+
+搜索栏下的封面规则通过jax跨页面加载写法
+a.0@href<js>java.ajax("补全缺失的网址"+result)</js>class.pic@img@src
+
+搜索栏下的章节规则拼接并净化垃圾话
+.tabcontent@class.tabvalue.1@tag.td.2@text&&
+.tabcontent@class.tabvalue.1@tag.td.1@text&&
+.tabcontent@class.tabvalue.1@tag.td.0@text##最后更新：|连载状态：|作品分类：
+
+
+封面图的另一种写法
+class.zp@tag.a@href<js>
+var id = result.match(/(\d+)\/?$/)[1];
+var iid = parseInt(id/1000);
+'https://www.qljgh5.tw/files/article/image/'+iid+'/'+id+'/'+id+'s.jpg';
+</js>
+
+文字内容不需要左右的[]括号可以这样写:
+tag.a.0@text##\[|\]
+
+目录页的章节名去垃圾话
+text##正文\s|[\(（【].*?[求更票谢乐发订合补加].*?[】）\)]
+
+章节名称通用替换规则:
+dd@text##[\(（【].*?[求更谢乐发订合补加].*?[】）\)]
+
+或者
+tag.a@text@js:result.replace(/[（［【\{\(].*?[更合求票赏鲜盟修推歉谢祝节年].*?[）］】\}\)]/,"")
+或者
+//去除双第N章的章字样，2留1
+tag.a@text##第.*?章\s?(第.*?章)(.*$)##$1 $2
+
+章节URL规则适用于动态加载的网页:
+tag.a@href@js:result+',{webView:“true”}'
+或者
+tag.a@href##$##,{'webView':true}
+
+章节URL取到地址进行拼接的
+tag.a@href##/(.*?)/(.*?).html##https://www.wanben8888txt.net/api/api.php,{
+  "charset": "gbk",
+  "method": "POST",  "body":"action=read&id=$1&cid=$2&token="
+}
+或者
+tag.a@href@js:'https://www.8k55ana.com/book/'+result+'.html'
+或者
+用这个方法取当前详情页的URL来做拆分拼接
+//取当前链接里的数字，然后带入新的链接里面去
+@js:var bid = baseUrl.match(/\d+/);
+java.put('bid', bid);
+'https://uk.reade5455r.com/book-read/'+bid+'/{{$.seq}}'
+
+﹉﹉﹉﹉
+★详情页+目录页+正文第一章显示在一页的时候的处理方法:
+章节名写法
+//具体到它的分页显示比如:首页 2/22 下一页 尾页
+a.0@text##(\d+)\/\d+##第$1页
+其他地方获取内容正常获取，就是在目录页里面的章节URL规则里面这样写:
+//意思是跟目录页共用一页作为第一章的网址
+{{baseUrl}}
+
+或者
+就不填目录链接，目录列表可以填tag.html或tag.body等，章节名称tag.title@text，章节链接填href（获取不到链接，正文就会直接用详情页链接）或者章节链接留空
+反正就是要有一个列表能获取到章节名称就行
+﹉﹉﹉﹉﹉
+
+简介通用替换规则:
+class.intro_info@textNodes##(^|[。！？]+[”」）】]?)##$1<br>
+或者
+[property$=description]@content##(^|[。！？]+[”」）】]?)##$1<br>
+
+
+目录下一页规则
+//适用于目录列表在详情页属于隐藏标签的
+option@value
+或者并发加载，多个隐藏按钮一起打开
+[name=pageselect] > option!0@value
+
+目录列表规则写法
+从id.list开始一直找到tag.dd标签然后把tag.dd的最上面9个排除，因为！号后面的0代表数字1后面的每个数字都是同理加上1算实际对的第几个章节目录
+id.list@tag.dl@tag.dd[!0:8]
+或者
+id.list@tag.dl@tag.dd!0:1:2:3:4:5:6:7:8
+
+目录标签下的目录列表规则
+//找div标签里面id是lbks的底下的dl标签下的最后一个dt标签后面的与dt标签同级标签里面找dd标签下的a标签
+//div[@id="lbks"]/dl/dt[last()]/following-sibling::dd/a
+案列:
+<div id="lbks"><dl><dt>最新8章节，如果喜欢可以把级放到书架里面随时观看</dt><dd><a href="/shoujixs_167907_44533846.html">第996章 古之名将</a></dd><dd><a href="/shoujixs_167907_44533845.html">第995章 包拯来啦</a></dd><dd><a href="/shoujixs_167907_44533844.html">第994章 丢了一魄嗯宁采臣</a></dd><dd><a href="/shoujixs_167907_44533843.html">第993章 移山术满级</a></dd><dd><a href="/shoujixs_167907_44533624.html">第992章 踏足枉死城</a></dd><dd><a href="/shoujixs_167907_44532919.html">第991章 玩家的求助帖</a></dd><dd><a href="/shoujixs_167907_44531951.html">第990章 一计不成又生一计</a></dd><dd><a href="/shoujixs_167907_44524032.html">第989章 损耗</a></dd><dt>正文</dt><dd><a href="/shoujixs_167907_41554242.html">第1章 全能王者！瞬间满级</a></dd><dd><a href="/shoujixs_167907_41554243.html">第2章 玩家广场热议综合排名第一人</a></dd><dd><a href="/shoujixs_167907_41554244.html">第3章 东汉末年冀州阵营</a></dd><dd><a href="/shoujixs_167907_41554245.html">第4章 成就勋章</a></dd><dd><a href="/shoujixs_167907_41555507.html">第5章 高览</a></dd><dd><a href="/shoujixs_167907_41569074.html">第6章 高阶刀法</a></dd><dd><a href="/shoujixs_167907_41569076.html">第7章 沙场刀诀</a></dd>
+
+
+听书源的正文写法
+正文规则
+<js>result</js>
+资源正则
+.*\.(mp3|m4a).*
+
+
+正文去重复章节名
+id.contents@html
+<js>
+a=title.replace(/第.*章\s*/,'第.*章')
+b=new RegExp(a,'g')
+result.replace(b,'')
+</js>
+
+或者
+书源正文规则后面添加 ##{{chapter.title}}
+可去除章节名称
+
+正文下一页写法(拼接网址)
+<js>
+var list=[];
+if(n=result.match(/\/(\d+)页/)){
+for(var i=2;i<=n[1];i++){list.push(baseUrl.replace(/\/$/,"_"+i+"/"))
+}}list</js>
+
+
+正文多个正则拼接
+##正则1
+<js>result</js>
+##正则2
+
+延时执行内容的方法，sleep的值是毫秒，1000等于1秒
+<js>
+Packages.java.lang.Thread.sleep(1000);
+result
+</js>
+等待1s之后执行
+……………………
+JSON隔栏取值写法
+$.book_author@put{自定义变量：当前页面获取的值}
+$.book_author@put:{bid:book_id}
+
+跨栏调用的格式是固定的 是这样的@get:{自定义变量}，参考下面链接
+这里调用本页的json信息可以用双大括号括起来{{$.book_id}} 里面的book_id就是要取的内容，参考下面链接
+http://123456.com/{{$.book_id}}_@get:{bid}/1.html
+……………………
+
+漫画源正文
+#cp_img@html##src.*\"
+@js:result.replace(/data-original/g,"src")
+漫画源正文的图片样式
+FULL
+
+
+发现页发现地址规则案列:
+
+[{"title":"❀榜单❀","url":"","style":{"layout_flexBasisPercent":1,"layout_flexGrow":1}},
+{"title":"总点击榜","url":"/top_allvisit/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"月点击榜","url":"/top_monthvisit/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"总推荐榜","url":"/top_allvote/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"月推荐榜","url":"/top_monthvote/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"总月票榜","url":"/top_allvipvote/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"总鲜花榜","url":"/top_allflower/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"月勤更榜","url":"/top_monthwords/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"最近更新","url":"/top_lastupdate/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"最新入库","url":"/top_postdate/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"收藏榜","url":"/top_goodnum/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"字数榜","url":"/top_words/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"新书榜","url":"/top_newhot/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"❀分类❀","url":"","style":{"layout_flexBasisPercent":1,"layout_flexGrow":1}},
+{"title":"玄幻奇幻","url":"/xuanhuan/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"武侠仙侠","url":"/xianxia/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"都市言情","url":"/dushi/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"穿越架空","url":"/chuanyue/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"女生视觉","url":"/nvsheng/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}},
+{"title":"精品辣文","url":"/lawen/{{page}}.html","style":{"layout_flexBasisPercent":0.25,"layout_flexGrow":1}}]
+
+```
+
+
+
+祝大家生活愉快！
