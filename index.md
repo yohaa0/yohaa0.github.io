@@ -95,16 +95,13 @@ class.zujimz@clas.fujimz@tag.a@text
 .zujimz .fujimz a@text
 
 
-
 特别说明一下,class属性的名字可能会出现多处.id属性它的名字大部分情况下都是独立唯一的.因为它不但有普通的显示作用还具备定位的作用,所以一般都是唯一的.
 
 
 所以在取属性的时候自己考虑怎么选择,我建议有id取id,没有的话取class或者别的. 它又不限制你取哪个属性,能得到自己想要的信息就可以.
 
 
-
 在阅读里写源也就是通过这些已知条件来挑选自己想要的东西.
-
 
 
 ### 关于[property$=book_name]@content这个写法的找法公布.
@@ -122,7 +119,6 @@ class.zujimz@clas.fujimz@tag.a@text
 比如这一条:
 
 ```<meta property="og:novel:book_name" content="活力宝祝大家开心每一天!">```
-
 
 
 meta是它的标签名,property是它的属性名,og:novel:book_name是它的属性名. 它的content的值就是我们要找的东西.
