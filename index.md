@@ -1,5 +1,6 @@
 # 书源日记
-[书源日记](ttps://yohaa0.github.io/README.md)
+
+[[书源日记](ttps://yohaa0.github.io/README.md)](https://github.com/yohaa0/yohaa0.github.io/blob/master/README.md)
 
 #### 介绍
 
