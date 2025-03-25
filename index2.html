@@ -1,0 +1,285 @@
+<!--http://api.yujn.cn/api/zzxjj.php
+
+https://onexiaolaji.cn/RandomPicture/api/api-video.php
+https://www.onexiaolaji.cn/RandomPicture/api/?class=video&type=json&key=qq249663924
+!-->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高质量MM</title>
+ <style>
+    #switch,#next1,#myButton{
+    background: #7F9CCC;
+    color:#fff;
+    line-height:40px;
+    text-align:center;
+    width:auto;
+	height:auto;
+    border:none;
+    margin:0 6px;
+    border-radius:6px;
+    font-weight:bold;
+    }
+	h3{
+	text-align:center;
+	
+	}
+	video {
+	text-align:center;
+    width: 102%;
+    height:auto;
+	margin-left:-5px;
+}
+    video {
+    object-fit: contain;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+	}
+body {
+    background-color: rgb(26,26,26);
+    color: #555;
+    font-family: Lato,sans-serif;
+    font-size: 15px;
+    line-height: 24px;
+
+}
+#labTxt,#textA{
+  text-align:center;
+   width: 90%;
+   height:auto;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+height:auto;
+    border:none;
+     margin-left: auto;
+  margin-right: auto;
+}
+</style>
+</head>
+<body>
+<div id="video-container">
+    <video id="videoPlayer" controls autoplay>
+        <source id="videoSource" src="" type="video/mp4">
+        您的浏览器不支持视频播放。
+    </video>
+</div>
+    <div class="controls">
+        <div style="text-align: center;">
+            <label for="autoplayNext">Auto</label>
+            <input type="checkbox" id="autoplayNext" checked>        
+			<button id="nextBtn">下一个</button>'>><<'<button id="huanBtn">换个源</button>
+		</div>
+    </div><hr>
+<h3><font color=GoldenRod align=center><div id=textA></div>
+</font></h3><hr>
+<div style="text-align: center;"><label id="labTxt" onclick="copyLabelText()" >地址</label></div>
+
+<p style="text-align: center;">下滑刷新视频</p>
+<div style="text-align: center;"><button  id="myButton3">换一个MP4源</button></div><br>
+<div style="text-align: center;"><button  id="myButton4">看图片</button></div>
+<script>
+	let isTouching = false;
+	let startY = 0;
+   const videoContainer = document.getElementById('video-container');
+   videoContainer.addEventListener('touchstart', function(e) {
+     isTouching = true;
+     startY = e.touches[0].pageY;
+     videoContainer.style.touchAction = 'none';
+   });
+  
+   videoContainer.addEventListener('touchmove', function(e) {
+     if (isTouching) {
+       const deltaY = e.touches[0].pageY - startY;
+       if (Math.abs(deltaY) > 150) { // 50px 阈值
+         isTouching = false;
+         if (deltaY > 0) {
+           // 向下滑动，切换到下一个视频
+           
+          document.getElementById('nextBtn').click();
+         }
+         videoContainer.style.touchAction = 'pan-y';
+       }
+     }
+   });
+  
+   videoContainer.addEventListener('touchend', function(e) {
+     if (isTouching) {
+       isTouching = false;
+      // document.getElementById('nextBtn').click();
+       videoContainer.style.touchAction = 'pan-y';
+     }
+   });
+   document.getElementById('myButton3').addEventListener('click', function() {
+       window.location.href = 'index.html';
+   });
+      document.getElementById('myButton4').addEventListener('click', function() {
+       window.location.href = 'index3.html';
+   });
+</script>
+
+<script>
+    // 获取视频元素和控制元素
+    const videoPlayer = document.getElementById('videoPlayer');
+    const videoSource = document.getElementById('videoSource');
+    const autoplayNextCheckbox = document.getElementById('autoplayNext');
+    const nextBtn = document.getElementById('nextBtn');
+    const huantBtn = document.getElementById('huanBtn');
+	var VideoUrl='';
+	var huanNewVideo=function(){
+		const functionsArray = ['https://777.cam/api/M/?type=json','https://tools.mgtv100.com/external/v1/pear/xjj',
+		'http://www.wudada.online/Api/ScSp',
+		'https://api.kuleu.com/api/MP4_xiaojiejie?type=json',
+		'https://onexiaolaji.cn/RandomPicture/api/api-video.php',
+		'https://api.kxzjoker.cn/api/Beautyvideo?type=json',
+		'https://api.pearktrue.cn/api/random/xjj/?type=json',
+		'https://v.api.aa1.cn/api/api-vs/index.php',
+		'https://api.dwo.cc/api/ksvideo?type=json',
+		'https://v2.xxapi.cn/api/meinv'];
+		const index = Math.floor(Math.random() * functionsArray.length);
+			VideoUrl=functionsArray[index];
+			console.log(VideoUrl);
+			huanBtn.innerText ='换源'+index
+	}
+    // 当视频结束时，自动播放下一个
+    videoPlayer.addEventListener('ended', function() {
+        if (autoplayNextCheckbox.checked) {
+            // 自动获取下一个视频
+            fetchNewVideo();
+			fetchText();
+        }
+    });
+
+    // 手动播放下一个视频
+    nextBtn.addEventListener('click', function() {
+        fetchNewVideo();
+		fetchText();
+    });
+	    // 手动换源
+    huanBtn.addEventListener('click', function() {
+        huanNewVideo();
+		fetchNewVideo();
+    });
+///////////////////////////
+function copyLabelText() {
+	document.getElementById('labTxt').addEventListener('click', function() {
+	    var text = this.textContent || this.innerText;
+	    navigator.clipboard.writeText(text).then(function() {
+	        console.log('文本已复制到剪贴板');
+			alert("已复制: " + textToCopy);
+	    }, function(err) {
+	        console.error('无法复制文本: ', err);
+			alert("无法复制文: " + err);
+	    });
+	});
+
+}
+//////////////////////////
+
+    // AJAX 请求新的视频源
+    function fetchNewVideo() {
+		
+        fetch(VideoUrl)
+            .then(response => {
+					// 确保响应成功
+					if (!response.ok) {
+					  throw new Error('网络不通 response was not ok ' + response.statusText);
+					}
+					return response.text(); // 获取响应的文本内容
+				  })
+            .then(data => {
+				console.log(data);
+				// 定义一个正则表达式来匹配你想要删除的内容
+				const regex = /<s.*>/gs;//为了删除微信小视频源中的杂码
+			 
+				// 使用 replace 方法和正则表达式来删除匹配的内容
+				data = data.replace(regex, '');
+				console.log(data);
+				// 如果需要，将修改后的字符串转换回JSON对象
+				data = JSON.parse(data);
+			 
+				// 处理修改后的数据
+				//console.log(data);				
+                if(data.data){
+                    // 更新视频源
+                    videoSource.src = data.data;
+                    videoPlayer.load(); // 重新加载da.online/Api/ScSpv2.xxapi.cn/api/meinv视频
+                    videoPlayer.play(); // 自动播放新视频
+					nextBtn.innerText ='下一个1'
+					labTxt.innerText = videoSource.src;
+                    }else if(data.video){
+                    // 更新视频源
+                    videoSource.src = data.video;
+                    videoPlayer.load(); // 重新加载https://api.pearktrue.cn/api/random/xjj/?type=json视频
+                    videoPlayer.play(); // 自动播放新视频
+					nextBtn.innerText ='下一个2'
+					labTxt.innerText = videoSource.src;
+					}else if(data.raw_url){
+                    // 更新视频源
+                    videoSource.src = data.raw_url;
+                    videoPlayer.load(); // 重新加载https://onexiaolaji.cn/RandomPicture/api/api-video.php视频
+                    videoPlayer.play(); // 自动播放新视频
+					nextBtn.innerText ='下一个3'
+					labTxt.innerText = videoSource.src;
+					}else if(data.mp4_video){
+                    // 更新视频源
+                    videoSource.src = data.mp4_video;
+                    videoPlayer.load(); // 重新加载https://api.kuleu.com/api/MP4_xiaojiejie?type=json视频
+                    videoPlayer.play(); // 自动播放新视频
+					nextBtn.innerText ='下一个5'
+					labTxt.innerText = videoSource.src;
+					}else if(data.pic){
+                    // 更新视频源
+                    videoSource.src = data.pic;
+                    videoPlayer.load(); // 重新加载https://api.dwo.cc/api/ksvideo?type=json视频
+                    videoPlayer.play(); // 自动播放新视频
+					nextBtn.innerText ='下一个8'
+					labTxt.innerText = videoSource.src;
+					}else if(data.download_url){
+                    // 更新视频源
+                    videoSource.src = data.download_url;
+                    videoPlayer.load(); // 重新加https://api.kxzjoker.cn/api/Beautyvideo?type=json载视频
+                    videoPlayer.play(); // 自动播放新视频
+					nextBtn.innerText ='下一个7'
+					labTxt.innerText = data.Video_platform+data.video_title+videoSource.src;
+					}else if(data.url){
+                    // 更新视频源
+                    videoSource.src = data.url;
+					console.log(videoSource.src);
+                    videoPlayer.load(); // 重新加载https://v.api.aa1.cn/api/api-vs/index.php视频
+                    videoPlayer.play(); // 自动播放新视频
+					nextBtn.innerText ='下一个4'
+					labTxt.innerText= '【微信视频】'+data.title+videoSource.src;
+					}else{
+                    console.error('无法获取新的视频链接');
+                }
+            })
+            .catch(error => console.error('获取视频时出错:', error));
+    }
+</script>
+<script>
+	function fetchText() {
+   // 假设你的JSON数据
+		   	fetch('https://api.vvhan.com/api/text/sexy?type=json')
+				.then(response => response.json())
+				.then(data => {
+					if (data.data){
+				// 获取text
+				
+				const textA = data.data.content;
+				//console.log(imageUrl);
+				document.getElementById('textA').innerText=textA;
+				} else {
+                console.error('无法获取新的视频链接');
+				}
+            })
+            .catch(error => console.error('获取视频时出错:', error));}
+</script>
+</body>
+</html>
+
